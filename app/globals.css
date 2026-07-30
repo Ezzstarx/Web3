@@ -40,7 +40,8 @@
   --font-satoshi: 'Satoshi', sans-serif;
   --font-aliencons: 'AlienCons TFB', sans-serif;
   --font-montserrat: 'Montserrat', sans-serif;
-  --font-scarlet: 'Scarlet Reliquary', 'Tektur', sans-serif;
+  /* Real design font first; Creepster is the temporary free stand-in. */
+  --font-scarlet: 'Scarlet Reliquary', var(--font-horror), 'Tektur', sans-serif;
 
   --shadow-neon: 0px 0px 10px rgba(222, 59, 214, 0.4), 1px 0px 5px rgba(1, 92, 104, 0.4);
 
@@ -115,7 +116,8 @@
   --font-satoshi: 'Satoshi', sans-serif;
   --font-aliencons: 'AlienCons TFB', sans-serif;
   --font-montserrat: 'Montserrat', sans-serif;
-  --font-scarlet: 'Scarlet Reliquary', 'Tektur', sans-serif;
+  /* Real design font first; Creepster is the temporary free stand-in. */
+  --font-scarlet: 'Scarlet Reliquary', var(--font-horror), 'Tektur', sans-serif;
 }
 
 @layer base {
