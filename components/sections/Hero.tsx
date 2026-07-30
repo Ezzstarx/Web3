@@ -127,7 +127,7 @@ export default function Hero() {
                     {/* Character Identity Block */}
                     <div className="mt-16 md:mt-0 flex flex-col items-start">
                         <h1
-                            className="font-tektur font-extrabold text-[72px] md:text-[120px] leading-none bg-clip-text text-transparent"
+                            className="font-scarlet text-[72px] md:text-[120px] leading-none bg-clip-text text-transparent"
                             style={{ backgroundImage: `linear-gradient(to bottom, ${active.titleFrom}, ${active.titleTo})` }}
                         >
                             {active.name}

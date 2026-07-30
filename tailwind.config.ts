@@ -32,6 +32,7 @@ const config: Config = {
         tektur: ['var(--font-tektur)', 'sans-serif'],
         satoshi: ['var(--font-satoshi)', 'sans-serif'],
         aliencons: ['var(--font-aliencons)', 'sans-serif'],
+        scarlet: ['var(--font-scarlet)', 'sans-serif'],
         montserrat: ['var(--font-montserrat)', 'sans-serif'],
       },
       backgroundImage: {

@@ -7,6 +7,19 @@
   font-style: normal;
 }
 
+/* Display face for the hero character name (Kenichi).
+   Drop the font file into public/fonts/ — any one of these extensions works. */
+@font-face {
+  font-family: 'Scarlet Reliquary';
+  src: url('/fonts/ScarletReliquary.woff2') format('woff2'),
+       url('/fonts/ScarletReliquary.woff') format('woff'),
+       url('/fonts/ScarletReliquary.otf') format('opentype'),
+       url('/fonts/ScarletReliquary.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-background: #000000;
   --color-foreground: #ffffff;
@@ -27,6 +40,7 @@
   --font-satoshi: 'Satoshi', sans-serif;
   --font-aliencons: 'AlienCons TFB', sans-serif;
   --font-montserrat: 'Montserrat', sans-serif;
+  --font-scarlet: 'Scarlet Reliquary', 'Tektur', sans-serif;
 
   --shadow-neon: 0px 0px 10px rgba(222, 59, 214, 0.4), 1px 0px 5px rgba(1, 92, 104, 0.4);
 
@@ -101,6 +115,7 @@
   --font-satoshi: 'Satoshi', sans-serif;
   --font-aliencons: 'AlienCons TFB', sans-serif;
   --font-montserrat: 'Montserrat', sans-serif;
+  --font-scarlet: 'Scarlet Reliquary', 'Tektur', sans-serif;
 }
 
 @layer base {
