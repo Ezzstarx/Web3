@@ -468,19 +468,20 @@
   scrollbar-color: rgba(173, 122, 255, 0.4) rgba(255, 255, 255, 0.05);
 }
 
-/* Barcode stripes under the hero "Case File" line */
+/* Barcode stripes under the hero "Case File" line.
+   Stripe colours follow the active character via --bc1/--bc2. */
 .barcode {
   background-image: repeating-linear-gradient(90deg,
-      #a855f7 0px,
-      #a855f7 2px,
+      var(--bc1, #a855f7) 0px,
+      var(--bc1, #a855f7) 2px,
       transparent 2px,
       transparent 4px,
-      #7c3aed 4px,
-      #7c3aed 5px,
+      var(--bc2, #7c3aed) 4px,
+      var(--bc2, #7c3aed) 5px,
       transparent 5px,
       transparent 9px,
-      #a855f7 9px,
-      #a855f7 12px,
+      var(--bc1, #a855f7) 9px,
+      var(--bc1, #a855f7) 12px,
       transparent 12px,
       transparent 14px);
   opacity: 0.9;

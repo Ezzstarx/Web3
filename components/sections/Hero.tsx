@@ -17,16 +17,17 @@ const navLinks = [
     { name: "Core Team", href: "#team" },
 ];
 
-// The 11 showcased characters, each paired with the grunge ring exported
-// alongside it. Accent colours are sampled from that ring, so the name
-// gradient and the rail thumbnail always match the artwork.
-// Only Kenichi's copy exists in the design — the rest await client text.
+// The showcased characters in the design's order, each paired with the grunge
+// ring exported alongside it. Accent colours are sampled from that ring, so
+// the name gradient, case-file code, barcode and rail thumbnail all match.
+// Subtitles/case-file codes were transcribed from a small design export —
+// correct any that the final design spells differently.
 const characters = [
-    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-01.png", ring: "/assets/images/hero/ring-01.png", thumbBg: "#4a4a52", titleFrom: "#b9b9c4", titleTo: "#5a5a64" },
-    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-02.png", ring: "/assets/images/hero/ring-02.png", thumbBg: "#155e6b", titleFrom: "#4be0f0", titleTo: "#1a7a8c" },
-    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-03.png", ring: "/assets/images/hero/ring-03.png", thumbBg: "#6b5320", titleFrom: "#e0b860", titleTo: "#7a5a1a" },
-    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-04.png", ring: "/assets/images/hero/ring-04.png", thumbBg: "#6b2410", titleFrom: "#e06a30", titleTo: "#7a2508" },
-    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-05.png", ring: "/assets/images/hero/ring-05.png", thumbBg: "#2c1470", titleFrom: "#7a5ae0", titleTo: "#2e1470" },
+    { name: "Cass", subtitle: "The Chain Reaper", caseFile: "CR-04-Cass", image: "/assets/images/hero/char-11.png", ring: "/assets/images/hero/ring-11.png", thumbBg: "#7a1212", titleFrom: "#d04040", titleTo: "#6a1010" },
+    { name: "Scarclaw", subtitle: "The Warlord", caseFile: "WL-09-Scarclaw", image: "/assets/images/hero/char-10.png", ring: "/assets/images/hero/ring-10.png", thumbBg: "#7a4212", titleFrom: "#d08a3a", titleTo: "#6a3810" },
+    { name: "Luna", subtitle: "The Night Eyed Sovereign", caseFile: "NS-02-Luna", image: "/assets/images/hero/char-09.png", ring: "/assets/images/hero/ring-09.png", thumbBg: "#55101a", titleFrom: "#a03a48", titleTo: "#4a0e18" },
+    { name: "Ivy", subtitle: "The Occultist", caseFile: "OC-07-Ivy", image: "/assets/images/hero/char-08.png", ring: "/assets/images/hero/ring-08.png", thumbBg: "#8a1f2b", titleFrom: "#d15563", titleTo: "#7a1f28" },
+    { name: "Blackheart", subtitle: "The Titan", caseFile: "TT-01-Blackheart", image: "/assets/images/hero/char-07.png", ring: "/assets/images/hero/ring-07.png", thumbBg: "#601a12", titleFrom: "#b0503a", titleTo: "#5a1810" },
     {
         name: "Kenichi",
         subtitle: "The Silent Executioner",
@@ -37,11 +38,12 @@ const characters = [
         titleFrom: "#8d7ae0",
         titleTo: "#4a3a8f",
     },
-    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-07.png", ring: "/assets/images/hero/ring-07.png", thumbBg: "#601a12", titleFrom: "#b0503a", titleTo: "#5a1810" },
-    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-08.png", ring: "/assets/images/hero/ring-08.png", thumbBg: "#8a1f2b", titleFrom: "#d15563", titleTo: "#7a1f28" },
-    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-09.png", ring: "/assets/images/hero/ring-09.png", thumbBg: "#55101a", titleFrom: "#a03a48", titleTo: "#4a0e18" },
-    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-10.png", ring: "/assets/images/hero/ring-10.png", thumbBg: "#7a4212", titleFrom: "#d08a3a", titleTo: "#6a3810" },
-    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-11.png", ring: "/assets/images/hero/ring-11.png", thumbBg: "#7a1212", titleFrom: "#d04040", titleTo: "#6a1010" },
+    { name: "Voidwalker", subtitle: "The Ghost", caseFile: "GH-00-Voidwalker", image: "/assets/images/hero/char-05.png", ring: "/assets/images/hero/ring-05.png", thumbBg: "#2c1470", titleFrom: "#7a5ae0", titleTo: "#2e1470" },
+    { name: "Hexa", subtitle: "The Techsmith", caseFile: "TS-08-Hexa", image: "/assets/images/hero/char-04.png", ring: "/assets/images/hero/ring-04.png", thumbBg: "#6b2410", titleFrom: "#e06a30", titleTo: "#7a2508" },
+    { name: "Rustbot", subtitle: "Nostalgic Machine", caseFile: "NM-77-Rustbot", image: "/assets/images/hero/char-03.png", ring: "/assets/images/hero/ring-03.png", thumbBg: "#6b5320", titleFrom: "#e0b860", titleTo: "#7a5a1a" },
+    { name: "Spica", subtitle: "SEIKA Spirit", caseFile: "Unknown", image: "/assets/images/hero/char-02.png", ring: "/assets/images/hero/ring-02.png", thumbBg: "#155e6b", titleFrom: "#4be0f0", titleTo: "#1a7a8c" },
+    // Unrevealed silhouette — teased but not yet announced in the design.
+    { name: "???", subtitle: "Unidentified", caseFile: "REDACTED", image: "/assets/images/hero/char-01.png", ring: "/assets/images/hero/ring-01.png", thumbBg: "#4a4a52", titleFrom: "#b9b9c4", titleTo: "#5a5a64" },
 ];
 
 // Kenichi is the character the design opens on.
@@ -139,10 +141,13 @@ export default function Hero() {
 
                         <div className="mt-8 md:mt-[clamp(12px,2.6svh,32px)] md:pl-10">
                             <p className="font-satoshi text-base md:text-[length:clamp(14px,1.8svh,18px)] text-white">
-                                Case File: <span className="text-[#8B5CF6]">{active.caseFile}</span>
+                                Case File: <span style={{ color: active.titleFrom }}>{active.caseFile}</span>
                             </p>
-                            {/* Barcode */}
-                            <div className="barcode mt-3 h-[26px] w-[300px] md:w-[370px]" />
+                            {/* Barcode — striped in the character's accent colours */}
+                            <div
+                                className="barcode mt-3 h-[26px] w-[300px] md:w-[370px]"
+                                style={{ "--bc1": active.titleFrom, "--bc2": active.titleTo } as React.CSSProperties}
+                            />
                         </div>
                     </div>
                 </div>
