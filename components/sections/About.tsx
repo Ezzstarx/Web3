@@ -12,8 +12,8 @@ export default function About() {
                 }}
             />
 
-            <div className="container mx-auto px-4 sm:px-6 relative z-10 py-28 md:py-36">
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-12 max-w-6xl mx-auto">
+            <div className="page-x relative z-10 py-28 md:py-36">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-12 w-full">
 
                     {/* Left: Heading + Copy */}
                     <div className="max-w-[560px]">

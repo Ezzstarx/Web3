@@ -28,7 +28,7 @@ const members: TeamMember[] = [
     { name: "Saachi Singh", role: "Product Designer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/saachi-singh-75323123b/", image: "/assets/images/team/m01.png", left: 9.5, height: 52 },
     { name: "Fateen Moeen", role: "Unreal Dev/ Ani Lead", description: "", x: "#", linkedin: "https://www.linkedin.com/in/fateen-catzero/", image: "/assets/images/team/m02.png", left: 17.5, height: 57 },
     { name: "Aman Prajapati", role: "CTO, Co-Founder", description: "", x: "#", linkedin: "https://www.linkedin.com/in/aman-prajapati-675909199/", image: "/assets/images/team/m03.png", left: 26, height: 54 },
-    { name: "Tushar Goyal", role: "Blockchain Developer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/tushar-goyal-1876b7160", image: "/assets/images/team/m04.png", left: 34, height: 50 },
+    { name: "Tushar Goyal", role: "Blockchain Developer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/tushar-goyal-1876b7160", image: "/assets/images/team/m10.png", left: 34, height: 50 },
     { name: "Rabiya Javed", role: "Graphic Designer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/rabiya-javed-378694275/", image: "/assets/images/team/m05.png", left: 41.5, height: 53 },
     {
         name: "Muzammil Moosa",
@@ -43,7 +43,7 @@ const members: TeamMember[] = [
     { name: "M. Arbaaz", role: "Partnership Manager", description: "", x: "#", linkedin: "https://www.linkedin.com/in/mohammed-arbaaz-41b428182/", image: "/assets/images/team/m07.png", left: 57.5, height: 49 },
     { name: "Ali Abdullah", role: "Community Builder", description: "", x: "#", linkedin: "https://www.linkedin.com/in/ali-abdullah-028845333/", image: "/assets/images/team/m08.png", left: 64.5, height: 55 },
     { name: "Harsh Upadhyay", role: "Full Stack Developer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/upadhyay-harsh9756/", image: "/assets/images/team/m09.png", left: 71.5, height: 47 },
-    { name: "Abdullah Khan", role: "Web Developer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/abdullahkhancs01/", image: "/assets/images/team/m10.png", left: 78.5, height: 54 },
+    { name: "Abdullah Khan", role: "Web Developer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/abdullahkhancs01/", image: "/assets/images/team/m04.png", left: 78.5, height: 54 },
     { name: "Misbah Iftikhar", role: "2D Concept Artist", description: "", x: "#", linkedin: "https://www.linkedin.com/in/misbah-iftikhar-20761938/", image: "/assets/images/team/m11.png", left: 85.5, height: 51 },
     { name: "Ayush Kumar", role: "Level Designer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/ayush-kumar-parganihaa-49048320b/", image: "/assets/images/team/m12.png", left: 92.5, height: 53 },
 ];
@@ -57,7 +57,7 @@ export default function CoreTeam() {
         <section id="team" className="relative overflow-hidden bg-[#04070d]">
             <div className="relative z-20 pt-20">
                 {/* Heading — left aligned */}
-                <div className="relative w-fit pb-4 mb-6 ml-6 md:ml-24">
+                <div className="page-x relative w-fit pb-4 mb-6">
                     <h2 className="text-3xl md:text-[44px] font-tektur font-medium text-white">
                         Core Team
                     </h2>
@@ -74,24 +74,45 @@ export default function CoreTeam() {
                     className="absolute inset-0 w-full h-full object-cover"
                 />
 
-                {/* Team figures */}
+                {/* Team figures — purely decorative. The cutouts carry ~60% transparent
+                    padding, so their boxes overlap their neighbours; hit-testing is
+                    handled by the separate hotspot bands below instead. */}
                 {members.map((member, idx) => (
-                    <button
+                    <div
                         key={idx}
-                        onMouseEnter={() => setActiveIndex(idx)}
-                        onFocus={() => setActiveIndex(idx)}
-                        className="absolute bottom-[22%] -translate-x-1/2 bg-transparent transition-all duration-300 hover:brightness-110 focus:outline-none"
+                        className="absolute bottom-[22%] -translate-x-1/2 pointer-events-none"
                         style={{ left: `${member.left}%`, height: `${member.height}%` }}
-                        aria-label={member.name}
                     >
                         <img
                             src={member.image}
                             alt={member.name}
-                            className={`h-full w-auto max-w-none object-contain object-bottom transition-all duration-300 ${activeIndex === idx ? "brightness-110" : "brightness-[0.85]"
+                            className={`h-full w-auto max-w-none object-contain object-bottom transition-all duration-300 ${activeIndex === idx ? "brightness-110" : "brightness-[0.82]"
                                 }`}
                         />
-                    </button>
+                    </div>
                 ))}
+
+                {/* Hover hotspots — one contiguous, non-overlapping band per figure,
+                    each running to the midpoint between neighbours so every character
+                    gets its own reliable hover region. */}
+                {members.map((member, idx) => {
+                    const prev = members[idx - 1];
+                    const next = members[idx + 1];
+                    const start = prev ? (prev.left + member.left) / 2 : 0;
+                    const end = next ? (member.left + next.left) / 2 : 100;
+                    return (
+                        <button
+                            key={`hit-${idx}`}
+                            onMouseEnter={() => setActiveIndex(idx)}
+                            onFocus={() => setActiveIndex(idx)}
+                            onClick={() => setActiveIndex(idx)}
+                            className="absolute bottom-[22%] top-[12%] bg-transparent focus:outline-none focus-visible:bg-white/5"
+                            style={{ left: `${start}%`, width: `${end - start}%` }}
+                            aria-label={member.name}
+                            aria-current={activeIndex === idx}
+                        />
+                    );
+                })}
 
                 {/* Member plate + bio */}
                 <div className="absolute bottom-[3%] left-0 right-0 z-20 pointer-events-none">

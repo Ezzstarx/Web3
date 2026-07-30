@@ -67,9 +67,9 @@ export default function Roadmap() {
             <div className="absolute top-1/2 left-0 w-[420px] h-[500px] bg-[#2ECC71]/10 rounded-full blur-[140px] pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[420px] h-[400px] bg-[#C243FE]/10 rounded-full blur-[140px] pointer-events-none" />
 
-            <div className="container mx-auto px-4 sm:px-6 relative z-10">
+            <div className="page-x relative z-10">
                 {/* Heading — left aligned */}
-                <div className="relative w-fit pb-4 mb-10 md:ml-16">
+                <div className="relative w-fit pb-4 mb-10">
                     <h2 className="text-3xl md:text-[44px] font-tektur font-medium text-white">
                         RoadMap
                     </h2>

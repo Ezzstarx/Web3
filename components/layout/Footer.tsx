@@ -75,7 +75,7 @@ export default function Footer() {
             {/* Purple band glow across the columns */}
             <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[90%] h-[180px] bg-[#a855f7] blur-[120px] opacity-30 pointer-events-none" />
 
-            <div className="container mx-auto px-6 md:px-12 lg:px-24 relative z-10">
+            <div className="page-x relative z-10">
                 <div className="flex flex-col md:flex-row gap-y-12 md:gap-x-8 mb-12 items-center md:items-start">
 
                     {/* Left: Pixel Logo & Socials */}

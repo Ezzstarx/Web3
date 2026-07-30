@@ -42,7 +42,7 @@ export default function SkaUtility() {
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none" />
 
-            <div className="container mx-auto px-4 sm:px-6 relative z-10">
+            <div className="page-x relative z-10">
                 {/* Heading */}
                 <div className="relative w-fit mx-auto pb-4 mb-16 md:mb-24">
                     <h2 className="text-3xl md:text-[44px] font-tektur font-medium text-white text-center">
@@ -51,7 +51,7 @@ export default function SkaUtility() {
                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[160%] h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>
                 </div>
 
-                <div className="flex flex-col lg:flex-row items-start justify-between gap-12 max-w-7xl mx-auto">
+                <div className="flex flex-col lg:flex-row items-start justify-between gap-12 w-full">
 
                     {/* Left: Question + Detail Card */}
                     <div className="w-full lg:w-[45%]">

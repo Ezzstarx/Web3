@@ -16,47 +16,46 @@ const navLinks = [
     { name: "Core Team", href: "#team" },
 ];
 
-// Showcased characters — switched via the thumbnail rail on the right.
-// Each has a matching grunge ring; the rail thumb is the head/bust crop of the
-// same artwork sitting on the character's accent colour.
+// The 11 showcased characters, each paired with the grunge ring exported
+// alongside it. Accent colours are sampled from that ring, so the name
+// gradient and the rail thumbnail always match the artwork.
+// Only Kenichi's copy exists in the design — the rest await client text.
 const characters = [
-    {
-        name: "",
-        subtitle: "",
-        caseFile: "",
-        image: "/assets/images/hero/char-shadow.png",
-        ring: "/assets/images/hero/ring-darkred.png",
-        thumbBg: "#5a1119",
-        titleFrom: "#b04a5a",
-        titleTo: "#5e1f2b",
-    },
+    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-01.png", ring: "/assets/images/hero/ring-01.png", thumbBg: "#4a4a52", titleFrom: "#b9b9c4", titleTo: "#5a5a64" },
+    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-02.png", ring: "/assets/images/hero/ring-02.png", thumbBg: "#155e6b", titleFrom: "#4be0f0", titleTo: "#1a7a8c" },
+    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-03.png", ring: "/assets/images/hero/ring-03.png", thumbBg: "#6b5320", titleFrom: "#e0b860", titleTo: "#7a5a1a" },
+    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-04.png", ring: "/assets/images/hero/ring-04.png", thumbBg: "#6b2410", titleFrom: "#e06a30", titleTo: "#7a2508" },
+    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-05.png", ring: "/assets/images/hero/ring-05.png", thumbBg: "#2c1470", titleFrom: "#7a5ae0", titleTo: "#2e1470" },
     {
         name: "Kenichi",
         subtitle: "The Silent Executioner",
         caseFile: "SE-13-Kenichi",
-        image: "/assets/images/hero/char-kenichi.png",
-        ring: "/assets/images/hero/ring-purple.png",
-        thumbBg: "#b9a3f5",
+        image: "/assets/images/hero/char-06.png",
+        ring: "/assets/images/hero/ring-06.png",
+        thumbBg: "#604090",
         titleFrom: "#8d7ae0",
         titleTo: "#4a3a8f",
     },
-    {
-        name: "",
-        subtitle: "",
-        caseFile: "",
-        image: "/assets/images/hero/char-crimson.png",
-        ring: "/assets/images/hero/ring-red.png",
-        thumbBg: "#b7222c",
-        titleFrom: "#d15563",
-        titleTo: "#7a1f28",
-    },
+    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-07.png", ring: "/assets/images/hero/ring-07.png", thumbBg: "#601a12", titleFrom: "#b0503a", titleTo: "#5a1810" },
+    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-08.png", ring: "/assets/images/hero/ring-08.png", thumbBg: "#8a1f2b", titleFrom: "#d15563", titleTo: "#7a1f28" },
+    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-09.png", ring: "/assets/images/hero/ring-09.png", thumbBg: "#55101a", titleFrom: "#a03a48", titleTo: "#4a0e18" },
+    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-10.png", ring: "/assets/images/hero/ring-10.png", thumbBg: "#7a4212", titleFrom: "#d08a3a", titleTo: "#6a3810" },
+    { name: "", subtitle: "", caseFile: "", image: "/assets/images/hero/char-11.png", ring: "/assets/images/hero/ring-11.png", thumbBg: "#7a1212", titleFrom: "#d04040", titleTo: "#6a1010" },
 ];
+
+// Kenichi is the character the design opens on.
+const INITIAL_INDEX = 5;
 
 export default function Hero() {
     const { isConnected, address, disconnectWallet, isCustomModalOpen, openCustomModal, closeCustomModal } = useWallet();
-    const [activeIndex, setActiveIndex] = useState(1);
+    const [activeIndex, setActiveIndex] = useState(INITIAL_INDEX);
 
     const active = characters[activeIndex];
+
+    // The rail shows three thumbnails at a time — the active character with its
+    // neighbours above and below — and wraps around the full list of 11.
+    const wrap = (i: number) => (i + characters.length) % characters.length;
+    const visible = [wrap(activeIndex - 1), activeIndex, wrap(activeIndex + 1)];
 
     return (
         <section id="hero" className="relative min-h-screen overflow-hidden bg-[#050505]">
@@ -67,7 +66,7 @@ export default function Hero() {
             />
 
             {/* Top Bar: Logo + Connect Wallet */}
-            <div className="relative z-30 flex items-center justify-between px-6 pt-6 md:px-[12.8%] md:pt-14">
+            <div className="page-x relative z-30 flex items-center justify-between pt-6 md:pt-14">
                 <Link href="/" className="flex items-center">
                     <img
                         src="/assets/images/logo.png"
@@ -100,7 +99,7 @@ export default function Hero() {
             <div className="relative z-10 flex min-h-[calc(100vh-120px)]">
 
                 {/* Left Column: Nav + Character Identity */}
-                <div className="relative z-20 flex flex-col justify-between pl-6 md:pl-[15.6%] pt-16 md:pt-14 pb-20 w-full lg:w-1/2">
+                <div className="page-x relative z-20 flex flex-col justify-between pt-16 md:pt-14 pb-20 w-full lg:w-1/2">
 
                     {/* Section Nav List */}
                     <nav className="flex flex-col gap-4 md:gap-5">
@@ -164,39 +163,67 @@ export default function Hero() {
                     />
                 </div>
 
-                {/* Character Switcher Rail */}
-                <div className="absolute right-3 md:right-7 top-[38%] z-30 flex flex-col gap-6">
-                    {characters.map((char, idx) => (
-                        <button
-                            key={idx}
-                            onClick={() => setActiveIndex(idx)}
-                            className={`w-[52px] h-[52px] md:w-[72px] md:h-[72px] overflow-hidden transition-all duration-300 ${activeIndex === idx
-                                ? "ring-1 ring-white/60 brightness-110"
-                                : "opacity-80 hover:opacity-100"
-                                }`}
-                            style={{ backgroundColor: char.thumbBg }}
-                            aria-label={char.name || `Character ${idx + 1}`}
-                        >
-                            {/* Head/bust crop of the same character artwork */}
-                            <img
-                                src={char.image}
-                                alt=""
-                                aria-hidden
-                                className="w-full h-full object-cover object-top scale-[1.7] origin-top"
-                            />
-                        </button>
-                    ))}
+                {/* Character Switcher Rail — three at a time, looping through all 11 */}
+                <div className="absolute right-3 md:right-[3.5%] top-1/2 -translate-y-1/2 z-30 flex flex-col items-center gap-3">
+                    <button
+                        onClick={() => setActiveIndex(wrap(activeIndex - 1))}
+                        className="text-white/50 hover:text-white transition-colors leading-none text-lg"
+                        aria-label="Previous character"
+                    >
+                        ▲
+                    </button>
+
+                    <div className="flex flex-col gap-4">
+                        {visible.map((charIdx, slot) => {
+                            const char = characters[charIdx];
+                            const isActive = charIdx === activeIndex;
+                            return (
+                                <button
+                                    key={`${charIdx}-${slot}`}
+                                    onClick={() => setActiveIndex(charIdx)}
+                                    className={`w-[52px] h-[52px] md:w-[72px] md:h-[72px] overflow-hidden transition-all duration-300 ${isActive
+                                        ? "ring-2 ring-white/70 brightness-110 scale-105"
+                                        : "opacity-70 hover:opacity-100"
+                                        }`}
+                                    style={{ backgroundColor: char.thumbBg }}
+                                    aria-label={char.name || `Character ${charIdx + 1}`}
+                                    aria-current={isActive}
+                                >
+                                    {/* Head/bust crop of the same character artwork */}
+                                    <img
+                                        src={char.image}
+                                        alt=""
+                                        aria-hidden
+                                        className="w-full h-full object-cover object-top scale-[1.7] origin-top"
+                                    />
+                                </button>
+                            );
+                        })}
+                    </div>
+
+                    <button
+                        onClick={() => setActiveIndex(wrap(activeIndex + 1))}
+                        className="text-white/50 hover:text-white transition-colors leading-none text-lg"
+                        aria-label="Next character"
+                    >
+                        ▼
+                    </button>
                 </div>
             </div>
 
-            {/* Smoke transition bleeding into the Seika section.
-                The artwork ships on an opaque black field, so screen-blend it onto the page. */}
-            <img
-                src="/assets/images/sections/transition-smoke.png"
-                alt=""
-                aria-hidden
-                className="relative z-20 -mt-40 md:-mt-56 -mb-px w-full h-auto pointer-events-none select-none mix-blend-screen"
-            />
+            {/* Smoke transition bleeding into the Seika section. Two copies of the
+                strip drift sideways forever and undulate out of phase, so the matter
+                appears to swim. Screen-blended because the art ships on black. */}
+            <div className="relative z-20 -mt-40 md:-mt-56 -mb-px w-full overflow-hidden pointer-events-none select-none mix-blend-screen">
+                <div className="smoke-rail">
+                    <div className="smoke-cell">
+                        <img src="/assets/images/sections/transition-smoke.png" alt="" aria-hidden />
+                    </div>
+                    <div className="smoke-cell">
+                        <img src="/assets/images/sections/transition-smoke.png" alt="" aria-hidden />
+                    </div>
+                </div>
+            </div>
 
             {/* Custom Wallet Modal */}
             <CustomWalletModal isOpen={isCustomModalOpen} onClose={closeCustomModal} />

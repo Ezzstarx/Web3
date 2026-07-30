@@ -48,16 +48,16 @@ export default function ProofOfDemand() {
             {/* Faint colored glow on the left edge */}
             <div className="absolute top-0 left-0 w-[300px] h-[600px] bg-[#2ECC71]/5 blur-[120px] pointer-events-none" />
 
-            <div className="container mx-auto px-4 sm:px-6 relative z-10">
+            <div className="page-x relative z-10">
                 {/* Heading — left aligned */}
-                <div className="relative w-fit pb-4 mb-14 md:ml-10">
+                <div className="relative w-fit pb-4 mb-14">
                     <h2 className="text-3xl md:text-[44px] font-tektur font-medium text-white">
                         Proof of Demand
                     </h2>
                     <div className="absolute bottom-0 -left-16 w-[260%] h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>
                 </div>
 
-                <div className="flex flex-col lg:flex-row justify-between gap-14 max-w-7xl mx-auto">
+                <div className="flex flex-col lg:flex-row justify-between gap-14 w-full">
 
                     {/* Left: Creator platform screenshots */}
                     <div className="w-full lg:w-[58%]">

@@ -25,14 +25,16 @@ export default function Tokenomics() {
 
     return (
         <section id="tokenomics" className="relative overflow-hidden py-20 md:py-24 bg-[#14082a]">
-            {/* Blurred "3B SKA" giant-letters background */}
+            {/* Blurred "3B SKA" giant-letters background. Fitted to the section
+                width rather than cover — the section is far taller than the art's
+                1.67 aspect, and cover magnified the lettering ~1.67x. */}
             <div
-                className="absolute inset-0 bg-cover bg-center"
+                className="absolute inset-0 bg-no-repeat bg-top bg-[length:100%_auto]"
                 style={{ backgroundImage: "url('/assets/images/sections/tokenomics-bg.png')" }}
             />
             <div className="absolute inset-0 bg-black/30 pointer-events-none" />
 
-            <div className="container mx-auto px-4 sm:px-6 relative z-10">
+            <div className="page-x relative z-10">
                 {/* Heading */}
                 <div className="relative w-fit mx-auto pb-4 mb-14 md:mb-20">
                     <h2 className="text-3xl md:text-[44px] font-tektur font-medium text-white text-center">
@@ -41,10 +43,11 @@ export default function Tokenomics() {
                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[160%] h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>
                 </div>
 
-                <div className="flex flex-col lg:flex-row items-center justify-center gap-10 max-w-7xl mx-auto mb-10">
+                <div className="flex flex-col lg:flex-row items-stretch lg:items-start justify-between gap-8 w-full mb-8">
 
-                    {/* Left: Donut distribution chart with callouts */}
-                    <div className="relative w-full max-w-[760px] shrink-0 bg-[#0a0a12]/80 p-4">
+                    {/* Left: Donut distribution chart with callouts — takes the
+                        remaining width so the pair spans the full content column */}
+                    <div className="relative flex-1 min-w-0 bg-[#0a0a12]/80 p-4">
                         <img
                             src="/assets/images/sections/tokenomics-donut.png"
                             alt="SKA token distribution"
@@ -53,7 +56,7 @@ export default function Tokenomics() {
                     </div>
 
                     {/* Right: Distribution Stats Grid */}
-                    <div className="w-full max-w-[460px] grid grid-cols-2">
+                    <div className="lg:w-[460px] lg:shrink-0 grid grid-cols-2">
                         {distribution.map((item, idx) => (
                             <div
                                 key={idx}
@@ -72,7 +75,7 @@ export default function Tokenomics() {
                 </div>
 
                 {/* Contract Section (shared component from the old site) */}
-                <div className="max-w-5xl mx-auto bg-[#0a0a12]/70 w-full flex flex-col">
+                <div className="w-full bg-[#0a0a12]/70 flex flex-col">
                     {/* Top Section with Border */}
                     <div className="p-6 md:p-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                         <div>
