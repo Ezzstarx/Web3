@@ -211,19 +211,14 @@ export default function Hero() {
                 </div>
             </div>
 
-            {/* Smoke transition bleeding into the Seika section. Two copies of the
-                strip drift sideways forever and undulate out of phase, so the matter
-                appears to swim. Screen-blended because the art ships on black. */}
-            <div className="relative z-20 -mt-40 md:-mt-56 -mb-px w-full overflow-hidden pointer-events-none select-none mix-blend-screen">
-                <div className="smoke-rail">
-                    <div className="smoke-cell">
-                        <img src="/assets/images/sections/transition-smoke.png" alt="" aria-hidden />
-                    </div>
-                    <div className="smoke-cell">
-                        <img src="/assets/images/sections/transition-smoke.png" alt="" aria-hidden />
-                    </div>
-                </div>
-            </div>
+            {/* Smoke transition bleeding into the Seika section.
+                The artwork ships on an opaque black field, so screen-blend it onto the page. */}
+            <img
+                src="/assets/images/sections/transition-smoke.png"
+                alt=""
+                aria-hidden
+                className="relative z-20 -mt-40 md:-mt-56 -mb-px w-full h-auto pointer-events-none select-none mix-blend-screen"
+            />
 
             {/* Custom Wallet Modal */}
             <CustomWalletModal isOpen={isCustomModalOpen} onClose={closeCustomModal} />

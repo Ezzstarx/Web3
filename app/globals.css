@@ -110,57 +110,6 @@
     }
   }
 
-  /* Hero smoke: the strip drifts sideways forever (two copies, so -50% loops
-     seamlessly) while each copy undulates — a slow swimming motion. */
-  @keyframes smoke-drift {
-    from {
-      transform: translateX(0);
-    }
-
-    to {
-      transform: translateX(-50%);
-    }
-  }
-
-  @keyframes smoke-swim-a {
-
-    0%,
-    100% {
-      transform: translateY(0) scaleY(1);
-    }
-
-    25% {
-      transform: translateY(-9px) scaleY(1.06);
-    }
-
-    50% {
-      transform: translateY(4px) scaleY(0.95);
-    }
-
-    75% {
-      transform: translateY(-5px) scaleY(1.03);
-    }
-  }
-
-  @keyframes smoke-swim-b {
-
-    0%,
-    100% {
-      transform: translateY(0) scaleY(1);
-    }
-
-    30% {
-      transform: translateY(7px) scaleY(0.94);
-    }
-
-    60% {
-      transform: translateY(-8px) scaleY(1.07);
-    }
-
-    80% {
-      transform: translateY(3px) scaleY(0.98);
-    }
-  }
 }
 
 :root {
@@ -211,51 +160,6 @@
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
-  }
-
-  /* Hero smoke strip: the rail drifts sideways forever while each half
-     undulates out of phase, so the matter appears to swim.
-     The artwork's left and right edges don't match, so the second copy is
-     mirrored — that makes both seams edge-to-matching-edge and the loop
-     invisible. Mirror lives on the <img>, swim on the cell, so the two
-     transforms never fight. */
-  .smoke-rail {
-    display: flex;
-    width: 200%;
-    animation: smoke-drift 38s linear infinite;
-    will-change: transform;
-  }
-
-  .smoke-cell {
-    width: 50%;
-    flex: none;
-    transform-origin: center bottom;
-  }
-
-  .smoke-cell>img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .smoke-cell:nth-child(1) {
-    animation: smoke-swim-a 11s ease-in-out infinite;
-  }
-
-  .smoke-cell:nth-child(2) {
-    animation: smoke-swim-b 13s ease-in-out infinite;
-  }
-
-  .smoke-cell:nth-child(2)>img {
-    transform: scaleX(-1);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-
-    .smoke-rail,
-    .smoke-cell {
-      animation: none;
-    }
   }
 
   /* Shared page gutter — keeps every section's content off the screen edges
