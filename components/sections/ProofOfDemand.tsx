@@ -65,9 +65,17 @@ export default function ProofOfDemand() {
                             We showed the vision for the creator platform.
                         </h3>
                         <div className="flex justify-center gap-6">
-                            {/* Screenshots of the platform (Manga/Stories & Gists/Events) — client will provide */}
-                            <div className="img-placeholder w-[300px] md:w-[380px] h-[540px] md:h-[680px] rounded-sm" data-image="proof-screenshot-1" />
-                            <div className="img-placeholder w-[300px] md:w-[380px] h-[540px] md:h-[680px] rounded-sm" data-image="proof-screenshot-2" />
+                            {/* Screenshots of the creator platform (Manga/Stories & Gists/Events) */}
+                            <img
+                                src="/assets/images/proof/screenshot-1.png"
+                                alt="Ezzstar creator platform — manga and stories"
+                                className="w-[300px] md:w-[380px] h-auto object-contain"
+                            />
+                            <img
+                                src="/assets/images/proof/screenshot-2.png"
+                                alt="Ezzstar creator platform — gists and events"
+                                className="w-[300px] md:w-[380px] h-auto object-contain"
+                            />
                         </div>
                     </div>
 

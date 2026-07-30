@@ -12,7 +12,7 @@ export default function PresaleWidget() {
     const { buyWithToken } = useWeb3Presale();
     const [payCurrency, setPayCurrency] = useState<string>("USDT");
     const [amount, setAmount] = useState<string>("0.002");
-    const [receiveAmount, setReceiveAmount] = useState<string>("0.05");
+    const [receiveAmount, setReceiveAmount] = useState<string>("1");
     const [isBuying, setIsBuying] = useState(false);
 
     // Transaction Modal State
@@ -22,21 +22,23 @@ export default function PresaleWidget() {
     const [modalMessage, setModalMessage] = useState("");
     const [modalTxHash, setModalTxHash] = useState<string | undefined>(undefined);
 
-    // 1 SKA = 0.004 USDT -> 250 SKA per USD
+    // Rates follow the design's worked example (0.002 USDT -> 1 SKA), i.e. 500 SKA per USD.
+    // Note this differs from the "1 SKA = 0.004 USDT" headline, which implies 250 — the
+    // design shows both, so the headline text and the quote are kept exactly as designed.
     const RATES: Record<string, number> = {
-        "USDT": 250,      // 1 USDT = 250 SKA
-        "BNB": 162500,    // 1 BNB = $650 = 162.5k SKA
-        "USDC": 250,
-        "DAI": 250,       // 1 DAI = $1 = 250 SKA
-        "SOL": 37500,     // 1 SOL = $150 = 37.5k SKA
-        "CARD": 250,      // Card payments settle in USD
+        "USDT": 500,      // 1 USDT = 500 SKA
+        "BNB": 325000,    // 1 BNB = $650
+        "USDC": 500,
+        "DAI": 500,       // 1 DAI = $1
+        "SOL": 75000,     // 1 SOL = $150
+        "CARD": 500,      // Card payments settle in USD
     };
 
     const CURRENCIES = [
-        { id: "USDT", icon: "/assets/icons/crypto/icon-usdt-v2.png" },
+        { id: "USDT", icon: "/assets/icons/crypto/icon-usdt-new.png" },
         { id: "BNB", icon: "/assets/icons/crypto/icon-bnb.png" },
-        { id: "USDC", icon: "/assets/icons/crypto/icon-usdc-v2.png" },
-        { id: "DAI", icon: "/assets/icons/crypto/icon-dai.png" },
+        { id: "USDC", icon: "/assets/icons/crypto/icon-usdc-new.png" },
+        { id: "DAI", icon: "/assets/icons/crypto/icon-dai-new.png" },
         { id: "SOL", icon: "/assets/icons/crypto/icon-sol.png" },
         { id: "CARD", icon: "" }, // Visa/Mastercard icon — client will provide
     ];
@@ -157,8 +159,11 @@ export default function PresaleWidget() {
                     {/* Receive Input */}
                     <div className="bg-[#050507] border-[0.5px] border-white/30 rounded-xl p-1.5 flex items-center gap-3">
                         <div className="w-6 h-6 flex items-center justify-center">
-                            {/* SKA coin icon — client will provide */}
-                            <span className="w-[24px] h-[24px] rounded-full img-placeholder" data-image="icon-ska" />
+                            <img
+                                src="/assets/icons/crypto/icon-ska.png"
+                                alt="SKA"
+                                className="w-[24px] h-[24px] object-contain"
+                            />
                         </div>
                         <input
                             type="text"

@@ -45,21 +45,6 @@ const phases: RoadmapPhase[] = [
     { id: 4, title: "Phase 4", period: "(Q2 2026)", points: [], detailPosition: null, highlighted: false },
 ];
 
-// Cyan tech-corner frame around phase images (pattern shared with the old site)
-function TechFrame({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-    return (
-        <div className={`relative p-3 ${className}`}>
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 left-0 w-10 h-10 border-t-[1px] border-l-[1px] border-[#3EE1F0] rounded-tl-sm" style={{ filter: "drop-shadow(0 0 6px #3EE1F0)" }}></div>
-                <div className="absolute top-0 right-0 w-10 h-10 border-t-[1px] border-r-[1px] border-[#3EE1F0] rounded-tr-sm" style={{ filter: "drop-shadow(0 0 6px #3EE1F0)" }}></div>
-                <div className="absolute bottom-0 left-0 w-10 h-10 border-b-[1px] border-l-[1px] border-[#3EE1F0] rounded-bl-sm" style={{ filter: "drop-shadow(0 0 6px #3EE1F0)" }}></div>
-                <div className="absolute bottom-0 right-0 w-10 h-10 border-b-[1px] border-r-[1px] border-[#3EE1F0] rounded-br-sm" style={{ filter: "drop-shadow(0 0 6px #3EE1F0)" }}></div>
-            </div>
-            {children}
-        </div>
-    );
-}
-
 function PhasePoints({ points }: { points: string[] }) {
     return (
         <ul className="space-y-1.5">
@@ -101,10 +86,12 @@ export default function Roadmap() {
                             {/* Vertical connector down to Phase 2 label */}
                             <div className="w-[1px] h-14 bg-white/60 ml-14 mt-3" />
                         </div>
-                        {/* Phase 2 image (gold SEIKA coin) — client will provide */}
-                        <TechFrame className="mt-2">
-                            <div className="img-placeholder w-[230px] h-[210px]" data-image="roadmap-phase2-coin" />
-                        </TechFrame>
+                        {/* Phase 2 image (gold SEIKA coin) — the cyan tech frame is part of the artwork */}
+                        <img
+                            src="/assets/images/roadmap/phase2-large.png"
+                            alt="Phase 2"
+                            className="mt-2 w-[260px] h-auto"
+                        />
                     </div>
 
                     {/* Timeline row */}
@@ -138,10 +125,12 @@ export default function Roadmap() {
                             <div className="w-[1px] h-12 bg-white/60 ml-14 mb-3 -mt-2" />
                             <PhasePoints points={phases[0].points} />
                         </div>
-                        {/* Phase 1 image (cyberpunk arcade building) — client will provide */}
-                        <TechFrame>
-                            <div className="img-placeholder w-[230px] h-[210px]" data-image="roadmap-phase1-building" />
-                        </TechFrame>
+                        {/* Phase 1 image (cyberpunk arcade building) — the cyan tech frame is part of the artwork */}
+                        <img
+                            src="/assets/images/roadmap/phase1-large.png"
+                            alt="Phase 1"
+                            className="w-[260px] h-auto"
+                        />
                     </div>
 
                     {/* Phase selector thumbnails — bottom right (shared component from the old site) */}
@@ -152,14 +141,15 @@ export default function Roadmap() {
                                 onClick={() => setActivePhaseId(phase.id)}
                                 className="flex flex-col items-center gap-2 md:gap-3 cursor-pointer group transition-transform duration-300 hover:scale-105 min-w-[60px] md:min-w-[80px]"
                             >
-                                {/* Thumbnail — client will provide phase images */}
+                                {/* Thumbnail */}
                                 <div className="w-[60px] h-[60px] md:w-[110px] md:h-[107px] relative flex-shrink-0">
-                                    <div
-                                        className={`img-placeholder w-full h-full transition-all duration-300 ${activePhaseId === phase.id
+                                    <img
+                                        src={`/assets/images/roadmap/thumb${phase.id}.png`}
+                                        alt={phase.title}
+                                        className={`w-full h-full object-contain transition-all duration-300 ${activePhaseId === phase.id
                                             ? "brightness-110 scale-110"
                                             : "brightness-75 opacity-70 group-hover:opacity-100 group-hover:brightness-100"
                                             }`}
-                                        data-image={`roadmap-thumb-phase${phase.id}`}
                                     />
                                 </div>
 
@@ -191,7 +181,7 @@ export default function Roadmap() {
                     <div className="flex flex-nowrap justify-center gap-6">
                         {phases.map((phase) => (
                             <div key={phase.id} onClick={() => setActivePhaseId(phase.id)} className="flex flex-col items-center gap-2 cursor-pointer">
-                                <div className="img-placeholder w-[60px] h-[60px]" data-image={`roadmap-thumb-phase${phase.id}`} />
+                                <img src={`/assets/images/roadmap/thumb${phase.id}.png`} alt={phase.title} className="w-[60px] h-[60px] object-contain" />
                                 <span className={`font-tektur text-xs ${activePhaseId === phase.id ? "text-white border-b border-white" : "text-white/70"}`}>{phase.title}</span>
                             </div>
                         ))}

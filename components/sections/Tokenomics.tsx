@@ -25,8 +25,11 @@ export default function Tokenomics() {
 
     return (
         <section id="tokenomics" className="relative overflow-hidden py-20 md:py-24 bg-[#14082a]">
-            {/* Blurred giant-letters background — client will provide */}
-            <div className="absolute inset-0" data-image="tokenomics-blur-bg" />
+            {/* Blurred "3B SKA" giant-letters background */}
+            <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: "url('/assets/images/sections/tokenomics-bg.png')" }}
+            />
             <div className="absolute inset-0 bg-black/30 pointer-events-none" />
 
             <div className="container mx-auto px-4 sm:px-6 relative z-10">
@@ -40,9 +43,13 @@ export default function Tokenomics() {
 
                 <div className="flex flex-col lg:flex-row items-center justify-center gap-10 max-w-7xl mx-auto mb-10">
 
-                    {/* Left: Donut distribution chart with callouts — client will provide graphic */}
-                    <div className="relative w-full max-w-[720px] aspect-[855/545] bg-[#0a0a12]/80 shrink-0">
-                        <div className="img-placeholder absolute inset-0" data-image="tokenomics-donut-chart" />
+                    {/* Left: Donut distribution chart with callouts */}
+                    <div className="relative w-full max-w-[760px] shrink-0 bg-[#0a0a12]/80 p-4">
+                        <img
+                            src="/assets/images/sections/tokenomics-donut.png"
+                            alt="SKA token distribution"
+                            className="w-full h-auto object-contain"
+                        />
                     </div>
 
                     {/* Right: Distribution Stats Grid */}

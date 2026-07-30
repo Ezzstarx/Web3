@@ -9,9 +9,13 @@ export default function Seika() {
             <div className="container mx-auto px-4 sm:px-6 relative z-10">
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
 
-                    {/* Left: 3D SKA Coin — client will provide */}
+                    {/* Left: 3D SKA Coin */}
                     <div className="relative w-[280px] h-[280px] md:w-[400px] md:h-[400px] shrink-0">
-                        <div className="img-placeholder w-full h-full rounded-full" data-image="seika-coin-3d" />
+                        <img
+                            src="/assets/images/sections/seika-coin.png"
+                            alt="Seika (SKA) coin"
+                            className="w-full h-full object-contain drop-shadow-[0_0_60px_rgba(192,38,211,0.45)]"
+                        />
                         {/* Glow reflection under coin */}
                         <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[70%] h-[60px] bg-[#c026d3]/30 blur-[40px] rounded-full pointer-events-none" />
                     </div>
@@ -38,11 +42,6 @@ export default function Seika() {
                 </div>
             </div>
 
-            {/* Bottom purple splatter transition into About — client will provide texture */}
-            <div
-                className="relative z-20 mt-16 h-[140px] md:h-[190px] w-full"
-                data-image="transition-splatter-seika"
-            />
         </section>
     );
 }

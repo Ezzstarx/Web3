@@ -16,41 +16,46 @@ interface TeamMember {
     description: string;
     x: string;        // profile links
     linkedin: string;
-    left: number;     // hotspot position, % of section width
+    image: string;
+    left: number;     // horizontal centre, % of the stage
+    height: number;   // figure height, % of the stage (depth cue)
 }
 
-// 13 figures stand in front of the EZZSTAR LED wall (single artwork, client-provided).
-// Hovering a figure reveals the member plate + bio. Only Muzammil's bio exists in
-// the design so far — names/roles carried over from the old site's Team data.
+// The 12 figures stand in front of the EZZSTAR LED wall. Hovering a figure
+// swaps the name plate and bio below. Only Muzammil's bio is defined in the
+// design; names/roles are carried over from the old site's Team data.
 const members: TeamMember[] = [
-    { name: "Saachi Singh", role: "Product Designer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/saachi-singh-75323123b/", left: 9 },
-    { name: "Fateen Moeen", role: "Unreal Dev/ Ani Lead", description: "", x: "#", linkedin: "https://www.linkedin.com/in/fateen-catzero/", left: 17.5 },
-    { name: "Aman Prajapati", role: "CTO, Co-Founder", description: "", x: "#", linkedin: "https://www.linkedin.com/in/aman-prajapati-675909199/", left: 26 },
-    { name: "Tushar Goyal", role: "Blockchain Developer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/tushar-goyal-1876b7160", left: 34 },
-    { name: "Rabiya Javed", role: "Graphic Designer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/rabiya-javed-378694275/", left: 41.5 },
+    { name: "Saachi Singh", role: "Product Designer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/saachi-singh-75323123b/", image: "/assets/images/team/m01.png", left: 9.5, height: 52 },
+    { name: "Fateen Moeen", role: "Unreal Dev/ Ani Lead", description: "", x: "#", linkedin: "https://www.linkedin.com/in/fateen-catzero/", image: "/assets/images/team/m02.png", left: 17.5, height: 57 },
+    { name: "Aman Prajapati", role: "CTO, Co-Founder", description: "", x: "#", linkedin: "https://www.linkedin.com/in/aman-prajapati-675909199/", image: "/assets/images/team/m03.png", left: 26, height: 54 },
+    { name: "Tushar Goyal", role: "Blockchain Developer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/tushar-goyal-1876b7160", image: "/assets/images/team/m04.png", left: 34, height: 50 },
+    { name: "Rabiya Javed", role: "Graphic Designer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/rabiya-javed-378694275/", image: "/assets/images/team/m05.png", left: 41.5, height: 53 },
     {
         name: "Muzammil Moosa",
         role: "CEO & Founder",
         description: "7+ years of market analysis insights from Nielsen. Experienced in e-commerce business and gaming community leadership gaming community director, previously administering regional tournament setups with global brands including Red Bull and Buffalo Wild Wings. Directing token design and network distribution.",
         x: "https://x.com/ezzstarx?s=21",
         linkedin: "https://www.linkedin.com/in/muzammil-moosa-48ba7a201/",
-        left: 50,
+        image: "/assets/images/team/m06.png",
+        left: 50.5,
+        height: 60,
     },
-    { name: "M. Arbaaz", role: "Partnership Manager", description: "", x: "#", linkedin: "https://www.linkedin.com/in/mohammed-arbaaz-41b428182/", left: 57 },
-    { name: "Ali Abdullah", role: "Community Builder", description: "", x: "#", linkedin: "https://www.linkedin.com/in/ali-abdullah-028845333/", left: 64 },
-    { name: "Harsh Upadhyay", role: "Full Stack Developer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/upadhyay-harsh9756/", left: 71 },
-    { name: "Abdullah Khan", role: "Web Developer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/abdullahkhancs01/", left: 78 },
-    { name: "Misbah Iftikhar", role: "2D Concept Artist", description: "", x: "#", linkedin: "https://www.linkedin.com/in/misbah-iftikhar-20761938/", left: 85 },
-    { name: "Ayush Kumar", role: "Level Designer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/ayush-kumar-parganihaa-49048320b/", left: 92 },
+    { name: "M. Arbaaz", role: "Partnership Manager", description: "", x: "#", linkedin: "https://www.linkedin.com/in/mohammed-arbaaz-41b428182/", image: "/assets/images/team/m07.png", left: 57.5, height: 49 },
+    { name: "Ali Abdullah", role: "Community Builder", description: "", x: "#", linkedin: "https://www.linkedin.com/in/ali-abdullah-028845333/", image: "/assets/images/team/m08.png", left: 64.5, height: 55 },
+    { name: "Harsh Upadhyay", role: "Full Stack Developer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/upadhyay-harsh9756/", image: "/assets/images/team/m09.png", left: 71.5, height: 47 },
+    { name: "Abdullah Khan", role: "Web Developer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/abdullahkhancs01/", image: "/assets/images/team/m10.png", left: 78.5, height: 54 },
+    { name: "Misbah Iftikhar", role: "2D Concept Artist", description: "", x: "#", linkedin: "https://www.linkedin.com/in/misbah-iftikhar-20761938/", image: "/assets/images/team/m11.png", left: 85.5, height: 51 },
+    { name: "Ayush Kumar", role: "Level Designer", description: "", x: "#", linkedin: "https://www.linkedin.com/in/ayush-kumar-parganihaa-49048320b/", image: "/assets/images/team/m12.png", left: 92.5, height: 53 },
 ];
 
 export default function CoreTeam() {
-    // The design's static state shows Muzammil highlighted by default
-    const [active, setActive] = useState<TeamMember>(members[5]);
+    // The design's resting state highlights Muzammil (centre figure)
+    const [activeIndex, setActiveIndex] = useState(5);
+    const active = members[activeIndex];
 
     return (
         <section id="team" className="relative overflow-hidden bg-[#04070d]">
-            <div className="relative z-10 pt-20">
+            <div className="relative z-20 pt-20">
                 {/* Heading — left aligned */}
                 <div className="relative w-fit pb-4 mb-6 ml-6 md:ml-24">
                     <h2 className="text-3xl md:text-[44px] font-tektur font-medium text-white">
@@ -60,24 +65,36 @@ export default function CoreTeam() {
                 </div>
             </div>
 
-            {/* Team artwork: 13 members in front of the EZZSTAR LED wall — client will provide */}
-            <div className="relative w-full aspect-[1920/1000]">
-                <div className="img-placeholder absolute inset-0" data-image="core-team-led-wall" />
+            {/* Stage: EZZSTAR LED wall with the team standing in front of it */}
+            <div className="relative w-full aspect-[1920/1000] -mt-16">
+                <img
+                    src="/assets/images/team/led-wall.png"
+                    alt=""
+                    aria-hidden
+                    className="absolute inset-0 w-full h-full object-cover"
+                />
 
-                {/* Invisible hover hotspots over each figure */}
+                {/* Team figures */}
                 {members.map((member, idx) => (
                     <button
                         key={idx}
-                        onMouseEnter={() => setActive(member)}
-                        onFocus={() => setActive(member)}
-                        className="absolute top-[15%] h-[65%] w-[7%] -translate-x-1/2 bg-transparent"
-                        style={{ left: `${member.left}%` }}
+                        onMouseEnter={() => setActiveIndex(idx)}
+                        onFocus={() => setActiveIndex(idx)}
+                        className="absolute bottom-[22%] -translate-x-1/2 bg-transparent transition-all duration-300 hover:brightness-110 focus:outline-none"
+                        style={{ left: `${member.left}%`, height: `${member.height}%` }}
                         aria-label={member.name}
-                    />
+                    >
+                        <img
+                            src={member.image}
+                            alt={member.name}
+                            className={`h-full w-auto max-w-none object-contain object-bottom transition-all duration-300 ${activeIndex === idx ? "brightness-110" : "brightness-[0.85]"
+                                }`}
+                        />
+                    </button>
                 ))}
 
-                {/* Member plate + bio (design shows these anchored low center-left) */}
-                <div className="absolute bottom-[6%] left-0 right-0 pointer-events-none">
+                {/* Member plate + bio */}
+                <div className="absolute bottom-[3%] left-0 right-0 z-20 pointer-events-none">
                     <div className="relative flex flex-col md:flex-row items-start gap-8 px-6 md:px-0">
 
                         {/* Name plate — magenta parallelogram */}
@@ -104,7 +121,7 @@ export default function CoreTeam() {
 
                         {/* Bio + socials */}
                         <div className="md:ml-[6%] max-w-[860px]">
-                            <p className="font-satoshi font-semibold text-white text-[14px] md:text-[16px] leading-relaxed">
+                            <p className="font-satoshi font-semibold text-white text-[14px] md:text-[16px] leading-relaxed [text-shadow:0_2px_8px_rgba(0,0,0,0.9)]">
                                 {active.description}
                             </p>
                             <div className="flex justify-end gap-5 mt-4 text-white pointer-events-auto">

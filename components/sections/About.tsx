@@ -1,12 +1,18 @@
 export default function About() {
     return (
-        <section id="about" className="relative overflow-hidden">
-            {/* Purple textured background — final grunge texture provided by client.
-                Solid purple stands in so the section reads correctly meanwhile. */}
-            <div className="absolute inset-0 bg-[#7a1fd0]" data-image="about-purple-texture" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.08)_0%,_transparent_70%)] pointer-events-none" />
+        <section id="about" className="relative overflow-hidden bg-black">
+            {/* Purple grunge slab — its ragged top/bottom edges form the section transitions.
+                Stretched to the section box so both torn edges stay pinned to the edges. */}
+            <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                    backgroundImage: "url('/assets/images/sections/about-purple.png')",
+                    backgroundSize: "100% 100%",
+                    backgroundRepeat: "no-repeat",
+                }}
+            />
 
-            <div className="container mx-auto px-4 sm:px-6 relative z-10 py-24 md:py-32">
+            <div className="container mx-auto px-4 sm:px-6 relative z-10 py-28 md:py-36">
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-12 max-w-6xl mx-auto">
 
                     {/* Left: Heading + Copy */}
@@ -34,10 +40,10 @@ export default function About() {
                         </p>
                     </div>
 
-                    {/* Right: Pixel EZZSTAR stacked logo (shared asset from the old site) */}
+                    {/* Right: Pixel EZZSTAR stacked logo */}
                     <div className="relative w-[240px] md:w-[360px] shrink-0">
                         <img
-                            src="/assets/images/Footer-Logo.png"
+                            src="/assets/images/sections/ezzstar-pixel.png"
                             alt="Ezzstar"
                             className="w-full h-auto object-contain"
                         />
@@ -56,12 +62,6 @@ export default function About() {
                     </a>
                 </div>
             </div>
-
-            {/* Bottom grunge transition into SKA Utility — client will provide texture */}
-            <div
-                className="relative z-20 h-[120px] md:h-[160px] w-full"
-                data-image="transition-grunge-about"
-            />
         </section>
     );
 }

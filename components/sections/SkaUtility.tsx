@@ -35,8 +35,11 @@ export default function SkaUtility() {
 
     return (
         <section id="ska-utility" className="relative overflow-hidden bg-[#0b0508] py-24 md:py-28">
-            {/* Cyberpunk cityscape background — client will provide */}
-            <div className="absolute inset-0" data-image="ska-utility-city-bg" />
+            {/* Cyberpunk cityscape background */}
+            <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: "url('/assets/images/sections/ska-utility-bg.png')" }}
+            />
             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none" />
 
             <div className="container mx-auto px-4 sm:px-6 relative z-10">
