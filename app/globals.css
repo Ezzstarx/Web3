@@ -162,6 +162,61 @@
     display: none;
   }
 
+  /* Smoke strip (see components/ui/SmokeStrip.tsx): the wrapper is masked by
+     the smoke artwork itself, so the silhouette stays perfectly still; the
+     texture inside crawls, making the marbled particles wriggle within it. */
+  /* No `position` here — the call sites position the strip themselves
+     (a rule here would win over their `absolute` utility and break clipping). */
+  .smoke-mask {
+    overflow: hidden;
+    -webkit-mask-image: url('/assets/images/sections/transition-smoke.png');
+    mask-image: url('/assets/images/sections/transition-smoke.png');
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    /* the art has no alpha — mask by how bright it is */
+    -webkit-mask-source-type: luminance;
+    mask-mode: luminance;
+  }
+
+  .smoke-tex {
+    position: absolute;
+    inset: -5%;
+    width: 110%;
+    height: 110%;
+    max-width: none;
+    object-fit: fill;
+    animation: smoke-crawl 16s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  @keyframes smoke-crawl {
+
+    0%,
+    100% {
+      transform: translate(0%, 0%) rotate(0deg);
+    }
+
+    30% {
+      transform: translate(-1.6%, 1.1%) rotate(0.35deg);
+    }
+
+    55% {
+      transform: translate(1.1%, -0.9%) rotate(-0.3deg);
+    }
+
+    80% {
+      transform: translate(-0.7%, -1.2%) rotate(0.2deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .smoke-tex {
+      animation: none;
+    }
+  }
+
   /* Shared page gutter — keeps every section's content off the screen edges
      and matched to the design's inset. Used by all sections + the footer. */
   .page-x {

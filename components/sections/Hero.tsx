@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useWallet } from "../providers/WalletProvider";
 import CustomWalletModal from "../ui/CustomWalletModal";
+import SmokeStrip from "../ui/SmokeStrip";
 
 // Hero navigation (anchors to page sections)
 const navLinks = [
@@ -58,7 +59,7 @@ export default function Hero() {
     const visible = [wrap(activeIndex - 1), activeIndex, wrap(activeIndex + 1)];
 
     return (
-        <section id="hero" className="relative min-h-screen lg:h-screen overflow-hidden bg-[#050505]">
+        <section id="hero" className="relative min-h-screen lg:h-screen lg:flex lg:flex-col overflow-hidden bg-[#050505]">
             {/* Dark grunge backdrop with the red bleed along the right edge */}
             <div
                 className="absolute inset-0 bg-cover bg-center pointer-events-none"
@@ -66,7 +67,7 @@ export default function Hero() {
             />
 
             {/* Top Bar: Logo + Connect Wallet */}
-            <div className="page-x relative z-30 flex items-center justify-between pt-6 md:pt-14">
+            <div className="page-x relative z-30 flex items-center justify-between pt-6 md:pt-[clamp(16px,3.5svh,56px)]">
                 <Link href="/" className="flex items-center">
                     <img
                         src="/assets/images/logo.png"
@@ -95,14 +96,15 @@ export default function Hero() {
                 </div>
             </div>
 
-            {/* Main Hero Content */}
-            <div className="relative z-10 flex min-h-[calc(100vh-120px)]">
+            {/* Main Hero Content. Vertical sizes are svh-clamped so the column
+                compresses on shorter laptop screens instead of overlapping. */}
+            <div className="relative z-10 flex min-h-[calc(100vh-120px)] lg:min-h-0 lg:flex-1">
 
                 {/* Left Column: Nav + Character Identity */}
-                <div className="page-x relative z-20 flex flex-col justify-between pt-16 md:pt-14 pb-20 w-full lg:w-1/2">
+                <div className="page-x relative z-20 flex flex-col justify-between pt-16 md:pt-[clamp(10px,2.2svh,48px)] pb-20 md:pb-[clamp(48px,8svh,88px)] w-full lg:w-1/2">
 
                     {/* Section Nav List */}
-                    <nav className="flex flex-col gap-4 md:gap-5">
+                    <nav className="flex flex-col gap-4 md:gap-[clamp(8px,1.7svh,20px)]">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
@@ -116,7 +118,7 @@ export default function Hero() {
                                     className="w-[22px] h-[23px] shrink-0"
                                     style={{ imageRendering: "pixelated" }}
                                 />
-                                <span className="font-tektur text-xl md:text-[27px] text-[#c9c9ce] group-hover:text-white transition-colors tracking-wide">
+                                <span className="font-tektur text-xl md:text-[length:clamp(19px,2.5svh,27px)] text-[#c9c9ce] group-hover:text-white transition-colors tracking-wide">
                                     {link.name}
                                 </span>
                             </Link>
@@ -126,17 +128,17 @@ export default function Hero() {
                     {/* Character Identity Block */}
                     <div className="mt-16 md:mt-0 flex flex-col items-start">
                         <h1
-                            className="font-scarlet text-[72px] md:text-[120px] leading-none bg-clip-text text-transparent"
+                            className="font-scarlet text-[72px] md:text-[length:clamp(76px,11svh,120px)] leading-none bg-clip-text text-transparent"
                             style={{ backgroundImage: `linear-gradient(to bottom, ${active.titleFrom}, ${active.titleTo})` }}
                         >
                             {active.name}
                         </h1>
-                        <p className="mt-3 w-full text-center font-tektur text-lg md:text-[22px] text-white tracking-wide">
+                        <p className="mt-3 w-full text-center font-tektur text-lg md:text-[length:clamp(16px,2svh,22px)] text-white tracking-wide">
                             {active.subtitle}
                         </p>
 
-                        <div className="mt-8 md:pl-10">
-                            <p className="font-satoshi text-base md:text-[18px] text-white">
+                        <div className="mt-8 md:mt-[clamp(12px,2.6svh,32px)] md:pl-10">
+                            <p className="font-satoshi text-base md:text-[length:clamp(14px,1.8svh,18px)] text-white">
                                 Case File: <span className="text-[#8B5CF6]">{active.caseFile}</span>
                             </p>
                             {/* Barcode */}
@@ -211,16 +213,10 @@ export default function Hero() {
                 </div>
             </div>
 
-            {/* Smoke transition bleeding into the Seika section. Pinned to the
-                bottom from lg up so it overlays the hero instead of adding to its
-                height — that keeps the section to exactly one screen.
-                The artwork ships on an opaque black field, so screen-blend it. */}
-            <img
-                src="/assets/images/sections/transition-smoke.png"
-                alt=""
-                aria-hidden
-                className="relative -mt-40 md:-mt-56 lg:mt-0 lg:absolute lg:bottom-0 lg:left-0 -mb-px z-20 w-full h-auto pointer-events-none select-none mix-blend-screen"
-            />
+            {/* Smoke transition straddling the hero/Seika boundary: pinned to the
+                bottom edge with ~35% of the art dipping below it (clipped here,
+                completed by the matching strip at the top of Seika). */}
+            <SmokeStrip className="absolute bottom-0 left-0 z-20 w-full translate-y-[35%]" />
 
             {/* Custom Wallet Modal */}
             <CustomWalletModal isOpen={isCustomModalOpen} onClose={closeCustomModal} />

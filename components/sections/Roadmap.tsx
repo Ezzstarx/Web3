@@ -50,8 +50,8 @@ function PhasePoints({ points }: { points: string[] }) {
         <ul className="space-y-1.5">
             {points.map((point, idx) => (
                 <li key={idx} className="flex items-start gap-3">
-                    <span className="mt-[11px] w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>
-                    <span className="text-white font-satoshi text-lg md:text-[22px] leading-relaxed">{point}</span>
+                    <span className="mt-[9px] w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>
+                    <span className="text-white font-satoshi text-base md:text-[18px] leading-relaxed">{point}</span>
                 </li>
             ))}
         </ul>

@@ -1,10 +1,15 @@
 import PresaleWidget from "./PresaleWidget";
+import SmokeStrip from "../ui/SmokeStrip";
 
 export default function Seika() {
     return (
         <section id="seika" className="screen-section relative overflow-hidden bg-black pt-20 pb-12 md:pt-24 md:pb-16">
             {/* Soft purple glow under the coin */}
             <div className="absolute bottom-0 left-0 w-[700px] h-[500px] bg-[#a020f0]/10 blur-[140px] rounded-full pointer-events-none" />
+
+            {/* Continuation of the hero's smoke strip across the section boundary
+                (the hero clips the lower ~35% of the art; this shows it). */}
+            <SmokeStrip className="hidden lg:block absolute top-0 left-0 z-0 w-full -translate-y-[65%]" />
 
             <div className="page-x relative z-10">
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">

@@ -43,11 +43,12 @@ export default function Tokenomics() {
                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[160%] h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>
                 </div>
 
-                <div className="flex flex-col lg:flex-row items-stretch lg:items-start justify-between gap-8 w-full mb-8">
+                {/* Compact centred block matching the Figma export: chart panel left,
+                    tight stats grid right, contract card narrower underneath. */}
+                <div className="mx-auto max-w-[1350px] flex flex-col lg:flex-row items-stretch lg:items-start justify-between gap-8 w-full mb-8">
 
-                    {/* Left: Donut distribution chart with callouts — takes the
-                        remaining width so the pair spans the full content column */}
-                    <div className="relative flex-1 min-w-0 bg-[#0a0a12]/80 p-4 flex items-center justify-center">
+                    {/* Left: Donut distribution chart with callouts */}
+                    <div className="relative w-full lg:max-w-[820px] min-w-0 bg-[#0a0a12]/80 p-4 flex items-center justify-center">
                         <img
                             src="/assets/images/sections/tokenomics-donut.png"
                             alt="SKA token distribution"
@@ -56,13 +57,13 @@ export default function Tokenomics() {
                     </div>
 
                     {/* Right: Distribution Stats Grid */}
-                    <div className="lg:w-[460px] lg:shrink-0 grid grid-cols-2">
+                    <div className="lg:w-[460px] lg:shrink-0 grid grid-cols-2 self-center w-full">
                         {distribution.map((item, idx) => (
                             <div
                                 key={idx}
-                                className={`relative p-6 flex flex-col gap-1 ${Math.floor(idx / 2) % 2 === 0 ? "bg-[#0d0d16]/80" : "bg-[#12121d]/60"}`}
+                                className={`relative px-6 py-5 flex flex-col gap-1 ${Math.floor(idx / 2) % 2 === 0 ? "bg-[#0d0d16]/80" : "bg-[#12121d]/60"}`}
                             >
-                                <span className="text-[26px] md:text-[30px] font-satoshi font-semibold text-white leading-tight">{item.pct}</span>
+                                <span className="text-[24px] md:text-[28px] font-satoshi font-semibold text-white leading-tight">{item.pct}</span>
                                 <span className="text-gray-400 text-[14px] leading-tight font-satoshi">{item.label}</span>
 
                                 {/* Vertical separator between the two columns */}
@@ -75,7 +76,7 @@ export default function Tokenomics() {
                 </div>
 
                 {/* Contract Section (shared component from the old site) */}
-                <div className="w-full bg-[#0a0a12]/70 flex flex-col">
+                <div className="mx-auto max-w-[1160px] w-full bg-[#0a0a12]/70 flex flex-col">
                     {/* Top Section with Border */}
                     <div className="p-6 md:p-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                         <div>
