@@ -24,7 +24,7 @@ export default function Tokenomics() {
     };
 
     return (
-        <section id="tokenomics" className="screen-section relative overflow-hidden py-14 md:py-16 bg-[#14082a]">
+        <section id="tokenomics" className="screen-section relative overflow-hidden py-12 md:py-14 bg-[#14082a]">
             {/* Blurred "3B SKA" giant-letters background. Fitted to the section
                 width rather than cover — the section is far taller than the art's
                 1.67 aspect, and cover magnified the lettering ~1.67x. */}

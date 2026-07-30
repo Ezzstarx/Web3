@@ -44,7 +44,7 @@ export default function SkaUtility() {
 
             <div className="page-x relative z-10">
                 {/* Heading */}
-                <div className="relative w-fit mx-auto pb-4 mb-16 md:mb-24">
+                <div className="relative w-fit mx-auto pb-4 mb-10 md:mb-12">
                     <h2 className="text-3xl md:text-[44px] font-tektur font-medium text-white text-center">
                         SKA Utility
                     </h2>

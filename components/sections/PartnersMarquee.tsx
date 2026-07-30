@@ -19,10 +19,10 @@ export default function PartnersMarquee() {
     const loop = [...partners, ...partners, ...partners, ...partners];
 
     return (
-        <section id="partners" className="relative w-full overflow-hidden bg-gradient-to-r from-[#7a0fd4] via-[#9013e0] to-[#7a0fd4] py-4">
+        <section id="partners" className="relative w-full overflow-hidden bg-gradient-to-r from-[#7a0fd4] via-[#9013e0] to-[#7a0fd4] py-1">
             <div className="flex w-max animate-marquee items-center">
                 {loop.map((partner, idx) => (
-                    <div key={idx} className="flex h-[72px] md:h-[92px] items-center justify-center px-10 md:px-14 shrink-0">
+                    <div key={idx} className="flex h-[56px] md:h-[62px] items-center justify-center px-10 md:px-14 shrink-0">
                         <img
                             src={partner.image}
                             alt={partner.name}

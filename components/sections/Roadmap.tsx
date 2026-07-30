@@ -76,28 +76,29 @@ export default function Roadmap() {
                     <div className="absolute bottom-0 -left-24 w-[300%] h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>
                 </div>
 
-                {/* Timeline. Height tracks the viewport (capped at the design's
-                    760px) and the rows below are placed in % of it, so the whole
-                    composition compresses on shorter screens instead of overflowing. */}
-                <div className="hidden lg:block relative h-[min(760px,calc(100svh-240px))]">
+                {/* Timeline — three stacked rows in normal flow (details above the
+                    line, the line itself, details below). Nothing is absolutely
+                    positioned, so rows reserve their own space and can never
+                    overlap, whatever the viewport height; images scale with svh. */}
+                <div className="hidden lg:flex flex-col">
 
-                    {/* Phase 2 details — above the line */}
-                    <div className="absolute top-0 left-[30%] flex items-start gap-16">
+                    {/* Row 1: Phase 2 details — above the line */}
+                    <div className="flex items-start gap-14 pl-[30%]">
                         <div className="flex flex-col">
                             <PhasePoints points={phases[1].points} />
                             {/* Vertical connector down to Phase 2 label */}
-                            <div className="w-[1px] h-14 bg-white/60 ml-14 mt-3" />
+                            <div className="w-[1px] h-[clamp(24px,5svh,56px)] bg-white/60 ml-14 mt-3" />
                         </div>
                         {/* Phase 2 image (gold SEIKA coin) — the cyan tech frame is part of the artwork */}
                         <img
                             src="/assets/images/roadmap/phase2-large.png"
                             alt="Phase 2"
-                            className="mt-2 w-[260px] h-auto max-h-[30svh] object-contain"
+                            className="mt-1 w-auto h-[clamp(150px,26svh,250px)] object-contain"
                         />
                     </div>
 
-                    {/* Timeline row */}
-                    <div className="absolute top-[52.6%] left-0 right-0 flex items-center">
+                    {/* Row 2: the timeline itself */}
+                    <div className="flex items-center">
                         {phases.map((phase, idx) => (
                             <div key={phase.id} className={`flex items-center ${idx < phases.length - 1 ? "flex-1" : ""}`}>
                                 <div className="flex flex-col shrink-0">
@@ -120,23 +121,24 @@ export default function Roadmap() {
                         ))}
                     </div>
 
-                    {/* Phase 1 details — below the line */}
-                    <div className="absolute top-[67%] left-0 flex items-start gap-10">
-                        <div className="flex flex-col">
-                            {/* Vertical connector up to Phase 1 label */}
-                            <div className="w-[1px] h-12 bg-white/60 ml-14 mb-3 -mt-2" />
-                            <PhasePoints points={phases[0].points} />
+                    {/* Row 3: Phase 1 details (below the line) + thumbnail selector */}
+                    <div className="flex items-start justify-between gap-8">
+                        <div className="flex items-start gap-10">
+                            <div className="flex flex-col">
+                                {/* Vertical connector up to Phase 1 label */}
+                                <div className="w-[1px] h-[clamp(20px,4.5svh,48px)] bg-white/60 ml-14 mb-3" />
+                                <PhasePoints points={phases[0].points} />
+                            </div>
+                            {/* Phase 1 image (cyberpunk arcade building) — the cyan tech frame is part of the artwork */}
+                            <img
+                                src="/assets/images/roadmap/phase1-large.png"
+                                alt="Phase 1"
+                                className="mt-4 w-auto h-[clamp(140px,24svh,240px)] object-contain"
+                            />
                         </div>
-                        {/* Phase 1 image (cyberpunk arcade building) — the cyan tech frame is part of the artwork */}
-                        <img
-                            src="/assets/images/roadmap/phase1-large.png"
-                            alt="Phase 1"
-                            className="w-[260px] h-auto max-h-[26svh] object-contain"
-                        />
-                    </div>
 
-                    {/* Phase selector thumbnails — bottom right (shared component from the old site) */}
-                    <div className="absolute bottom-0 right-0 flex flex-nowrap items-end gap-2 md:gap-10 z-30">
+                        {/* Phase selector thumbnails — bottom right (shared component from the old site) */}
+                        <div className="flex flex-nowrap items-end gap-2 md:gap-10 self-end pt-4">
                         {phases.map((phase) => (
                             <div
                                 key={phase.id}
@@ -166,6 +168,7 @@ export default function Roadmap() {
                                 </div>
                             </div>
                         ))}
+                        </div>
                     </div>
                 </div>
 
