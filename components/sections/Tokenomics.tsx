@@ -24,7 +24,7 @@ export default function Tokenomics() {
     };
 
     return (
-        <section id="tokenomics" className="relative overflow-hidden py-20 md:py-24 bg-[#14082a]">
+        <section id="tokenomics" className="screen-section relative overflow-hidden py-14 md:py-16 bg-[#14082a]">
             {/* Blurred "3B SKA" giant-letters background. Fitted to the section
                 width rather than cover — the section is far taller than the art's
                 1.67 aspect, and cover magnified the lettering ~1.67x. */}
@@ -36,7 +36,7 @@ export default function Tokenomics() {
 
             <div className="page-x relative z-10">
                 {/* Heading */}
-                <div className="relative w-fit mx-auto pb-4 mb-14 md:mb-20">
+                <div className="relative w-fit mx-auto pb-4 mb-8 md:mb-10">
                     <h2 className="text-3xl md:text-[44px] font-tektur font-medium text-white text-center">
                         Tokenomics
                     </h2>
@@ -47,11 +47,11 @@ export default function Tokenomics() {
 
                     {/* Left: Donut distribution chart with callouts — takes the
                         remaining width so the pair spans the full content column */}
-                    <div className="relative flex-1 min-w-0 bg-[#0a0a12]/80 p-4">
+                    <div className="relative flex-1 min-w-0 bg-[#0a0a12]/80 p-4 flex items-center justify-center">
                         <img
                             src="/assets/images/sections/tokenomics-donut.png"
                             alt="SKA token distribution"
-                            className="w-full h-auto object-contain"
+                            className="w-full h-auto max-h-[42svh] object-contain"
                         />
                     </div>
 

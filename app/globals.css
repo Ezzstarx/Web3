@@ -169,6 +169,18 @@
     padding-right: clamp(1.25rem, 7vw, 8.5rem);
   }
 
+  /* One section per screen: each section fills the viewport and centres its
+     content, so scrolling lands on a whole section at a time. Only applied
+     from lg up — below that, content stacks and is allowed to run long. */
+  @media (min-width: 1024px) {
+    .screen-section {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
   /* Empty slot for an image the client will provide later.
      Swap the element for an <Image /> keeping the same classes/dimensions. */
   .img-placeholder {

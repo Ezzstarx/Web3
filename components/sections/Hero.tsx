@@ -58,7 +58,7 @@ export default function Hero() {
     const visible = [wrap(activeIndex - 1), activeIndex, wrap(activeIndex + 1)];
 
     return (
-        <section id="hero" className="relative min-h-screen overflow-hidden bg-[#050505]">
+        <section id="hero" className="relative min-h-screen lg:h-screen overflow-hidden bg-[#050505]">
             {/* Dark grunge backdrop with the red bleed along the right edge */}
             <div
                 className="absolute inset-0 bg-cover bg-center pointer-events-none"
@@ -211,13 +211,15 @@ export default function Hero() {
                 </div>
             </div>
 
-            {/* Smoke transition bleeding into the Seika section.
-                The artwork ships on an opaque black field, so screen-blend it onto the page. */}
+            {/* Smoke transition bleeding into the Seika section. Pinned to the
+                bottom from lg up so it overlays the hero instead of adding to its
+                height — that keeps the section to exactly one screen.
+                The artwork ships on an opaque black field, so screen-blend it. */}
             <img
                 src="/assets/images/sections/transition-smoke.png"
                 alt=""
                 aria-hidden
-                className="relative z-20 -mt-40 md:-mt-56 -mb-px w-full h-auto pointer-events-none select-none mix-blend-screen"
+                className="relative -mt-40 md:-mt-56 lg:mt-0 lg:absolute lg:bottom-0 lg:left-0 -mb-px z-20 w-full h-auto pointer-events-none select-none mix-blend-screen"
             />
 
             {/* Custom Wallet Modal */}

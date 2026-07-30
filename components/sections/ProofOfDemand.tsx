@@ -44,53 +44,57 @@ const messages = [
 
 export default function ProofOfDemand() {
     return (
-        <section id="proof-of-demand" className="relative overflow-hidden bg-black py-20 md:py-24">
+        <section id="proof-of-demand" className="screen-section relative overflow-hidden bg-black py-14 md:py-16">
             {/* Faint colored glow on the left edge */}
             <div className="absolute top-0 left-0 w-[300px] h-[600px] bg-[#2ECC71]/5 blur-[120px] pointer-events-none" />
 
             <div className="page-x relative z-10">
                 {/* Heading — left aligned */}
-                <div className="relative w-fit pb-4 mb-14">
+                <div className="relative w-fit pb-4 mb-8">
                     <h2 className="text-3xl md:text-[44px] font-tektur font-medium text-white">
                         Proof of Demand
                     </h2>
                     <div className="absolute bottom-0 -left-16 w-[260%] h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>
                 </div>
 
-                <div className="flex flex-col lg:flex-row justify-between gap-14 w-full">
+                {/* From lg up the row is height-driven off the viewport so the whole
+                    section stays within one screen; both columns scale to fit it. */}
+                <div className="flex flex-col lg:flex-row justify-between gap-14 w-full lg:h-[calc(100svh-320px)]">
 
                     {/* Left: Creator platform screenshots */}
-                    <div className="w-full lg:w-[58%]">
-                        <h3 className="font-tektur text-xl md:text-[26px] text-white text-center mb-10">
+                    <div className="w-full lg:w-[58%] flex flex-col min-h-0">
+                        <h3 className="font-tektur text-xl md:text-[26px] text-white text-center mb-6">
                             We showed the vision for the creator platform.
                         </h3>
-                        <div className="flex justify-center gap-6">
+                        <div className="flex justify-center gap-6 min-h-0 lg:flex-1">
                             {/* Screenshots of the creator platform (Manga/Stories & Gists/Events) */}
                             <img
                                 src="/assets/images/proof/screenshot-1.png"
                                 alt="Ezzstar creator platform — manga and stories"
-                                className="w-[300px] md:w-[380px] h-auto object-contain"
+                                className="w-[300px] md:w-[380px] lg:w-auto h-auto lg:h-full object-contain object-top"
                             />
                             <img
                                 src="/assets/images/proof/screenshot-2.png"
                                 alt="Ezzstar creator platform — gists and events"
-                                className="w-[300px] md:w-[380px] h-auto object-contain"
+                                className="w-[300px] md:w-[380px] lg:w-auto h-auto lg:h-full object-contain object-top"
                             />
                         </div>
                     </div>
 
                     {/* Right: Discord chat card */}
-                    <div className="w-full lg:w-[40%]">
-                        <h3 className="font-tektur text-xl md:text-[26px] text-white text-center mb-10">
+                    <div className="w-full lg:w-[40%] flex flex-col min-h-0">
+                        <h3 className="font-tektur text-xl md:text-[26px] text-white text-center mb-6">
                             Community showed the love.
                         </h3>
 
-                        <div className="relative rounded-2xl border border-white/15 bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-sm p-5 md:p-7">
-                            <div className="flex flex-col gap-5">
+                        {/* Scrolls internally only if the viewport is too short for the
+                            full thread — keeps the section to one screen either way. */}
+                        <div className="relative rounded-2xl border border-white/15 bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-sm p-4 md:p-5 lg:flex-1 lg:min-h-0 lg:overflow-y-auto scrollbar-hide">
+                            <div className="flex flex-col gap-3">
                                 {messages.map((msg, idx) => (
                                     <div
                                         key={idx}
-                                        className={`relative flex gap-3 rounded-md p-3.5 ${msg.highlighted
+                                        className={`relative flex gap-3 rounded-md p-3 ${msg.highlighted
                                             ? "bg-[#2a2a20]/90 border-l-2 border-[#f0c040]"
                                             : "bg-[#141417]/90"
                                             }`}
@@ -110,7 +114,7 @@ export default function ProofOfDemand() {
                                                 )}
                                             </div>
                                             {msg.lines.map((line, li) => (
-                                                <p key={li} className="font-satoshi text-[15px] text-white/90 leading-relaxed">
+                                                <p key={li} className="font-satoshi text-[14px] text-white/90 leading-snug">
                                                     {line}
                                                     {msg.edited && li === msg.lines.length - 1 && (
                                                         <span className="text-white/40 text-[11px] ml-1">(edited)</span>
@@ -127,7 +131,7 @@ export default function ProofOfDemand() {
             </div>
 
             {/* "This is Chapter 1" ribbon — bottom right */}
-            <div className="relative z-20 flex justify-end mt-16">
+            <div className="relative z-20 flex justify-end mt-8">
                 <div
                     className="relative pr-8 pl-14 py-2.5 bg-[#0d0d12]"
                     style={{ clipPath: "polygon(28px 0, 100% 0, 100% 100%, 0 100%)" }}

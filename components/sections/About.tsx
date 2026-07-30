@@ -1,6 +1,6 @@
 export default function About() {
     return (
-        <section id="about" className="relative overflow-hidden bg-black">
+        <section id="about" className="screen-section relative overflow-hidden bg-black">
             {/* Purple grunge slab — its ragged top/bottom edges form the section transitions.
                 Stretched to the section box so both torn edges stay pinned to the edges. */}
             <div
@@ -12,19 +12,21 @@ export default function About() {
                 }}
             />
 
-            <div className="page-x relative z-10 py-28 md:py-36">
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-12 w-full">
+            {/* Content sits in a narrower, centred column so the copy and logo read
+                as one compact block rather than spanning the full purple field. */}
+            <div className="page-x relative z-10 py-14 md:py-16">
+                <div className="mx-auto w-full max-w-[1080px] flex flex-col lg:flex-row items-center justify-between gap-10">
 
                     {/* Left: Heading + Copy */}
-                    <div className="max-w-[560px]">
-                        <div className="relative pb-3 mb-10 w-fit">
-                            <h2 className="text-4xl md:text-[54px] font-tektur font-medium text-white tracking-[-1px]">
+                    <div className="max-w-[500px]">
+                        <div className="relative pb-3 mb-7 w-fit">
+                            <h2 className="text-3xl md:text-[44px] font-tektur font-medium text-white tracking-[-1px]">
                                 About US
                             </h2>
                             <div className="absolute bottom-0 -left-6 w-[160%] h-[1px] bg-gradient-to-r from-transparent via-[#7ef2ff] to-transparent"></div>
                         </div>
 
-                        <p className="font-tektur text-base md:text-[19px] leading-relaxed text-white mb-8">
+                        <p className="font-tektur text-sm md:text-[16px] leading-relaxed text-white mb-6">
                             Ezzstar is an interconnected entertainment ecosystem built
                             for creators, gamers, and digital communities. Powered by
                             Seika Koin, it connects digital experiences, creator
@@ -33,7 +35,7 @@ export default function About() {
                             one growing economy.
                         </p>
 
-                        <p className="font-tektur text-base md:text-[19px] leading-relaxed text-white">
+                        <p className="font-tektur text-sm md:text-[16px] leading-relaxed text-white">
                             Ezzstar is designed to let users earn, spend, unlock, support
                             creators, build identity, and access value across both digital
                             and real world experiences.
@@ -41,7 +43,7 @@ export default function About() {
                     </div>
 
                     {/* Right: Pixel EZZSTAR stacked logo */}
-                    <div className="relative w-[240px] md:w-[360px] shrink-0">
+                    <div className="relative w-[190px] md:w-[260px] shrink-0">
                         <img
                             src="/assets/images/sections/ezzstar-pixel.png"
                             alt="Ezzstar"
@@ -51,7 +53,7 @@ export default function About() {
                 </div>
 
                 {/* Whitepaper Button */}
-                <div className="flex justify-center mt-16">
+                <div className="flex justify-center mt-10">
                     <a
                         href="https://ezzstar.gitbook.io/ezzstar-gitbook"
                         target="_blank"

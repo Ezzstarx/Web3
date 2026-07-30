@@ -34,7 +34,7 @@ export default function SkaUtility() {
     const activeTab = tabs.find((t) => t.id === activeId) || tabs[0];
 
     return (
-        <section id="ska-utility" className="relative overflow-hidden bg-[#0b0508] py-24 md:py-28">
+        <section id="ska-utility" className="screen-section relative overflow-hidden bg-[#0b0508] py-16 md:py-20">
             {/* Cyberpunk cityscape background */}
             <div
                 className="absolute inset-0 bg-cover bg-center"

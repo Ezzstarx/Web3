@@ -54,7 +54,7 @@ export default function CoreTeam() {
     const active = members[activeIndex];
 
     return (
-        <section id="team" className="relative overflow-hidden bg-[#04070d]">
+        <section id="team" className="screen-section relative overflow-hidden bg-[#04070d]">
             <div className="relative z-20 pt-20">
                 {/* Heading — left aligned */}
                 <div className="page-x relative w-fit pb-4 mb-6">
@@ -65,8 +65,10 @@ export default function CoreTeam() {
                 </div>
             </div>
 
-            {/* Stage: EZZSTAR LED wall with the team standing in front of it */}
-            <div className="relative w-full aspect-[1920/1000] -mt-16">
+            {/* Stage: EZZSTAR LED wall with the team standing in front of it.
+                From lg up the stage is height-driven so the whole section fits one
+                screen; the figures are positioned in %, so they scale with it. */}
+            <div className="relative w-full aspect-[1920/1000] lg:aspect-auto lg:h-[calc(100svh-130px)] -mt-16">
                 <img
                     src="/assets/images/team/led-wall.png"
                     alt=""

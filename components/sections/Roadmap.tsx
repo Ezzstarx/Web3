@@ -62,7 +62,7 @@ export default function Roadmap() {
     const [activePhaseId, setActivePhaseId] = useState<number>(1);
 
     return (
-        <section id="roadmap" className="relative w-full py-16 md:py-20 overflow-hidden bg-black">
+        <section id="roadmap" className="screen-section relative w-full py-12 md:py-14 overflow-hidden bg-black">
             {/* Ambient color glows (left edge, as in the design) */}
             <div className="absolute top-1/2 left-0 w-[420px] h-[500px] bg-[#2ECC71]/10 rounded-full blur-[140px] pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[420px] h-[400px] bg-[#C243FE]/10 rounded-full blur-[140px] pointer-events-none" />
@@ -76,8 +76,10 @@ export default function Roadmap() {
                     <div className="absolute bottom-0 -left-24 w-[300%] h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>
                 </div>
 
-                {/* Timeline */}
-                <div className="hidden lg:block relative min-h-[760px]">
+                {/* Timeline. Height tracks the viewport (capped at the design's
+                    760px) and the rows below are placed in % of it, so the whole
+                    composition compresses on shorter screens instead of overflowing. */}
+                <div className="hidden lg:block relative h-[min(760px,calc(100svh-240px))]">
 
                     {/* Phase 2 details — above the line */}
                     <div className="absolute top-0 left-[30%] flex items-start gap-16">
@@ -90,12 +92,12 @@ export default function Roadmap() {
                         <img
                             src="/assets/images/roadmap/phase2-large.png"
                             alt="Phase 2"
-                            className="mt-2 w-[260px] h-auto"
+                            className="mt-2 w-[260px] h-auto max-h-[30svh] object-contain"
                         />
                     </div>
 
                     {/* Timeline row */}
-                    <div className="absolute top-[400px] left-0 right-0 flex items-center">
+                    <div className="absolute top-[52.6%] left-0 right-0 flex items-center">
                         {phases.map((phase, idx) => (
                             <div key={phase.id} className={`flex items-center ${idx < phases.length - 1 ? "flex-1" : ""}`}>
                                 <div className="flex flex-col shrink-0">
@@ -119,7 +121,7 @@ export default function Roadmap() {
                     </div>
 
                     {/* Phase 1 details — below the line */}
-                    <div className="absolute top-[510px] left-0 flex items-start gap-10">
+                    <div className="absolute top-[67%] left-0 flex items-start gap-10">
                         <div className="flex flex-col">
                             {/* Vertical connector up to Phase 1 label */}
                             <div className="w-[1px] h-12 bg-white/60 ml-14 mb-3 -mt-2" />
@@ -129,7 +131,7 @@ export default function Roadmap() {
                         <img
                             src="/assets/images/roadmap/phase1-large.png"
                             alt="Phase 1"
-                            className="w-[260px] h-auto"
+                            className="w-[260px] h-auto max-h-[26svh] object-contain"
                         />
                     </div>
 

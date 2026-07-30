@@ -2,7 +2,7 @@ import PresaleWidget from "./PresaleWidget";
 
 export default function Seika() {
     return (
-        <section id="seika" className="relative overflow-hidden bg-black pt-24 pb-16 md:pt-32 md:pb-24">
+        <section id="seika" className="screen-section relative overflow-hidden bg-black pt-20 pb-12 md:pt-24 md:pb-16">
             {/* Soft purple glow under the coin */}
             <div className="absolute bottom-0 left-0 w-[700px] h-[500px] bg-[#a020f0]/10 blur-[140px] rounded-full pointer-events-none" />
 
