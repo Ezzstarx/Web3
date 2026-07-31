@@ -166,18 +166,18 @@
      the smoke artwork itself, so the silhouette stays perfectly still; the
      texture inside crawls, making the marbled particles wriggle within it. */
   /* No `position` here — the call sites position the strip themselves
-     (a rule here would win over their `absolute` utility and break clipping). */
+     (a rule here would win over their `absolute` utility and break clipping).
+     The mask is a dedicated PNG whose ALPHA is the smoke's luminance; the
+     source art is RGB-only, so an alpha mask on it was a no-op and the whole
+     strip scrolled. This holds the silhouette perfectly still. */
   .smoke-mask {
     overflow: hidden;
-    -webkit-mask-image: url('/assets/images/sections/transition-smoke.png');
-    mask-image: url('/assets/images/sections/transition-smoke.png');
+    -webkit-mask-image: url('/assets/images/sections/transition-smoke-mask.png');
+    mask-image: url('/assets/images/sections/transition-smoke-mask.png');
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
-    /* the art has no alpha — mask by how bright it is */
-    -webkit-mask-source-type: luminance;
-    mask-mode: luminance;
   }
 
   /* Rail of four tiles (2 full [A][A-mirrored] units) scrolling left forever.

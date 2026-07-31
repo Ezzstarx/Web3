@@ -49,11 +49,11 @@ export default function Tokenomics() {
 
                 {/* Compact centred block matching the Figma export: chart panel left,
                     tight stats grid right, contract card narrower underneath. */}
-                <div className="mx-auto max-w-[1350px] flex flex-col lg:flex-row items-stretch lg:items-start justify-between gap-8 w-full mb-[clamp(14px,2.5svh,32px)]">
+                <div className="mx-auto max-w-[1480px] flex flex-col lg:flex-row items-stretch lg:items-start justify-between gap-8 w-full mb-[clamp(14px,2.5svh,32px)]">
 
                     {/* Left: Donut distribution chart with callouts. Narrower panel
                         with the chart filling it edge to edge. */}
-                    <div className="relative w-full lg:max-w-[min(660px,46svh)] min-w-0 bg-[#0a0a12]/20 flex items-center justify-center">
+                    <div className="relative w-full lg:max-w-[min(860px,62svh)] min-w-0 bg-[#0a0a12]/20 flex items-center justify-center">
                         <img
                             src="/assets/images/sections/tokenomics-donut.png"
                             alt="SKA token distribution"
@@ -84,9 +84,9 @@ export default function Tokenomics() {
                 {/* Contract Section (shared component from the old site) */}
                 <div className="mx-auto max-w-[1160px] w-full bg-[#0a0a12]/70 flex flex-col">
                     {/* Top Section with Border */}
-                    <div className="p-6 md:p-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div className="px-6 md:px-8 py-3 md:py-4 border-t border-white/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
                         <div>
-                            <h4 className="text-xl font-satoshi font-medium text-white mb-2">Contract Address</h4>
+                            <h4 className="text-xl font-satoshi font-medium text-white mb-1">Contract Address</h4>
                             {/* The address itself stays hidden until launch — shown as a
                                 row of small dashes, as in the design. Copy Address still
                                 puts the real value on the clipboard. */}
@@ -138,7 +138,7 @@ export default function Tokenomics() {
                             return (
                                 <div
                                     key={idx}
-                                    className="relative col-span-1 text-center md:text-left w-full flex flex-col items-center md:items-start p-4 border-t border-white/20"
+                                    className="relative col-span-1 text-center md:text-left w-full flex flex-col items-center md:items-start px-4 py-2.5 border-t border-white/20"
                                 >
                                     <span className="block text-[24px] font-satoshi text-white mb-0 leading-tight">{item.value}</span>
                                     <span className="text-gray-400 text-[14px] text-center md:text-left block w-full leading-tight font-satoshi">{item.label}</span>

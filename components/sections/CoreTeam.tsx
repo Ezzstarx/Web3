@@ -49,10 +49,30 @@ const members: TeamMember[] = [
     { name: "Ayush Kumar", role: "Level Designer", description: "Designs the arenas and game-zone layouts for Ezzstar's competitive titles, balancing spectacle with fair, readable play.", x: "#", linkedin: "https://www.linkedin.com/in/ayush-kumar-parganihaa-49048320b/", image: "/assets/images/team/m12.png", left: 92.5, height: 53 },
 ];
 
+// Where each member's card sits, as % of the stage. `left` is the card's left
+// edge and `bottom` its height off the floor — both hand-set per character so
+// the card lands near its own figure and never in the same spot twice. Cards
+// float above the other figures (z-index), which the design allows.
+const CARD_POS = [
+    { left: 4, bottom: 30 },   // Saachi
+    { left: 6, bottom: 12 },   // Fateen
+    { left: 12, bottom: 34 },  // Aman
+    { left: 16, bottom: 10 },  // Tushar
+    { left: 22, bottom: 30 },  // Rabiya
+    { left: 26, bottom: 8 },   // Muzammil (design's resting state)
+    { left: 34, bottom: 32 },  // Arbaaz
+    { left: 38, bottom: 12 },  // Ali
+    { left: 44, bottom: 34 },  // Harsh
+    { left: 46, bottom: 10 },  // Abdullah
+    { left: 48, bottom: 30 },  // Misbah
+    { left: 50, bottom: 13 },  // Ayush
+];
+
 export default function CoreTeam() {
     // The design's resting state highlights Muzammil (centre figure)
     const [activeIndex, setActiveIndex] = useState(5);
     const active = members[activeIndex];
+    const card = CARD_POS[activeIndex];
 
     // Taller than one screen on purpose: the extra height below the stage is the
     // floor the figures' reflections fall onto (hence no .screen-section here).
@@ -86,32 +106,39 @@ export default function CoreTeam() {
                     handled by the separate hotspot bands below instead.
                     Each figure is mirrored beneath itself, faded and blurred, so it
                     reads as a reflection on the glossy floor. */}
-                {members.map((member, idx) => (
-                    <div
-                        key={idx}
-                        className="absolute bottom-[18%] -translate-x-1/2 pointer-events-none flex flex-col items-center"
-                        style={{ left: `${member.left}%`, height: `${member.height}%` }}
-                    >
-                        <img
-                            src={member.image}
-                            alt={member.name}
-                            className="h-full w-auto max-w-none object-contain object-bottom brightness-[1.18]"
-                        />
-                        {/* contact shadow pooled where the feet meet the floor */}
-                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[62%] h-[10px] bg-black/70 blur-[7px] rounded-[50%]" />
-                        {/* mirrored reflection on the glass floor */}
-                        <img
-                            src={member.image}
-                            alt=""
-                            aria-hidden
-                            className="absolute top-full left-1/2 -translate-x-1/2 h-full w-auto max-w-none object-contain object-top -scale-y-100 opacity-[0.32] blur-[2px]"
-                            style={{
-                                WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, transparent 55%)",
-                                maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, transparent 55%)",
-                            }}
-                        />
-                    </div>
-                ))}
+                {members.map((member, idx) => {
+                    const isActive = activeIndex === idx;
+                    return (
+                        <div
+                            key={idx}
+                            className="absolute bottom-[18%] -translate-x-1/2 pointer-events-none flex flex-col items-center"
+                            style={{ left: `${member.left}%`, height: `${member.height}%`, zIndex: isActive ? 12 : 4 }}
+                        >
+                            <img
+                                src={member.image}
+                                alt={member.name}
+                                className={`h-full w-auto max-w-none object-contain object-bottom transition-all duration-300 ${isActive
+                                    ? "brightness-[1.28] drop-shadow-[0_0_28px_rgba(150,190,255,0.45)]"
+                                    : "brightness-[0.62]"
+                                    }`}
+                            />
+                            {/* contact shadow pooled where the feet meet the floor */}
+                            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-[13px] bg-black/80 blur-[8px] rounded-[50%]" />
+                            {/* mirrored reflection on the glass floor */}
+                            <img
+                                src={member.image}
+                                alt=""
+                                aria-hidden
+                                className={`absolute top-full left-1/2 -translate-x-1/2 h-full w-auto max-w-none object-contain object-top -scale-y-100 blur-[1.5px] transition-opacity duration-300 ${isActive ? "opacity-55" : "opacity-30"
+                                    }`}
+                                style={{
+                                    WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.45) 35%, transparent 70%)",
+                                    maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.45) 35%, transparent 70%)",
+                                }}
+                            />
+                        </div>
+                    );
+                })}
 
                 {/* Hover hotspots — one contiguous, non-overlapping band per figure,
                     each running to the midpoint between neighbours so every character
@@ -135,19 +162,36 @@ export default function CoreTeam() {
                     );
                 })}
 
-                {/* Member plate + bio — sits in the reflection zone below the
-                    figures' feet (bottom 20% of the stage). Fonts are svh-clamped
-                    and the bio column capped, so it never climbs onto the figures. */}
-                <div className="absolute bottom-[2.5%] left-0 right-0 z-20 pointer-events-none">
-                    <div className="relative flex flex-col md:flex-row items-start gap-5 px-6 md:px-0">
+                {/* Member card — anchored per character (see CARD_POS) and floating
+                    above the other figures, with a connector running back to the
+                    hovered figure's feet as in the design. */}
+                <div
+                    className="hidden lg:block absolute z-30 pointer-events-none transition-all duration-300"
+                    style={{ left: `${card.left}%`, bottom: `${card.bottom}%`, width: "46%" }}
+                >
+                    {/* Connector: from the plate across to the active figure, ending in a ring */}
+                    <div
+                        className="absolute top-[26px] h-[2px] bg-[#a855f7]"
+                        style={{
+                            left: "16%",
+                            width: `calc(${Math.max(0, (active.left - card.left) / 46 * 100)}% - 16%)`,
+                        }}
+                    />
+                    <div
+                        className="absolute w-[14px] h-[14px] rounded-full border-2 border-[#a855f7]"
+                        style={{
+                            top: "20px",
+                            left: `calc(${Math.max(0, (active.left - card.left) / 46 * 100)}% - 7px)`,
+                        }}
+                    />
 
-                        {/* Name plate — magenta parallelogram */}
-                        <div className="relative md:ml-[22%] shrink-0">
+                    <div className="relative flex items-start gap-5">
+                        {/* Name plate — magenta parallelogram with halftone dots */}
+                        <div className="relative shrink-0">
                             <div
                                 className="relative px-9 py-2.5 bg-gradient-to-r from-[#c026d3] to-[#7c3aed]"
                                 style={{ clipPath: "polygon(10% 0, 100% 0, 90% 100%, 0 100%)" }}
                             >
-                                {/* halftone dots overlay */}
                                 <div
                                     className="absolute inset-0 opacity-30"
                                     style={{
@@ -159,13 +203,12 @@ export default function CoreTeam() {
                                 <p className="relative font-satoshi font-bold text-white text-[length:clamp(13px,1.7svh,17px)] leading-snug whitespace-nowrap">{active.name}</p>
                                 <p className="relative font-satoshi text-white/90 text-[length:clamp(11px,1.4svh,14px)] whitespace-nowrap">{active.role}</p>
                             </div>
-                            {/* Connector line toward the figure */}
-                            <div className="hidden md:block absolute top-1/2 -right-24 w-24 h-[2px] bg-[#a855f7]" />
                         </div>
 
-                        {/* Bio + socials */}
-                        <div className="md:ml-[6%] max-w-[46%]">
-                            <p className="font-satoshi font-semibold text-white text-[length:clamp(12px,1.55svh,16px)] leading-relaxed [text-shadow:0_2px_8px_rgba(0,0,0,0.9)]">
+                        {/* Bio + socials. The card floats over other figures, so the
+                            copy sits on a dark scrim to stay readable. */}
+                        <div className="flex-1 min-w-0 rounded-lg bg-black/60 backdrop-blur-[3px] px-4 py-3">
+                            <p className="font-satoshi font-semibold text-white text-[length:clamp(12px,1.55svh,16px)] leading-relaxed">
                                 {active.description}
                             </p>
                             <div className="flex justify-end gap-5 mt-2 text-white pointer-events-auto">
@@ -178,6 +221,17 @@ export default function CoreTeam() {
                             </div>
                         </div>
                     </div>
+                </div>
+
+                {/* Mobile: the same card, stacked under the stage */}
+                <div className="lg:hidden absolute bottom-[2%] left-0 right-0 z-30 px-6 pointer-events-none">
+                    <div className="relative px-6 py-2 w-fit bg-gradient-to-r from-[#c026d3] to-[#7c3aed]">
+                        <p className="font-satoshi font-bold text-white text-[15px] leading-snug">{active.name}</p>
+                        <p className="font-satoshi text-white/90 text-[13px]">{active.role}</p>
+                    </div>
+                    <p className="mt-2 font-satoshi font-semibold text-white text-[13px] leading-relaxed [text-shadow:0_2px_10px_rgba(0,0,0,0.95)]">
+                        {active.description}
+                    </p>
                 </div>
             </div>
         </section>

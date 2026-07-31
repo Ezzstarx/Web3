@@ -44,7 +44,7 @@ const messages = [
 
 export default function ProofOfDemand() {
     return (
-        <section id="proof-of-demand" className="screen-section relative overflow-hidden bg-black py-10 md:py-12">
+        <section id="proof-of-demand" className="relative overflow-hidden bg-black py-10 md:py-12 lg:min-h-[126svh] lg:flex lg:flex-col lg:justify-center">
             {/* Faint colored glow on the left edge */}
             <div className="absolute top-0 left-0 w-[300px] h-[600px] bg-[#2ECC71]/5 blur-[120px] pointer-events-none" />
 
@@ -59,25 +59,27 @@ export default function ProofOfDemand() {
 
                 {/* From lg up the row is height-driven off the viewport so the whole
                     section stays within one screen; both columns scale to fit it. */}
-                <div className="flex flex-col lg:flex-row justify-between gap-14 w-full lg:h-[calc(100svh-275px)]">
+                <div className="flex flex-col lg:flex-row justify-between gap-14 w-full lg:h-[calc(126svh-275px)]">
 
                     {/* Left: Creator platform screenshots */}
                     <div className="w-full lg:w-[58%] flex flex-col min-h-0">
                         <h3 className="font-tektur text-xl md:text-[26px] text-white text-center mb-6">
                             We showed the vision for the creator platform.
                         </h3>
+                        {/* Each shot gets half the column and is bounded on both axes,
+                            so growing the section can't push them past their column. */}
                         <div className="flex justify-center gap-6 min-h-0 lg:flex-1">
-                            {/* Screenshots of the creator platform (Manga/Stories & Gists/Events) */}
-                            <img
-                                src="/assets/images/proof/screenshot-1.png"
-                                alt="Ezzstar creator platform — manga and stories"
-                                className="w-[300px] md:w-[380px] lg:w-auto h-auto lg:h-full object-contain object-top"
-                            />
-                            <img
-                                src="/assets/images/proof/screenshot-2.png"
-                                alt="Ezzstar creator platform — gists and events"
-                                className="w-[300px] md:w-[380px] lg:w-auto h-auto lg:h-full object-contain object-top"
-                            />
+                            {[1, 2].map((n) => (
+                                <div key={n} className="lg:flex-1 lg:min-w-0 flex items-start justify-center">
+                                    <img
+                                        src={`/assets/images/proof/screenshot-${n}.png`}
+                                        alt={n === 1
+                                            ? "Ezzstar creator platform — manga and stories"
+                                            : "Ezzstar creator platform — gists and events"}
+                                        className="w-[300px] md:w-[380px] lg:w-auto lg:max-w-full h-auto lg:max-h-full object-contain object-top"
+                                    />
+                                </div>
+                            ))}
                         </div>
                     </div>
 
@@ -89,7 +91,7 @@ export default function ProofOfDemand() {
 
                         {/* Scrolls internally only if the viewport is too short for the
                             full thread — keeps the section to one screen either way. */}
-                        <div className="relative rounded-2xl border border-white/15 bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-sm p-4 md:p-5 lg:flex-1 lg:min-h-0 lg:overflow-y-auto scrollbar-hide">
+                        <div className="relative rounded-2xl border border-white/15 bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-sm p-4 md:p-5 lg:self-start lg:w-full">
                             <div className="flex flex-col gap-3">
                                 {messages.map((msg, idx) => (
                                     <div
@@ -135,8 +137,8 @@ export default function ProofOfDemand() {
                 masked by a dot pattern, so the dots themselves carry the colour). */}
             <div className="relative z-20 flex justify-end mt-6">
                 <div
-                    className="relative pl-24 pr-10 py-2.5 md:py-3"
-                    style={{ clipPath: "polygon(64px 0, 100% 0, 100% 100%, 0 100%)" }}
+                    className="relative pl-24 pr-10 py-1.5"
+                    style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 64px 100%)" }}
                 >
                     <div
                         className="absolute inset-0"
@@ -153,7 +155,7 @@ export default function ProofOfDemand() {
                         This is Chapter 1
                     </span>
                     {/* cyan underline beneath the wordmark */}
-                    <div className="absolute left-24 right-10 bottom-1.5 h-[2px] bg-[#7fe9ff]" />
+                    <div className="absolute left-24 right-10 bottom-1 h-[2px] bg-[#7fe9ff]" />
                 </div>
             </div>
         </section>
