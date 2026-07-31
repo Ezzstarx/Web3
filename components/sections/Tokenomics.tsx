@@ -87,11 +87,20 @@ export default function Tokenomics() {
                     <div className="p-6 md:p-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                         <div>
                             <h4 className="text-xl font-satoshi font-medium text-white mb-2">Contract Address</h4>
-                            <div className="flex flex-col gap-1">
-                                <code className="text-gray-400 font-mono text-base break-all">
-                                    {contractAddress}
-                                </code>
-                            </div>
+                            {/* The address itself stays hidden until launch — shown as a
+                                row of small dashes, as in the design. Copy Address still
+                                puts the real value on the clipboard. */}
+                            <div
+                                aria-label="Contract address hidden until launch"
+                                className="h-[10px] w-[240px] md:w-[300px]"
+                                style={{
+                                    backgroundImage:
+                                        "repeating-linear-gradient(90deg, rgba(255,255,255,0.45) 0 6px, transparent 6px 12px)",
+                                    backgroundSize: "12px 1px",
+                                    backgroundRepeat: "repeat-x",
+                                    backgroundPosition: "left center",
+                                }}
+                            />
                         </div>
                         <div className="flex flex-col items-end gap-2 self-end md:self-auto">
                             <button

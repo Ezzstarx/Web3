@@ -44,13 +44,13 @@ const messages = [
 
 export default function ProofOfDemand() {
     return (
-        <section id="proof-of-demand" className="screen-section relative overflow-hidden bg-black py-14 md:py-16">
+        <section id="proof-of-demand" className="screen-section relative overflow-hidden bg-black py-10 md:py-12">
             {/* Faint colored glow on the left edge */}
             <div className="absolute top-0 left-0 w-[300px] h-[600px] bg-[#2ECC71]/5 blur-[120px] pointer-events-none" />
 
             <div className="page-x relative z-10">
                 {/* Heading — left aligned */}
-                <div className="relative w-fit pb-4 mb-8">
+                <div className="relative w-fit pb-4 mb-6">
                     <h2 className="text-3xl md:text-[44px] font-tektur font-medium text-white">
                         Proof of Demand
                     </h2>
@@ -59,7 +59,7 @@ export default function ProofOfDemand() {
 
                 {/* From lg up the row is height-driven off the viewport so the whole
                     section stays within one screen; both columns scale to fit it. */}
-                <div className="flex flex-col lg:flex-row justify-between gap-14 w-full lg:h-[calc(100svh-320px)]">
+                <div className="flex flex-col lg:flex-row justify-between gap-14 w-full lg:h-[calc(100svh-275px)]">
 
                     {/* Left: Creator platform screenshots */}
                     <div className="w-full lg:w-[58%] flex flex-col min-h-0">
@@ -130,22 +130,30 @@ export default function ProofOfDemand() {
                 </div>
             </div>
 
-            {/* "This is Chapter 1" ribbon — bottom right */}
-            <div className="relative z-20 flex justify-end mt-8">
+            {/* "This is Chapter 1" ribbon — bottom right. Angled left edge, filled
+                with a red→magenta→blue→cyan halftone dot field (the gradient is
+                masked by a dot pattern, so the dots themselves carry the colour). */}
+            <div className="relative z-20 flex justify-end mt-6">
                 <div
-                    className="relative pr-8 pl-14 py-2.5 bg-[#0d0d12]"
-                    style={{ clipPath: "polygon(28px 0, 100% 0, 100% 100%, 0 100%)" }}
+                    className="relative pl-24 pr-10 py-2.5 md:py-3"
+                    style={{ clipPath: "polygon(64px 0, 100% 0, 100% 100%, 0 100%)" }}
                 >
-                    {/* Halftone edge texture — client may replace with the pixel ribbon asset */}
-                    <div className="absolute inset-y-0 left-0 w-24 opacity-70"
+                    <div
+                        className="absolute inset-0"
                         style={{
-                            background: "linear-gradient(90deg, #00EAFF 0%, #DE3BD6 100%)",
-                            clipPath: "polygon(28px 0, 60px 0, 32px 100%, 0 100%)",
+                            background:
+                                "linear-gradient(90deg, #ff0a3c 0%, #e2119c 26%, #8a1ad2 48%, #1e3fd8 70%, #00e6c6 100%)",
+                            WebkitMaskImage: "radial-gradient(circle at center, #000 46%, transparent 48%)",
+                            maskImage: "radial-gradient(circle at center, #000 46%, transparent 48%)",
+                            WebkitMaskSize: "7px 7px",
+                            maskSize: "7px 7px",
                         }}
                     />
-                    <span className="font-tektur text-xl md:text-[26px] bg-clip-text text-transparent bg-gradient-to-r from-[#00EAFF] to-[#DE3BD6]">
+                    <span className="relative font-tektur text-xl md:text-[26px] text-white [text-shadow:0_2px_6px_rgba(0,0,0,0.85)]">
                         This is Chapter 1
                     </span>
+                    {/* cyan underline beneath the wordmark */}
+                    <div className="absolute left-24 right-10 bottom-1.5 h-[2px] bg-[#7fe9ff]" />
                 </div>
             </div>
         </section>

@@ -16,7 +16,14 @@ const DiscordIcon = ({ size = 20, className = "" }: { size?: number, className?:
     </svg>
 );
 
-// Helper Component for Expanding Social Button (shared with the old site)
+// Custom Medium Icon
+const MediumIcon = ({ size = 20, className = "" }: { size?: number, className?: string }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+        <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42c1.87 0 3.38 2.88 3.38 6.42zM24 12c0 3.06-.46 5.55-1.04 5.55-.58 0-1.04-2.49-1.04-5.55s.46-5.55 1.04-5.55c.58 0 1.04 2.49 1.04 5.55z" />
+    </svg>
+);
+
+// Helper Component for Expanding Social Button
 const SocialButton = ({ href, icon: Icon, label, colorClass }: { href: string, icon: any, label: string, colorClass: string }) => {
     return (
         <a
@@ -31,68 +38,31 @@ const SocialButton = ({ href, icon: Icon, label, colorClass }: { href: string, i
     );
 };
 
-// Footer link columns (new site structure)
-const columns = [
-    {
-        title: "Company",
-        links: [
-            { label: "About Ezsstar", href: "#about" },
-            { label: "Whitepaper", href: "https://ezzstar.gitbook.io/ezzstar-gitbook" },
-            { label: "Tokenomics", href: "#tokenomics" },
-            { label: "Roadmap", href: "#roadmap" },
-        ],
-    },
-    {
-        title: "Support",
-        links: [
-            { label: "Discord", href: "https://discord.gg/sY3gsZVyeg" },
-            { label: "Telegram", href: "https://t.me/EzzstarSPCA" },
-            { label: "Contact Us", href: "#" },
-        ],
-    },
-    {
-        title: "Ecosystem",
-        links: [
-            { label: "Partner With Us", href: "#" },
-            { label: "Investor Relations", href: "#" },
-            { label: "Advertise With Us", href: "#" },
-        ],
-    },
-    {
-        title: "Business Alliance",
-        links: [
-            { label: "Accept Seika Payments", href: "#" },
-            { label: "Become a Merchant", href: "#" },
-            { label: "Business Partnership", href: "#" },
-            { label: "List Your Business", href: "#" },
-        ],
-    },
-];
-
 export default function Footer() {
     return (
-        <footer className="relative pt-16 pb-6 overflow-hidden bg-[linear-gradient(180deg,#12071f_0%,#5b1798_30%,#3b0d68_55%,#12051f_100%)]">
-            {/* Purple band glow across the columns */}
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[90%] h-[180px] bg-[#a855f7] blur-[120px] opacity-30 pointer-events-none" />
+        <footer className="relative bg-[radial-gradient(ellipse_at_top,_rgba(222,59,214,0.15)_0%,_#020205_50%,_#000000_100%)] pt-24 pb-6 border-t border-white/5 overflow-hidden">
+            {/* Top Purple Glow Effect - Enhanced Center */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[150px] bg-[#DE3BD6] blur-[90px] opacity-40 pointer-events-none" />
 
-            <div className="page-x relative z-10">
-                <div className="flex flex-col md:flex-row gap-y-12 md:gap-x-8 mb-12 items-center md:items-start">
+            <div className="container mx-auto px-6 md:px-12 lg:px-24">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-y-12 mb-12">
 
-                    {/* Left: Pixel Logo & Socials */}
-                    <div className="flex flex-col items-center gap-6 md:w-[22%] shrink-0">
+                    {/* Left Column: Logo & Socials - Takes 4 Columns */}
+                    <div className="col-span-1 md:col-span-4 flex flex-col items-center md:items-start gap-8 md:pl-6">
                         <Link href="/">
-                            <div className="relative w-28 h-32 hover:opacity-90 transition-opacity">
+                            {/* Reduced Logo Size */}
+                            <div className="relative w-48 h-24 hover:opacity-90 transition-opacity">
                                 <Image
                                     src="/assets/images/Footer-Logo.png"
                                     alt="Ezzstar Logo"
                                     fill
-                                    className="object-contain"
+                                    className="object-contain object-center md:object-left"
                                 />
                             </div>
                         </Link>
 
-                        {/* Expanding Social Icons (shared with the old site) */}
-                        <div className="flex flex-wrap items-center justify-center gap-1 text-white/80">
+                        {/* Expanding Social Icons */}
+                        <div className="flex flex-wrap items-center gap-2 text-gray-400">
                             <SocialButton href="https://discord.gg/sY3gsZVyeg" icon={DiscordIcon} label="Discord" colorClass="hover:text-[#5865F2]" />
                             <SocialButton href="https://t.me/EzzstarSPCA" icon={Send} label="Telegram" colorClass="hover:text-[#0088cc]" />
                             <SocialButton href="https://x.com/ezzstarx?s=21" icon={XIcon} label="X" colorClass="hover:text-white" />
@@ -101,33 +71,42 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Right: Link Columns */}
-                    <div className="flex-1 grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 text-center">
-                        {columns.map((col) => (
-                            <div key={col.title} className="flex flex-col gap-4">
-                                <h3 className="font-tektur text-lg md:text-[22px] font-medium text-white mb-1">{col.title}</h3>
-                                {col.links.map((link) => (
-                                    <Link
-                                        key={link.label}
-                                        href={link.href}
-                                        target={link.href.startsWith("http") ? "_blank" : undefined}
-                                        className="text-gray-300 hover:text-white hover:translate-x-1 transition-all font-satoshi text-sm md:text-[17px]"
-                                    >
-                                        {link.label}
-                                    </Link>
-                                ))}
-                            </div>
-                        ))}
+                    {/* Gap Column - Increased to 3 Columns for larger middle gap */}
+                    <div className="hidden md:block col-span-1 md:col-span-3"></div>
+
+                    {/* Right Columns: Links - Reduced to 5 Columns (pushed right) and reduced internal gap */}
+                    <div className="col-span-1 md:col-span-5 grid grid-cols-2 sm:grid-cols-3 gap-2 md:gap-4 text-center md:text-left">
+                        {/* Company */}
+                        <div className="flex flex-col gap-5">
+                            <h3 className="font-tektur text-lg font-medium !text-white mb-1">Company</h3>
+                            <Link href="#about" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">About Us</Link>
+                            <Link href="https://ezzstar.gitbook.io/ezzstar-gitbook" target="_blank" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Whitepaper</Link>
+                            <Link href="#tokenomics" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Tokenomics</Link>
+                            <Link href="#roadmap" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Roadmap</Link>
+                        </div>
+
+                        {/* Support */}
+                        <div className="flex flex-col gap-5">
+                            <h3 className="font-tektur text-lg font-medium !text-white mb-1">Support</h3>
+                            <Link href="https://discord.gg/sY3gsZVyeg" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Discord</Link>
+                            <Link href="https://t.me/EzzstarSPCA" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Telegram</Link>
+                        </div>
+
+                        {/* Service */}
+                        <div className="flex flex-col gap-5">
+                            <h3 className="font-tektur text-lg font-medium !text-white mb-1">Service</h3>
+                            <Link href="#referral" className="text-gray-400 hover:text-[#C243FE] hover:translate-x-1 transition-all font-satoshi text-sm md:text-base">Referral</Link>
+                        </div>
                     </div>
                 </div>
 
                 {/* Bottom Section */}
-                <div className="border-t border-white/20 pt-5 flex flex-col items-center gap-2 text-center">
-                    <p className="text-gray-300 font-satoshi text-xs md:text-[15px] max-w-4xl mx-auto leading-relaxed">
-                        <span className="text-white font-semibold">Disclaimer:</span> Cryptocurrency might not be regulated in your area. Its value can fluctuate, and profits could be taxed according to your local laws.
+                <div className="border-t border-white/10 pt-5 flex flex-col items-center gap-2 text-center">
+                    <p className="text-gray-500 font-satoshi text-xs md:text-sm max-w-4xl mx-auto leading-relaxed opacity-70">
+                        <span className=" text-gray-50">Disclaimer:</span> Cryptocurrency might not be regulated in your area. Its value can fluctuate, and profits could be taxed according to your local laws.
                     </p>
                     <p className="text-gray-500 font-satoshi text-sm">
-                        <span className="text-[#FF00FF] font-medium">© 2025 Ezzstar All Rights reserved.</span>
+                        <span className="text-[#FF00FF] font-medium">© 2026 Ezzstar All Rights reserved.</span>
                     </p>
                 </div>
             </div>

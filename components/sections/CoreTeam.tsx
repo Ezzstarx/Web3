@@ -54,8 +54,10 @@ export default function CoreTeam() {
     const [activeIndex, setActiveIndex] = useState(5);
     const active = members[activeIndex];
 
+    // Taller than one screen on purpose: the extra height below the stage is the
+    // floor the figures' reflections fall onto (hence no .screen-section here).
     return (
-        <section id="team" className="screen-section relative overflow-hidden bg-[#04070d]">
+        <section id="team" className="relative overflow-hidden bg-[#04070d] lg:min-h-[118svh] lg:flex lg:flex-col">
             {/* Title row keeps its own space; the stage fills whatever height is
                 left, so the heading can never be cropped or covered. */}
             <div className="relative z-20 pt-8 md:pt-10 shrink-0">
@@ -81,17 +83,32 @@ export default function CoreTeam() {
 
                 {/* Team figures — purely decorative. The cutouts carry ~60% transparent
                     padding, so their boxes overlap their neighbours; hit-testing is
-                    handled by the separate hotspot bands below instead. */}
+                    handled by the separate hotspot bands below instead.
+                    Each figure is mirrored beneath itself, faded and blurred, so it
+                    reads as a reflection on the glossy floor. */}
                 {members.map((member, idx) => (
                     <div
                         key={idx}
-                        className="absolute bottom-[22%] -translate-x-1/2 pointer-events-none"
+                        className="absolute bottom-[18%] -translate-x-1/2 pointer-events-none flex flex-col items-center"
                         style={{ left: `${member.left}%`, height: `${member.height}%` }}
                     >
                         <img
                             src={member.image}
                             alt={member.name}
                             className="h-full w-auto max-w-none object-contain object-bottom brightness-[1.18]"
+                        />
+                        {/* contact shadow pooled where the feet meet the floor */}
+                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[62%] h-[10px] bg-black/70 blur-[7px] rounded-[50%]" />
+                        {/* mirrored reflection on the glass floor */}
+                        <img
+                            src={member.image}
+                            alt=""
+                            aria-hidden
+                            className="absolute top-full left-1/2 -translate-x-1/2 h-full w-auto max-w-none object-contain object-top -scale-y-100 opacity-[0.32] blur-[2px]"
+                            style={{
+                                WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, transparent 55%)",
+                                maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, transparent 55%)",
+                            }}
                         />
                     </div>
                 ))}
@@ -110,7 +127,7 @@ export default function CoreTeam() {
                             onMouseEnter={() => setActiveIndex(idx)}
                             onFocus={() => setActiveIndex(idx)}
                             onClick={() => setActiveIndex(idx)}
-                            className="absolute bottom-[22%] top-[12%] bg-transparent focus:outline-none focus-visible:bg-white/5"
+                            className="absolute bottom-[18%] top-[8%] bg-transparent focus:outline-none focus-visible:bg-white/5"
                             style={{ left: `${start}%`, width: `${end - start}%` }}
                             aria-label={member.name}
                             aria-current={activeIndex === idx}
