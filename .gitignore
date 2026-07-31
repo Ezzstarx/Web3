@@ -29,3 +29,9 @@ next-env.d.ts
 
 # raw design exports (processed copies live in public/assets)
 /assets
+
+# personal files
+*.jpeg
+WhatsApp*
+assets/
+_*.png

@@ -1,13 +1,13 @@
 // The white "matter" strip that straddles the hero/Seika boundary.
 //
-// The outer div is masked by the smoke artwork itself (luminance mask), so the
-// silhouette never moves. Inside it, a rail of four copies of the same artwork
-// scrolls right-to-left forever, so the marbled particles appear to stream
-// through the smoke while staying inside it.
+// Two layers inside a mask cut from the artwork itself:
+//   1. the smoke image, completely STATIC — the structure never moves;
+//   2. a fine filament texture (a high-pass of the same artwork) scrolling
+//      right-to-left and screen-blended on top, so only particles drift
+//      *inside* the fixed silhouette.
 //
-// The rail tiles as [A][A-mirrored][A][A-mirrored]: mirroring makes every
-// adjacent edge meet its own reflection (no seam), and translating by exactly
-// two cells lands on an identical frame (no jump at the loop point).
+// The particle rail tiles as [A][A-mirrored], so every seam meets its own
+// reflection and translating one full unit lands on an identical frame.
 export default function SmokeStrip({ className = "" }: { className?: string }) {
     return (
         <div
@@ -15,16 +15,14 @@ export default function SmokeStrip({ className = "" }: { className?: string }) {
             className={`smoke-mask pointer-events-none select-none mix-blend-screen ${className}`}
             style={{ aspectRatio: "1600/300" }}
         >
-            <div className="smoke-rail">
-                {[0, 1, 2, 3].map((i) => (
-                    <img
-                        key={i}
-                        src="/assets/images/sections/transition-smoke.png"
-                        alt=""
-                        className={i % 2 === 1 ? "smoke-cell smoke-cell--flip" : "smoke-cell"}
-                    />
-                ))}
-            </div>
+            {/* 1. static structure */}
+            <img
+                src="/assets/images/sections/transition-smoke.png"
+                alt=""
+                className="smoke-base"
+            />
+            {/* 2. drifting particles */}
+            <div className="smoke-particles" />
         </div>
     );
 }

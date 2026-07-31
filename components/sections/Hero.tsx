@@ -130,7 +130,7 @@ export default function Hero() {
                     {/* Character Identity Block */}
                     <div className="mt-16 md:mt-0 flex flex-col items-start">
                         <h1
-                            className="font-scarlet text-[72px] md:text-[length:clamp(76px,11svh,120px)] leading-none bg-clip-text text-transparent"
+                            className="font-scarlet text-[96px] md:text-[length:clamp(104px,15svh,164px)] leading-none bg-clip-text text-transparent"
                             style={{ backgroundImage: `linear-gradient(to bottom, ${active.titleFrom}, ${active.titleTo})` }}
                         >
                             {active.name}
@@ -170,51 +170,35 @@ export default function Hero() {
                     />
                 </div>
 
-                {/* Character Switcher Rail — three at a time, looping through all 11 */}
-                <div className="absolute right-3 md:right-[3.5%] top-1/2 -translate-y-1/2 z-30 flex flex-col items-center gap-3">
-                    <button
-                        onClick={() => setActiveIndex(wrap(activeIndex - 1))}
-                        className="text-white/50 hover:text-white transition-colors leading-none text-lg"
-                        aria-label="Previous character"
-                    >
-                        ▲
-                    </button>
-
-                    <div className="flex flex-col gap-4">
-                        {visible.map((charIdx, slot) => {
-                            const char = characters[charIdx];
-                            const isActive = charIdx === activeIndex;
-                            return (
-                                <button
-                                    key={`${charIdx}-${slot}`}
-                                    onClick={() => setActiveIndex(charIdx)}
-                                    className={`w-[52px] h-[52px] md:w-[72px] md:h-[72px] overflow-hidden transition-all duration-300 ${isActive
-                                        ? "ring-2 ring-white/70 brightness-110 scale-105"
-                                        : "opacity-70 hover:opacity-100"
-                                        }`}
-                                    style={{ backgroundColor: char.thumbBg }}
-                                    aria-label={char.name || `Character ${charIdx + 1}`}
-                                    aria-current={isActive}
-                                >
-                                    {/* Head/bust crop of the same character artwork */}
-                                    <img
-                                        src={char.image}
-                                        alt=""
-                                        aria-hidden
-                                        className="w-full h-full object-cover object-top scale-[1.7] origin-top"
-                                    />
-                                </button>
-                            );
-                        })}
-                    </div>
-
-                    <button
-                        onClick={() => setActiveIndex(wrap(activeIndex + 1))}
-                        className="text-white/50 hover:text-white transition-colors leading-none text-lg"
-                        aria-label="Next character"
-                    >
-                        ▼
-                    </button>
+                {/* Character Switcher Rail — three at a time, looping through all 11.
+                    Per the design: plain rounded thumbnails with a light border and
+                    no arrows; clicking a neighbour re-centres the window on it. */}
+                <div className="absolute right-3 md:right-[3.5%] top-1/2 -translate-y-1/2 z-30 flex flex-col items-center gap-3.5">
+                    {visible.map((charIdx, slot) => {
+                        const char = characters[charIdx];
+                        const isActive = charIdx === activeIndex;
+                        return (
+                            <button
+                                key={`${charIdx}-${slot}`}
+                                onClick={() => setActiveIndex(charIdx)}
+                                className={`w-[52px] h-[52px] md:w-[72px] md:h-[72px] overflow-hidden rounded-[6px] border transition-all duration-300 ${isActive
+                                    ? "border-white/90 brightness-110 scale-[1.06]"
+                                    : "border-white/35 opacity-75 hover:opacity-100 hover:border-white/60"
+                                    }`}
+                                style={{ backgroundColor: char.thumbBg }}
+                                aria-label={char.name || `Character ${charIdx + 1}`}
+                                aria-current={isActive}
+                            >
+                                {/* Head/bust crop of the same character artwork */}
+                                <img
+                                    src={char.image}
+                                    alt=""
+                                    aria-hidden
+                                    className="w-full h-full object-cover object-top scale-[1.7] origin-top"
+                                />
+                            </button>
+                        );
+                    })}
                 </div>
             </div>
 
