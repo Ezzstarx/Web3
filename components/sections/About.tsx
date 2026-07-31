@@ -15,8 +15,10 @@ export default function About() {
             {/* Content matches the Figma export: a ~1180px column, copy on the left
                 (~600px), pixel logo right, small WHITEPAPER button under the copy. */}
             <div className="page-x relative z-10 py-14 md:py-16">
-                <div className="mx-auto w-full max-w-[1180px]">
-                    <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
+                {/* Narrower column with its own side padding, so the block sits
+                    clearly inset from the torn edges of the purple field. */}
+                <div className="mx-auto w-full max-w-[980px] px-2 sm:px-8 lg:px-12">
+                    <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
 
                         {/* Left: Heading + Copy */}
                         <div className="max-w-[600px]">
@@ -53,13 +55,13 @@ export default function About() {
                         </div>
                     </div>
 
-                    {/* Whitepaper Button — small, sitting under the copy column */}
-                    <div className="flex justify-center lg:justify-start lg:max-w-[600px] mt-9">
+                    {/* Whitepaper Button — centred beneath the copy and the logo */}
+                    <div className="flex justify-center mt-10">
                         <a
                             href="https://ezzstar.gitbook.io/ezzstar-gitbook"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="mx-auto px-7 py-2 border border-[#ff4dd8]/70 rounded-md bg-[#4a0e7f]/40 font-tektur font-medium text-base md:text-[19px] tracking-[0.18em] text-[#ff4dd8] hover:bg-[#4a0e7f]/70 hover:shadow-[0_0_25px_rgba(255,77,216,0.35)] transition-all"
+                            className="px-7 py-2 border border-[#ff4dd8]/70 rounded-md bg-[#4a0e7f]/40 font-tektur font-medium text-base md:text-[19px] tracking-[0.18em] text-[#ff4dd8] hover:bg-[#4a0e7f]/70 hover:shadow-[0_0_25px_rgba(255,77,216,0.35)] transition-all"
                         >
                             WHITEPAPER
                         </a>

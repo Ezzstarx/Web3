@@ -34,7 +34,7 @@ export default function SkaUtility() {
     const activeTab = tabs.find((t) => t.id === activeId) || tabs[0];
 
     return (
-        <section id="ska-utility" className="screen-section relative overflow-hidden bg-[#0b0508] py-16 md:py-20">
+        <section id="ska-utility" className="screen-section font-tektur relative overflow-hidden bg-[#0b0508] py-16 md:py-20">
             {/* Cyberpunk cityscape background */}
             <div
                 className="absolute inset-0 bg-cover bg-center"
@@ -66,16 +66,16 @@ export default function SkaUtility() {
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -12 }}
                                 transition={{ duration: 0.25 }}
-                                className="relative rounded-xl border border-white/25 bg-gradient-to-b from-[#4c1d95]/90 to-[#2e1065]/90 p-8 md:p-10 min-h-[330px]"
+                                className="relative rounded-xl border border-white/25 bg-gradient-to-b from-[#4c1d95]/35 to-[#2e1065]/35 backdrop-blur-[2px] p-8 md:p-10 min-h-[clamp(210px,40svh,330px)]"
                             >
-                                <h4 className="text-2xl md:text-[30px] font-tektur font-bold text-white mb-6">
+                                <h4 className="text-2xl md:text-[30px] font-tektur font-medium text-white mb-6">
                                     {activeTab.label}
                                 </h4>
                                 <ul className="space-y-3">
                                     {activeTab.points.map((point, idx) => (
                                         <li key={idx} className="flex items-start gap-3">
                                             <span className="mt-2 w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>
-                                            <span className="text-white font-satoshi text-base md:text-[17px] leading-relaxed">
+                                            <span className="text-white font-tektur text-base md:text-[17px] leading-relaxed">
                                                 {point}
                                             </span>
                                         </li>
@@ -91,7 +91,7 @@ export default function SkaUtility() {
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveId(tab.id)}
-                                className={`w-full text-left px-7 py-3.5 rounded-lg border font-tektur text-xl md:text-[26px] tracking-wide transition-all duration-300 ${activeId === tab.id
+                                className={`w-full text-left px-7 py-1 rounded-lg border font-tektur text-xl md:text-[26px] leading-tight tracking-wide transition-all duration-300 ${activeId === tab.id
                                     ? "border-white/40 bg-gradient-to-r from-[#6d28d9] to-[#4c1d95] text-white shadow-[0_0_20px_rgba(109,40,217,0.35)]"
                                     : "border-white/30 bg-black/20 text-[#cfc8bd] hover:bg-white/5 hover:text-white"
                                     }`}

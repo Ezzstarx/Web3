@@ -24,19 +24,23 @@ export default function Tokenomics() {
     };
 
     return (
-        <section id="tokenomics" className="screen-section relative overflow-hidden py-12 md:py-14 bg-[#14082a]">
+        <section id="tokenomics" className="screen-section relative overflow-hidden py-12 md:py-[clamp(28px,5svh,56px)] bg-[#14082a]">
             {/* Blurred "3B SKA" giant-letters background. Fitted to the section
                 width rather than cover — the section is far taller than the art's
-                1.67 aspect, and cover magnified the lettering ~1.67x. */}
-            <div
-                className="absolute inset-0 bg-no-repeat bg-top bg-[length:100%_auto]"
-                style={{ backgroundImage: "url('/assets/images/sections/tokenomics-bg.png')" }}
-            />
+                1.67 aspect, and cover magnified the lettering ~1.67x.
+                Inset negatively so the blur has material to bleed into and
+                doesn't feather the section's edges. */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div
+                    className="absolute -inset-16 bg-no-repeat bg-top bg-[length:100%_auto] blur-[14px]"
+                    style={{ backgroundImage: "url('/assets/images/sections/tokenomics-bg.png')" }}
+                />
+            </div>
             <div className="absolute inset-0 bg-black/30 pointer-events-none" />
 
             <div className="page-x relative z-10">
                 {/* Heading */}
-                <div className="relative w-fit mx-auto pb-4 mb-8 md:mb-10">
+                <div className="relative w-fit mx-auto pb-4 mb-6 md:mb-8">
                     <h2 className="text-3xl md:text-[44px] font-tektur font-medium text-white text-center">
                         Tokenomics
                     </h2>
@@ -45,26 +49,28 @@ export default function Tokenomics() {
 
                 {/* Compact centred block matching the Figma export: chart panel left,
                     tight stats grid right, contract card narrower underneath. */}
-                <div className="mx-auto max-w-[1350px] flex flex-col lg:flex-row items-stretch lg:items-start justify-between gap-8 w-full mb-8">
+                <div className="mx-auto max-w-[1350px] flex flex-col lg:flex-row items-stretch lg:items-start justify-between gap-8 w-full mb-[clamp(14px,2.5svh,32px)]">
 
-                    {/* Left: Donut distribution chart with callouts */}
-                    <div className="relative w-full lg:max-w-[820px] min-w-0 bg-[#0a0a12]/80 p-4 flex items-center justify-center">
+                    {/* Left: Donut distribution chart with callouts. Narrower panel
+                        with the chart filling it edge to edge. */}
+                    <div className="relative w-full lg:max-w-[min(660px,46svh)] min-w-0 bg-[#0a0a12]/20 flex items-center justify-center">
                         <img
                             src="/assets/images/sections/tokenomics-donut.png"
                             alt="SKA token distribution"
-                            className="w-full h-auto max-h-[42svh] object-contain"
+                            className="w-full h-auto object-contain"
                         />
                     </div>
 
-                    {/* Right: Distribution Stats Grid */}
-                    <div className="lg:w-[460px] lg:shrink-0 grid grid-cols-2 self-center w-full">
+                    {/* Right: Distribution Stats Grid — uniformly transparent, with a
+                        thin white rule between each row. */}
+                    <div className="lg:w-[460px] lg:shrink-0 grid grid-cols-2 self-center w-full bg-[#0a0a12]/25">
                         {distribution.map((item, idx) => (
                             <div
                                 key={idx}
-                                className={`relative px-6 py-5 flex flex-col gap-1 ${Math.floor(idx / 2) % 2 === 0 ? "bg-[#0d0d16]/80" : "bg-[#12121d]/60"}`}
+                                className={`relative px-6 py-[clamp(10px,2.2svh,20px)] flex flex-col gap-1 ${idx >= 2 ? "border-t border-white/25" : ""}`}
                             >
-                                <span className="text-[24px] md:text-[28px] font-satoshi font-semibold text-white leading-tight">{item.pct}</span>
-                                <span className="text-gray-400 text-[14px] leading-tight font-satoshi">{item.label}</span>
+                                <span className="text-[24px] md:text-[length:clamp(21px,2.8svh,28px)] font-satoshi font-semibold text-white leading-tight">{item.pct}</span>
+                                <span className="text-gray-300 text-[14px] leading-tight font-satoshi">{item.label}</span>
 
                                 {/* Vertical separator between the two columns */}
                                 {idx % 2 === 0 && (

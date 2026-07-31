@@ -180,39 +180,41 @@
     mask-mode: luminance;
   }
 
-  .smoke-tex {
-    position: absolute;
-    inset: -5%;
-    width: 110%;
-    height: 110%;
-    max-width: none;
-    object-fit: fill;
-    animation: smoke-crawl 16s ease-in-out infinite;
+  /* Rail of four tiles (2 full [A][A-mirrored] units) scrolling left forever.
+     Translating -50% advances exactly one unit, landing on an identical
+     frame — so the loop is invisible. */
+  .smoke-rail {
+    display: flex;
+    width: 400%;
+    height: 100%;
+    animation: smoke-flow 26s linear infinite;
     will-change: transform;
   }
 
-  @keyframes smoke-crawl {
+  .smoke-cell {
+    width: 25%;
+    height: 100%;
+    flex: none;
+    object-fit: fill;
+    display: block;
+  }
 
-    0%,
-    100% {
-      transform: translate(0%, 0%) rotate(0deg);
+  .smoke-cell--flip {
+    transform: scaleX(-1);
+  }
+
+  @keyframes smoke-flow {
+    from {
+      transform: translate3d(0, 0, 0);
     }
 
-    30% {
-      transform: translate(-1.6%, 1.1%) rotate(0.35deg);
-    }
-
-    55% {
-      transform: translate(1.1%, -0.9%) rotate(-0.3deg);
-    }
-
-    80% {
-      transform: translate(-0.7%, -1.2%) rotate(0.2deg);
+    to {
+      transform: translate3d(-50%, 0, 0);
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .smoke-tex {
+    .smoke-rail {
       animation: none;
     }
   }
