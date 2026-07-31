@@ -1,7 +1,3 @@
-"use client";
-
-import { useState } from "react";
-
 interface RoadmapPhase {
     id: number;
     title: string;
@@ -59,8 +55,6 @@ function PhasePoints({ points }: { points: string[] }) {
 }
 
 export default function Roadmap() {
-    const [activePhaseId, setActivePhaseId] = useState<number>(1);
-
     return (
         <section id="roadmap" className="screen-section relative w-full py-12 md:py-14 overflow-hidden bg-black">
             {/* Ambient color glows (left edge, as in the design) */}
@@ -121,54 +115,19 @@ export default function Roadmap() {
                         ))}
                     </div>
 
-                    {/* Row 3: Phase 1 details (below the line) + thumbnail selector */}
-                    <div className="flex items-start justify-between gap-8">
-                        <div className="flex items-start gap-10">
-                            <div className="flex flex-col">
-                                {/* Vertical connector up to Phase 1 label */}
-                                <div className="w-[1px] h-[clamp(20px,4.5svh,48px)] bg-white/60 ml-14 mb-3" />
-                                <PhasePoints points={phases[0].points} />
-                            </div>
-                            {/* Phase 1 image (cyberpunk arcade building) — the cyan tech frame is part of the artwork */}
-                            <img
-                                src="/assets/images/roadmap/phase1-large.png"
-                                alt="Phase 1"
-                                className="mt-4 w-auto h-[clamp(140px,24svh,240px)] object-contain"
-                            />
+                    {/* Row 3: Phase 1 details — below the line */}
+                    <div className="flex items-start gap-10">
+                        <div className="flex flex-col">
+                            {/* Vertical connector up to Phase 1 label */}
+                            <div className="w-[1px] h-[clamp(20px,4.5svh,48px)] bg-white/60 ml-14 mb-3" />
+                            <PhasePoints points={phases[0].points} />
                         </div>
-
-                        {/* Phase selector thumbnails — bottom right (shared component from the old site) */}
-                        <div className="flex flex-nowrap items-end gap-2 md:gap-10 self-end pt-4">
-                        {phases.map((phase) => (
-                            <div
-                                key={phase.id}
-                                onClick={() => setActivePhaseId(phase.id)}
-                                className="flex flex-col items-center gap-2 md:gap-3 cursor-pointer group transition-transform duration-300 hover:scale-105 min-w-[60px] md:min-w-[80px]"
-                            >
-                                {/* Thumbnail */}
-                                <div className="w-[60px] h-[60px] md:w-[110px] md:h-[107px] relative flex-shrink-0">
-                                    <img
-                                        src={`/assets/images/roadmap/thumb${phase.id}.png`}
-                                        alt={phase.title}
-                                        className={`w-full h-full object-contain transition-all duration-300 ${activePhaseId === phase.id
-                                            ? "brightness-110 scale-110"
-                                            : "brightness-75 opacity-70 group-hover:opacity-100 group-hover:brightness-100"
-                                            }`}
-                                    />
-                                </div>
-
-                                {/* Label */}
-                                <div className="flex flex-col items-center min-w-[60px] md:min-w-[80px]">
-                                    <span className={`font-tektur text-[10px] md:text-[20px] tracking-wide transition-colors duration-300 text-center whitespace-nowrap pb-1 ${activePhaseId === phase.id
-                                        ? "text-white font-medium border-b-2 border-white"
-                                        : "text-white/70 group-hover:text-white border-b-2 border-transparent"
-                                        }`}>
-                                        {phase.title}
-                                    </span>
-                                </div>
-                            </div>
-                        ))}
-                        </div>
+                        {/* Phase 1 image (cyberpunk arcade building) — the cyan tech frame is part of the artwork */}
+                        <img
+                            src="/assets/images/roadmap/phase1-large.png"
+                            alt="Phase 1"
+                            className="mt-4 w-auto h-[clamp(140px,24svh,240px)] object-contain"
+                        />
                     </div>
                 </div>
 
@@ -183,14 +142,6 @@ export default function Roadmap() {
                             <PhasePoints points={phase.points} />
                         </div>
                     ))}
-                    <div className="flex flex-nowrap justify-center gap-6">
-                        {phases.map((phase) => (
-                            <div key={phase.id} onClick={() => setActivePhaseId(phase.id)} className="flex flex-col items-center gap-2 cursor-pointer">
-                                <img src={`/assets/images/roadmap/thumb${phase.id}.png`} alt={phase.title} className="w-[60px] h-[60px] object-contain" />
-                                <span className={`font-tektur text-xs ${activePhaseId === phase.id ? "text-white border-b border-white" : "text-white/70"}`}>{phase.title}</span>
-                            </div>
-                        ))}
-                    </div>
                 </div>
             </div>
         </section>

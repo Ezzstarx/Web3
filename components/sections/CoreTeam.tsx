@@ -91,8 +91,7 @@ export default function CoreTeam() {
                         <img
                             src={member.image}
                             alt={member.name}
-                            className={`h-full w-auto max-w-none object-contain object-bottom transition-all duration-300 ${activeIndex === idx ? "brightness-110" : "brightness-[0.82]"
-                                }`}
+                            className="h-full w-auto max-w-none object-contain object-bottom brightness-[1.18]"
                         />
                     </div>
                 ))}
