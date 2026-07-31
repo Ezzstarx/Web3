@@ -55,8 +55,11 @@ function PhasePoints({ points }: { points: string[] }) {
 }
 
 export default function Roadmap() {
+    // Height leaves room for the ~70px partner strip that follows, so the two
+    // together fill exactly one screen and the logos are visible alongside the
+    // roadmap rather than below the fold (QA issue 4).
     return (
-        <section id="roadmap" className="screen-section relative w-full py-12 md:py-14 overflow-hidden bg-black">
+        <section id="roadmap" className="relative w-full py-12 md:py-14 overflow-hidden bg-black lg:min-h-[calc(100svh-70px)] lg:flex lg:flex-col lg:justify-center">
             {/* Ambient color glows (left edge, as in the design) */}
             <div className="absolute top-1/2 left-0 w-[420px] h-[500px] bg-[#2ECC71]/10 rounded-full blur-[140px] pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-[420px] h-[400px] bg-[#C243FE]/10 rounded-full blur-[140px] pointer-events-none" />

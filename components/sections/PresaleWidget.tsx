@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Loader2 } from "lucide-react";
+import { Loader2, CreditCard } from "lucide-react";
 import { useWallet } from "../providers/WalletProvider";
 import MagicButton from "@/components/ui/MagicButton";
 import TransactionModal from "@/components/ui/TransactionModal";
@@ -34,13 +34,16 @@ export default function PresaleWidget() {
         "CARD": 500,      // Card payments settle in USD
     };
 
+    // Token icons are the old site's originals. The design export's versions were
+    // 28-36px crops that rendered soft/malformed at 24px (QA issues 1 & 2).
     const CURRENCIES = [
-        { id: "USDT", icon: "/assets/icons/crypto/icon-usdt-new.png" },
+        { id: "USDT", icon: "/assets/icons/crypto/icon-usdt-v2.png" },
         { id: "BNB", icon: "/assets/icons/crypto/icon-bnb.png" },
-        { id: "USDC", icon: "/assets/icons/crypto/icon-usdc-new.png" },
-        { id: "DAI", icon: "/assets/icons/crypto/icon-dai-new.png" },
+        { id: "USDC", icon: "/assets/icons/crypto/icon-usdc-v2.png" },
+        { id: "DAI", icon: "/assets/icons/crypto/icon-dai.png" },
         { id: "SOL", icon: "/assets/icons/crypto/icon-sol.png" },
-        { id: "CARD", icon: "" }, // Visa/Mastercard icon — client will provide
+        // Card: generic payment-card glyph until the client supplies branded art.
+        { id: "CARD", icon: "" },
     ];
 
     useEffect(() => {
@@ -139,7 +142,7 @@ export default function PresaleWidget() {
                                     className="w-[24px] h-[24px] object-contain"
                                 />
                             ) : (
-                                <span className="w-[24px] h-[24px] rounded-full img-placeholder" data-image="icon-card" />
+                                <CreditCard className="w-[24px] h-[24px] text-white/85" strokeWidth={1.75} />
                             )}
                         </div>
                         <input
@@ -174,15 +177,19 @@ export default function PresaleWidget() {
                     </div>
                 </div>
 
+                {/* Six currencies at the old site's fixed widths overflowed the card
+                    and clipped the last tab (QA issue 2). The active tab keeps a fixed
+                    width for its label; the rest share whatever is left, so the row
+                    always fits the card exactly. */}
                 <div className="flex items-center justify-center mt-4 lg:mt-3 mb-4 lg:mb-3 w-full">
-                    <div className="flex items-center w-fit h-[38px] bg-black/40 px-1 rounded-full">
+                    <div className="flex items-center w-full h-[38px] bg-black/40 px-1 rounded-full">
                         {CURRENCIES.map((curr) => (
                             <button
                                 key={curr.id}
                                 onClick={() => setPayCurrency(curr.id)}
                                 className={`relative flex items-center justify-center transition-all duration-300 h-[37px] ${payCurrency === curr.id
-                                    ? "w-[100px] bg-teal-900/40 border-cyan-400 py-0 shadow-[0_0_15px_rgba(34,211,238,0.1)]"
-                                    : "w-[48px]"
+                                    ? "w-[92px] shrink-0 bg-teal-900/40 border-cyan-400 py-0 shadow-[0_0_15px_rgba(34,211,238,0.1)]"
+                                    : "flex-1 min-w-0"
                                     }`}
                             >
                                 <div className="flex items-center justify-center gap-2">
@@ -194,7 +201,7 @@ export default function PresaleWidget() {
                                                 className="w-[15px] h-[15px] object-contain"
                                             />
                                         ) : (
-                                            <span className="w-[15px] h-[15px] rounded-full img-placeholder" data-image="icon-card" />
+                                            <CreditCard className="w-[15px] h-[15px] text-white/85" strokeWidth={2} />
                                         )}
                                     </div>
                                     {payCurrency === curr.id && (
