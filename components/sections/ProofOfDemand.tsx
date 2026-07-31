@@ -59,7 +59,10 @@ export default function ProofOfDemand() {
 
                 {/* From lg up the row is height-driven off the viewport so the whole
                     section stays within one screen; both columns scale to fit it. */}
-                <div className="flex flex-col lg:flex-row justify-between gap-14 w-full lg:h-[calc(126svh-275px)]">
+                {/* min-height, not a fixed height: on short viewports a fixed row
+                    could end up shorter than the chat card, which then spilled out
+                    and collided with the ribbon below. */}
+                <div className="flex flex-col lg:flex-row justify-between gap-14 w-full lg:min-h-[calc(126svh-275px)]">
 
                     {/* Left: Creator platform screenshots */}
                     <div className="w-full lg:w-[58%] flex flex-col min-h-0">
@@ -76,7 +79,7 @@ export default function ProofOfDemand() {
                                         alt={n === 1
                                             ? "Ezzstar creator platform — manga and stories"
                                             : "Ezzstar creator platform — gists and events"}
-                                        className="w-[300px] md:w-[380px] lg:w-auto lg:max-w-full h-auto lg:max-h-full object-contain object-top"
+                                        className="w-[300px] md:w-[380px] lg:w-auto lg:max-w-full h-auto lg:max-h-[calc(126svh-330px)] object-contain object-top"
                                     />
                                 </div>
                             ))}
