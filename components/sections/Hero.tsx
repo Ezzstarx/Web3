@@ -181,9 +181,9 @@ export default function Hero() {
                             <button
                                 key={`${charIdx}-${slot}`}
                                 onClick={() => setActiveIndex(charIdx)}
-                                className={`w-[52px] h-[52px] md:w-[72px] md:h-[72px] overflow-hidden rounded-[6px] border transition-all duration-300 ${isActive
-                                    ? "border-white/90 brightness-110 scale-[1.06]"
-                                    : "border-white/35 opacity-75 hover:opacity-100 hover:border-white/60"
+                                className={`overflow-hidden rounded-[6px] border transition-all duration-300 ${isActive
+                                    ? "w-[68px] h-[68px] md:w-[104px] md:h-[104px] border-white/90 brightness-110 shadow-[0_0_18px_rgba(255,255,255,0.25)]"
+                                    : "w-[46px] h-[46px] md:w-[64px] md:h-[64px] border-white/35 opacity-70 hover:opacity-100 hover:border-white/60"
                                     }`}
                                 style={{ backgroundColor: char.thumbBg }}
                                 aria-label={char.name || `Character ${charIdx + 1}`}
