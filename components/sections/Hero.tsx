@@ -182,7 +182,7 @@ export default function Hero() {
                                 key={`${charIdx}-${slot}`}
                                 onClick={() => setActiveIndex(charIdx)}
                                 className={`overflow-hidden rounded-[6px] border transition-all duration-300 ${isActive
-                                    ? "w-[68px] h-[68px] md:w-[104px] md:h-[104px] border-white/90 brightness-110 shadow-[0_0_18px_rgba(255,255,255,0.25)]"
+                                    ? "w-[58px] h-[58px] md:w-[86px] md:h-[86px] border-white/90 brightness-110 shadow-[0_0_18px_rgba(255,255,255,0.25)]"
                                     : "w-[46px] h-[46px] md:w-[64px] md:h-[64px] border-white/35 opacity-70 hover:opacity-100 hover:border-white/60"
                                     }`}
                                 style={{ backgroundColor: char.thumbBg }}
