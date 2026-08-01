@@ -7,15 +7,17 @@
   font-style: normal;
 }
 
-/* Display face for the hero character name (Kenichi).
-   Drop the font file into public/fonts/ — any one of these extensions works. */
+/* Display face used for every hero character name.
+   Client-provided TTF is the only source — a stale woff2 that shipped earlier
+   was rendering as a different face and winning over the TTF in the src list.
+   The ?v= query is a permanent cache-buster: any CDN/browser cache of the old
+   file is bypassed and the real font loads for everyone. */
 @font-face {
   font-family: 'Scarlet Reliquary';
-  src: url('/fonts/ScarletReliquary.woff2') format('woff2'),
-       url('/fonts/ScarletReliquary.ttf') format('truetype');
+  src: url('/fonts/ScarletReliquary.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 @theme {
@@ -39,7 +41,8 @@
   --font-aliencons: 'AlienCons TFB', sans-serif;
   --font-montserrat: 'Montserrat', sans-serif;
   /* The design's display face, self-hosted (see @font-face above). */
-  --font-scarlet: 'Scarlet Reliquary', 'Tektur', sans-serif;
+  --font-scarlet: 'Scarlet Reliquary', sans-serif;
+  --font-family-scarlet: 'Scarlet Reliquary', sans-serif;
 
   --shadow-neon: 0px 0px 10px rgba(222, 59, 214, 0.4), 1px 0px 5px rgba(1, 92, 104, 0.4);
 
@@ -116,7 +119,8 @@
   --font-aliencons: 'AlienCons TFB', sans-serif;
   --font-montserrat: 'Montserrat', sans-serif;
   /* The design's display face, self-hosted (see @font-face above). */
-  --font-scarlet: 'Scarlet Reliquary', 'Tektur', sans-serif;
+  --font-scarlet: 'Scarlet Reliquary', sans-serif;
+  --font-family-scarlet: 'Scarlet Reliquary', sans-serif;
 }
 
 @layer base {
