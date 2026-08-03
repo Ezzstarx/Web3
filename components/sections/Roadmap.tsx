@@ -58,8 +58,8 @@ const phases: RoadmapPhase[] = [
             "Marketplace launch.",
         ],
         side: "below",
-        image: "/assets/images/roadmap/thumb-phase3.jpg",
-        thumb: "/assets/images/roadmap/thumb-phase3.jpg",
+        image: "/assets/images/roadmap/thumb3.png",
+        thumb: "/assets/images/roadmap/thumb3.png",
     },
     {
         id: 4,
@@ -71,8 +71,8 @@ const phases: RoadmapPhase[] = [
             "Community expansion.",
         ],
         side: "above",
-        image: "/assets/images/roadmap/thumb3.png",
-        thumb: "/assets/images/roadmap/thumb3.png",
+        image: "/assets/images/roadmap/thumb4.png",
+        thumb: "/assets/images/roadmap/thumb4.png",
     },
     {
         id: 5,
@@ -145,6 +145,28 @@ function ProgressSegment({ filled }: { filled: boolean }) {
     );
 }
 
+// Phase image component that adds the cyan bracket borders for phases that don't have them baked in
+function PhaseImage({ phase, mobile }: { phase: RoadmapPhase; mobile?: boolean }) {
+    const isThumb = phase.image.includes("thumb");
+    const hClass = mobile ? "h-[160px] mt-5" : "h-[clamp(130px,25svh,268px)] shrink-0";
+    
+    if (!isThumb) {
+        return <img src={phase.image} alt={phase.title} className={`max-w-full w-auto object-contain ${hClass}`} />;
+    }
+
+    return (
+        <div className={`relative inline-flex items-center justify-center ${hClass}`}>
+            <div className="absolute top-0 left-0 w-6 h-6 md:w-8 md:h-8 border-t-[2px] border-l-[2px] border-[#00FFF0] pointer-events-none rounded-tl-[4px]" />
+            <div className="absolute top-0 right-0 w-6 h-6 md:w-8 md:h-8 border-t-[2px] border-r-[2px] border-[#00FFF0] pointer-events-none rounded-tr-[4px]" />
+            <div className="absolute bottom-0 left-0 w-6 h-6 md:w-8 md:h-8 border-b-[2px] border-l-[2px] border-[#00FFF0] pointer-events-none rounded-bl-[4px]" />
+            <div className="absolute bottom-0 right-0 w-6 h-6 md:w-8 md:h-8 border-b-[2px] border-r-[2px] border-[#00FFF0] pointer-events-none rounded-br-[4px]" />
+            <div className="absolute inset-[6px] md:inset-[10px] border border-white/5 rounded-xl bg-white/[0.02] pointer-events-none" />
+            
+            <img src={phase.image} alt={phase.title} className="relative z-10 max-w-full w-auto h-full object-contain p-4 md:p-6" />
+        </div>
+    );
+}
+
 // The detail block: bullets and the phase artwork, hanging off a stem that
 // starts at the block's left edge — which is the phase's own column, so the
 // block, the stem and the label all line up.
@@ -177,11 +199,7 @@ function PhaseDetail({ phase, index }: { phase: RoadmapPhase; index: number }) {
                             className="shrink-0 flex items-start justify-center"
                             style={{ width: `${(ICON_W / width) * 100}%` }}
                         >
-                            <img
-                                src={phase.image}
-                                alt={phase.title}
-                                className="max-w-full w-auto object-contain h-[clamp(130px,25svh,268px)]"
-                            />
+                            <PhaseImage phase={phase} />
                         </div>
                         <div className="flex-1 min-w-0">
                             <PhasePoints points={phase.points} />
@@ -198,11 +216,7 @@ function PhaseDetail({ phase, index }: { phase: RoadmapPhase; index: number }) {
                     {phase.side === "below" && <div className="mb-3">{stem}</div>}
                     <div className="flex items-start gap-6">
                         <PhasePoints points={phase.points} />
-                        <img
-                            src={phase.image}
-                            alt={phase.title}
-                            className="w-auto object-contain shrink-0 h-[clamp(130px,25svh,268px)]"
-                        />
+                        <PhaseImage phase={phase} />
                     </div>
                     {phase.side === "above" && <div className="mt-3">{stem}</div>}
                 </>
@@ -332,7 +346,7 @@ export default function Roadmap() {
                             <span className="font-satoshi font-bold text-lg text-[#ED3BD6]">{active.period}</span>
                         </div>
                         <PhasePoints points={active.points} />
-                        <img src={active.image} alt={active.title} className="mt-5 w-auto h-[160px] object-contain" />
+                        <PhaseImage phase={active} mobile />
                     </div>
                     <div className="flex flex-nowrap justify-center gap-4 overflow-x-auto scrollbar-hide">
                         {phases.map((phase) => (
