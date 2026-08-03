@@ -58,8 +58,8 @@ const phases: RoadmapPhase[] = [
             "Marketplace launch.",
         ],
         side: "below",
-        image: "/assets/images/roadmap/thumb3.png",
-        thumb: "/assets/images/roadmap/thumb3.png",
+        image: "/assets/images/roadmap/thumb-phase3.jpg?v=2",
+        thumb: "/assets/images/roadmap/thumb-phase3.jpg?v=2",
     },
     {
         id: 4,
@@ -71,8 +71,8 @@ const phases: RoadmapPhase[] = [
             "Community expansion.",
         ],
         side: "above",
-        image: "/assets/images/roadmap/thumb4.png",
-        thumb: "/assets/images/roadmap/thumb4.png",
+        image: "/assets/images/roadmap/thumb3.png",
+        thumb: "/assets/images/roadmap/thumb3.png",
     },
     {
         id: 5,
