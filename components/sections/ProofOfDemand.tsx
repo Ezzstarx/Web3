@@ -40,6 +40,32 @@ const messages = [
         lines: ["DAMN DUDE", "That's nice as hell"],
         edited: false,
     },
+    {
+        name: "Wisteria",
+        badge: "🍃 BG3",
+        nameColor: "#e0e0e0",
+        highlighted: false,
+        lines: [],
+        // Reaction image post — the client's own screenshot drops in here.
+        attachment: "absolute-cinema",
+        edited: false,
+    },
+    {
+        name: "Tobi Tobster The Toaste…",
+        badge: "💀 YBS",
+        nameColor: "#7ee0c9",
+        highlighted: true,
+        lines: ["its really good!"],
+        edited: false,
+    },
+    {
+        name: "Zanta",
+        badge: "💀 DUDE",
+        nameColor: "#ffffff",
+        highlighted: false,
+        lines: ["looks cool"],
+        edited: false,
+    },
 ];
 
 export default function ProofOfDemand() {
@@ -92,28 +118,29 @@ export default function ProofOfDemand() {
                             Community showed the love.
                         </h3>
 
-                        {/* Scrolls internally only if the viewport is too short for the
-                            full thread — keeps the section to one screen either way. */}
-                        <div className="relative rounded-2xl border border-white/15 bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-sm p-4 md:p-5 lg:self-start lg:w-full">
-                            <div className="flex flex-col gap-3">
-                                {messages.map((msg, idx) => (
+                        {/* The thread scrolls itself, forever. The list is rendered
+                            twice and the track travels exactly one copy's height,
+                            so the loop point is invisible. Hovering pauses it. */}
+                        <div className="chat-marquee relative rounded-2xl border border-white/15 bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-sm p-4 md:p-5 lg:h-[calc(126svh-360px)] overflow-hidden">
+                            <div className="chat-track flex flex-col gap-3">
+                                {[...messages, ...messages].map((msg, idx) => (
                                     <div
                                         key={idx}
-                                        className={`relative flex gap-3 rounded-md p-3 ${msg.highlighted
+                                        className={`relative flex gap-3 rounded-md p-3 shrink-0 ${msg.highlighted
                                             ? "bg-[#2a2a20]/90 border-l-2 border-[#f0c040]"
                                             : "bg-[#141417]/90"
                                             }`}
                                     >
                                         {/* Avatar — client will provide */}
-                                        <span className="img-placeholder w-10 h-10 rounded-full shrink-0" data-image={`discord-avatar-${idx + 1}`} />
+                                        <span className="img-placeholder w-10 h-10 rounded-full shrink-0" data-image={`discord-avatar-${(idx % messages.length) + 1}`} />
 
                                         <div className="flex flex-col gap-1 min-w-0">
                                             <div className="flex items-center gap-2">
-                                                <span className="font-satoshi font-semibold text-[16px]" style={{ color: msg.nameColor }}>
+                                                <span className="font-satoshi font-semibold text-[16px] truncate" style={{ color: msg.nameColor }}>
                                                     {msg.name}
                                                 </span>
                                                 {msg.badge && (
-                                                    <span className="text-[11px] font-satoshi bg-black/60 border border-white/10 rounded px-1.5 py-0.5 text-white/80">
+                                                    <span className="text-[11px] font-satoshi bg-black/60 border border-white/10 rounded px-1.5 py-0.5 text-white/80 shrink-0">
                                                         {msg.badge}
                                                     </span>
                                                 )}
@@ -126,6 +153,12 @@ export default function ProofOfDemand() {
                                                     )}
                                                 </p>
                                             ))}
+                                            {"attachment" in msg && msg.attachment && (
+                                                <span
+                                                    className="img-placeholder mt-1 block w-[190px] h-[150px] rounded"
+                                                    data-image={`discord-${msg.attachment}`}
+                                                />
+                                            )}
                                         </div>
                                     </div>
                                 ))}

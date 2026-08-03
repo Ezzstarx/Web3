@@ -225,6 +225,41 @@
     }
   }
 
+  /* Community feed that scrolls itself. The list is rendered twice inside
+     .chat-track; travelling exactly half the track height lands on an
+     identical frame, so the loop is seamless. The gap between the two copies
+     is accounted for by translating calc(-50% - half a gap). */
+  .chat-track {
+    animation: chat-scroll 36s linear infinite;
+    will-change: transform;
+  }
+
+  .chat-marquee:hover .chat-track {
+    animation-play-state: paused;
+  }
+
+  /* Fade the top and bottom edges so messages enter and leave softly */
+  .chat-marquee {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 6%, #000 94%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 6%, #000 94%, transparent 100%);
+  }
+
+  @keyframes chat-scroll {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      transform: translate3d(0, calc(-50% - 0.375rem), 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chat-track {
+      animation: none;
+    }
+  }
+
   /* Shared page gutter — keeps every section's content off the screen edges
      and matched to the design's inset. Used by all sections + the footer. */
   .page-x {
