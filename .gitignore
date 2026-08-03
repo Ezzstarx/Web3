@@ -33,5 +33,9 @@ next-env.d.ts
 # personal files
 *.jpeg
 WhatsApp*
-assets/
 _*.png
+
+# NOTE: the raw-exports rule must stay anchored as "/assets" (root only).
+# A bare "assets/" pattern also matches public/assets/ and silently keeps
+# every new site image out of git — which is exactly what broke production
+# (missing phase-3 pic, community screenshots and the smoke texture).

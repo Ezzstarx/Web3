@@ -36,6 +36,17 @@ export default function RootLayout({
   // reference them (a var declared on :root can't see a var set on <body>).
   return (
     <html lang="en" className={`${tektur.variable} ${satoshi.variable}`}>
+      <head>
+        {/* Preload the hero display face so the character name paints in
+            Scarlet Reliquary immediately instead of flashing the fallback. */}
+        <link
+          rel="preload"
+          href="/fonts/ScarletReliquary.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="font-tektur text-white antialiased overflow-x-hidden relative bg-black">
         <WalletProvider>
           <main className="min-h-screen relative z-10">

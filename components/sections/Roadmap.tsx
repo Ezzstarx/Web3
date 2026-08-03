@@ -58,8 +58,8 @@ const phases: RoadmapPhase[] = [
             "Marketplace launch.",
         ],
         side: "below",
-        image: "/assets/images/roadmap/thumb-phase3.png?v=3",
-        thumb: "/assets/images/roadmap/thumb-phase3.png?v=3",
+        image: "/assets/images/roadmap/thumb-phase3.png",
+        thumb: "/assets/images/roadmap/thumb-phase3.png",
     },
     {
         id: 4,
