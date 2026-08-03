@@ -96,7 +96,7 @@ const phases: RoadmapPhase[] = [
 // LEFT of the bullets and the block shifts left by exactly the artwork's width
 // — the bullets and stem still land on the phase's x.
 const COL = 20;
-const ICON_W = 13; // artwork column, % of the row
+const ICON_W = 17; // artwork column, % of the row
 const ICON_GAP = 2;
 function blockGeometry(index: number) {
     const phaseX = index * COL;
@@ -119,28 +119,27 @@ function PhasePoints({ points }: { points: string[] }) {
     );
 }
 
-// A timeline connector, built exactly like the presale progress bar: an
-// outlined pill whose fill is a hue-cycling magenta→cyan glow, a travelling
-// light stream and a white core line on top. Fills when the segment sits
-// behind the active phase.
+// A timeline connector. No outlined pill — just a thin white rule, with the
+// completed portion drawn over it as a glowing magenta→cyan line (the presale
+// bar's hue-cycling glow and travelling light stream, minus the container).
 function ProgressSegment({ filled }: { filled: boolean }) {
     return (
-        <div className="flex-1 mx-4 h-[6px] bg-black border border-white rounded-full overflow-hidden">
+        <div className="flex-1 mx-5 relative h-[10px]">
+            {/* the plain rule every segment shows */}
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-white/85 rounded-full" />
+            {/* the lit portion */}
             <motion.div
-                className="relative h-[2px] top-1/2 -translate-y-1/2"
+                className="absolute left-0 top-1/2 -translate-y-1/2 h-[2px]"
                 initial={false}
                 animate={{ width: filled ? "100%" : "0%" }}
                 transition={{ duration: 0.6, ease: "easeInOut" }}
             >
-                {/* 1. static gradient glow */}
                 <div
-                    className="absolute top-[-6px] bottom-[-6px] left-0 w-full bg-gradient-to-r from-[#FF00FF] to-[#00FFF0] blur-[4px] opacity-60 z-0"
+                    className="absolute top-[-7px] bottom-[-7px] left-0 w-full bg-gradient-to-r from-[#FF00FF] to-[#00FFF0] blur-[5px] opacity-70 z-0"
                     style={{ animation: "colorCycle 4s linear infinite" }}
                 />
-                {/* 2. travelling glow stream */}
                 <div className="presale-glow-stream z-0" />
-                {/* 3. the white line itself */}
-                <div className="absolute inset-0 bg-white z-10 rounded-full shadow-[0_0_15px_rgba(255,0,255,0.7)]" />
+                <div className="absolute inset-0 bg-white z-10 rounded-full shadow-[0_0_15px_rgba(255,0,255,0.8)]" />
             </motion.div>
         </div>
     );
@@ -163,26 +162,37 @@ function PhaseDetail({ phase, index }: { phase: RoadmapPhase; index: number }) {
             style={{ left: `${left}%`, width: `${width}%` }}
         >
             {iconLeft ? (
-                // Artwork first, then a column holding the stem + bullets. That
-                // column starts exactly at the phase's x, so the stem still
-                // points at its own label.
-                <div className="flex items-start" style={{ gap: `${(ICON_GAP / width) * 100}%` }}>
-                    <div
-                        className="shrink-0 flex items-start justify-center"
-                        style={{ width: `${(ICON_W / width) * 100}%` }}
-                    >
-                        <img
-                            src={phase.image}
-                            alt={phase.title}
-                            className="max-w-full w-auto object-contain h-[clamp(105px,16svh,170px)]"
-                        />
+                // Artwork on the left, bullets on the right. The stem is hoisted
+                // out of the row and indented to the bullets' x, so the artwork
+                // and the bullets share a top edge instead of the artwork
+                // sitting a stem's height higher than the card.
+                <>
+                    {phase.side === "below" && (
+                        <div className="mb-3" style={{ marginLeft: `calc(${((ICON_W + ICON_GAP) / width) * 100}% + 14px)` }}>
+                            <div className="w-[1px] h-[clamp(20px,4.5svh,52px)] bg-white/60" />
+                        </div>
+                    )}
+                    <div className="flex items-start" style={{ gap: `${(ICON_GAP / width) * 100}%` }}>
+                        <div
+                            className="shrink-0 flex items-start justify-center"
+                            style={{ width: `${(ICON_W / width) * 100}%` }}
+                        >
+                            <img
+                                src={phase.image}
+                                alt={phase.title}
+                                className="max-w-full w-auto object-contain h-[clamp(130px,25svh,268px)]"
+                            />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                            <PhasePoints points={phase.points} />
+                        </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                        {phase.side === "below" && <div className="mb-3">{stem}</div>}
-                        <PhasePoints points={phase.points} />
-                        {phase.side === "above" && <div className="mt-3">{stem}</div>}
-                    </div>
-                </div>
+                    {phase.side === "above" && (
+                        <div className="mt-3" style={{ marginLeft: `calc(${((ICON_W + ICON_GAP) / width) * 100}% + 14px)` }}>
+                            <div className="w-[1px] h-[clamp(20px,4.5svh,52px)] bg-white/60" />
+                        </div>
+                    )}
+                </>
             ) : (
                 <>
                     {phase.side === "below" && <div className="mb-3">{stem}</div>}
@@ -191,7 +201,7 @@ function PhaseDetail({ phase, index }: { phase: RoadmapPhase; index: number }) {
                         <img
                             src={phase.image}
                             alt={phase.title}
-                            className="w-auto object-contain shrink-0 h-[clamp(105px,16svh,170px)]"
+                            className="w-auto object-contain shrink-0 h-[clamp(130px,25svh,268px)]"
                         />
                     </div>
                     {phase.side === "above" && <div className="mt-3">{stem}</div>}
@@ -218,7 +228,7 @@ export default function Roadmap() {
 
             <div className="page-x relative z-10">
                 {/* Heading — left aligned */}
-                <div className="relative w-fit pb-4 mb-[clamp(28px,6svh,64px)]">
+                <div className="relative w-fit pb-4 mb-[clamp(34px,8svh,86px)]">
                     <h2 className="text-3xl md:text-[44px] font-tektur font-medium text-white">
                         RoadMap
                     </h2>
@@ -230,7 +240,7 @@ export default function Roadmap() {
                 <div className="hidden lg:flex flex-col">
 
                     {/* Band above the line */}
-                    <div className="relative h-[clamp(140px,22svh,265px)]">
+                    <div className="relative h-[clamp(170px,30svh,340px)]">
                         <AnimatePresence mode="wait">
                             {active.side === "above" && <PhaseDetail phase={active} index={activeIndex} />}
                         </AnimatePresence>
@@ -270,7 +280,7 @@ export default function Roadmap() {
                     </div>
 
                     {/* Band below the line */}
-                    <div className="relative h-[clamp(140px,22svh,265px)]">
+                    <div className="relative h-[clamp(170px,30svh,340px)]">
                         <AnimatePresence mode="wait">
                             {active.side === "below" && <PhaseDetail phase={active} index={activeIndex} />}
                         </AnimatePresence>
@@ -278,8 +288,8 @@ export default function Roadmap() {
 
                     {/* Phase selector — its own row, so the detail block above can
                         never sit on top of it. */}
-                    <div className="flex justify-end mt-[clamp(10px,2.2svh,28px)]">
-                        <div className="flex flex-nowrap items-end gap-6 md:gap-9">
+                    <div className="flex justify-end mt-[clamp(20px,5svh,60px)]">
+                        <div className="flex flex-nowrap items-end gap-5 md:gap-7">
                             {phases.map((phase) => {
                                 const isActive = phase.id === activeId;
                                 return (
@@ -290,7 +300,7 @@ export default function Roadmap() {
                                         aria-label={`Show ${phase.title}`}
                                         aria-current={isActive}
                                     >
-                                        <div className="w-[70px] h-[70px] md:w-[92px] md:h-[92px] relative flex items-center justify-center">
+                                        <div className="w-[56px] h-[56px] md:w-[72px] md:h-[72px] relative flex items-center justify-center">
                                             <img
                                                 src={phase.thumb}
                                                 alt=""
@@ -301,7 +311,7 @@ export default function Roadmap() {
                                                     }`}
                                             />
                                         </div>
-                                        <span className={`font-tektur text-[15px] md:text-[17px] tracking-wide whitespace-nowrap pb-1 border-b-2 transition-colors duration-300 ${isActive
+                                        <span className={`font-tektur text-[12px] md:text-[14px] tracking-wide whitespace-nowrap pb-1 border-b-2 transition-colors duration-300 ${isActive
                                             ? "text-white font-medium border-[#39FF14]"
                                             : "text-white/70 group-hover:text-white border-transparent"
                                             }`}>
