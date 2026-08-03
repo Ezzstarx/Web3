@@ -21,19 +21,63 @@ interface TeamMember {
     height: number;   // figure height, % of the stage (depth cue)
 }
 
-// The 12 figures stand in front of the EZZSTAR LED wall. Hovering a figure
-// swaps the name plate and bio below. Muzammil's bio comes from the design;
-// the rest are placeholder copy written from each member's role — replace
-// with the client's final text when provided.
+// The 12 figures stand in front of the EZZSTAR LED wall, left to right.
+// Names, roles and bios are the client's final copy, assigned in that same
+// left-to-right sequence; the artwork keeps its natural order (m01 … m12).
 const members: TeamMember[] = [
-    { name: "Saachi Singh", role: "Product Designer", description: "Designs the Ezzstar experience end to end — from the presale flow to the Game Zone OS concepts — turning a sprawling ecosystem into interfaces that feel effortless to use.", x: "#", linkedin: "https://www.linkedin.com/in/saachi-singh-75323123b/", image: "/assets/images/team/m01.png", left: 9.5, height: 52 },
-    { name: "Fateen Moeen", role: "Unreal Dev/ Ani Lead", description: "Leads character animation and Unreal Engine development. Builds the rigs, movesets and cinematic sequences that bring Ezzstar's character roster to life on screen.", x: "#", linkedin: "https://www.linkedin.com/in/fateen-catzero/", image: "/assets/images/team/m02.png", left: 17.5, height: 57 },
-    { name: "Aman Prajapati", role: "CTO, Co-Founder", description: "Architect of the Ezzstar platform. Oversees everything from smart-contract infrastructure to the creator platform's backend, keeping the whole ecosystem shipping on schedule.", x: "#", linkedin: "https://www.linkedin.com/in/aman-prajapati-675909199/", image: "/assets/images/team/m03.png", left: 26, height: 54 },
-    { name: "Tushar Goyal", role: "Blockchain Developer", description: "Writes and audits the Solidity behind SKA — the presale, vesting and reward contracts on BNB Chain — with a security-first approach to token engineering.", x: "#", linkedin: "https://www.linkedin.com/in/tushar-goyal-1876b7160", image: "/assets/images/team/m10.png", left: 34, height: 50 },
-    { name: "Rabiya Javed", role: "Graphic Designer", description: "Owns Ezzstar's visual identity: the grunge textures, pixel marks and promotional artwork that give the brand its cyberpunk edge across every channel.", x: "#", linkedin: "https://www.linkedin.com/in/rabiya-javed-378694275/", image: "/assets/images/team/m05.png", left: 41.5, height: 53 },
+    {
+        name: "Misbah Iftikhar",
+        role: "2D Concept Artist",
+        description: "7+ years in character concepts, visual storytelling and environment art. Supports character identity, skins, lore visuals and metaverse concept direction.",
+        x: "#",
+        linkedin: "https://www.linkedin.com/in/misbah-iftikhar-20761938/",
+        image: "/assets/images/team/m01.png",
+        left: 9.5,
+        height: 52,
+    },
+    {
+        name: "Fateen Mooen",
+        role: "Unreal Developer / 3D Lead",
+        description: "5+ years in blockchain development, smart contracts and token utility architecture. Supports SKA token infrastructure, contract logic and Web3 integrations.",
+        x: "#",
+        linkedin: "https://www.linkedin.com/in/fateen-catzero/",
+        image: "/assets/images/team/m02.png",
+        left: 17.5,
+        height: 57,
+    },
+    {
+        name: "Abdullah Khan",
+        role: "Frontend Developer",
+        description: "2+ years building responsive user interfaces and seamless Web3 integrations. Supports user onboarding, wallet connections and cross-platform accessibility.",
+        x: "#",
+        linkedin: "https://www.linkedin.com/in/abdullahkhancs01/",
+        image: "/assets/images/team/m03.png",
+        left: 26,
+        height: 54,
+    },
+    {
+        name: "Nikhil Kandesar",
+        role: "Blockchain / Smart Contract Developer",
+        description: "5+ years in blockchain development, smart contracts and token utility architecture. Supports SKA token infrastructure, contract logic and Web3 integrations.",
+        x: "#",
+        linkedin: "https://www.linkedin.com/in/nikhilkandesar/",
+        image: "/assets/images/team/m04.png",
+        left: 34,
+        height: 50,
+    },
+    {
+        name: "Rabiya Javed",
+        role: "Graphic Designer",
+        description: "3+ years creating brand visuals, campaign graphics and digital assets. Supports Ezzstar's visual identity, social content.",
+        x: "#",
+        linkedin: "https://www.linkedin.com/in/rabiya-javed-378694275/",
+        image: "/assets/images/team/m05.png",
+        left: 41.5,
+        height: 53,
+    },
     {
         name: "Muzammil Moosa",
-        role: "CEO & Founder",
+        role: "Founder / CEO",
         description: "7+ years of market analysis insights from Nielsen. Experienced in e-commerce business and gaming community leadership gaming community director, previously administering regional tournament setups with global brands including Red Bull and Buffalo Wild Wings. Directing token design and network distribution.",
         x: "https://x.com/ezzstarx?s=21",
         linkedin: "https://www.linkedin.com/in/muzammil-moosa-48ba7a201/",
@@ -41,12 +85,67 @@ const members: TeamMember[] = [
         left: 50.5,
         height: 60,
     },
-    { name: "M. Arbaaz", role: "Partnership Manager", description: "Builds Ezzstar's alliance network — exchanges, game-zone organisers and brand partners — turning introductions into signed, working collaborations.", x: "#", linkedin: "https://www.linkedin.com/in/mohammed-arbaaz-41b428182/", image: "/assets/images/team/m07.png", left: 57.5, height: 49 },
-    { name: "Ali Abdullah", role: "Community Builder", description: "Runs the Discord and Telegram day to day: events, AMAs and reward campaigns that keep the Ezzstar community growing and genuinely engaged.", x: "#", linkedin: "https://www.linkedin.com/in/ali-abdullah-028845333/", image: "/assets/images/team/m08.png", left: 64.5, height: 55 },
-    { name: "Harsh Upadhyay", role: "Full Stack Developer", description: "Ships across the whole stack — the creator platform, referral system and presale site — moving features from design to production at speed.", x: "#", linkedin: "https://www.linkedin.com/in/upadhyay-harsh9756/", image: "/assets/images/team/m09.png", left: 71.5, height: 47 },
-    { name: "Abdullah Khan", role: "Web Developer", description: "Builds and maintains Ezzstar's web surfaces, obsessing over performance, responsiveness and pixel-perfect implementation of the design language.", x: "#", linkedin: "https://www.linkedin.com/in/abdullahkhancs01/", image: "/assets/images/team/m04.png", left: 78.5, height: 54 },
-    { name: "Misbah Iftikhar", role: "2D Concept Artist", description: "Concepts the characters, environments and key art of the Ezzstar universe — the first drawings from which every asset and animation grows.", x: "#", linkedin: "https://www.linkedin.com/in/misbah-iftikhar-20761938/", image: "/assets/images/team/m11.png", left: 85.5, height: 51 },
-    { name: "Ayush Kumar", role: "Level Designer", description: "Designs the arenas and game-zone layouts for Ezzstar's competitive titles, balancing spectacle with fair, readable play.", x: "#", linkedin: "https://www.linkedin.com/in/ayush-kumar-parganihaa-49048320b/", image: "/assets/images/team/m12.png", left: 92.5, height: 53 },
+    {
+        name: "Anshu Kumar",
+        role: "Mobile Application Developer",
+        description: "3+ years building mobile applications, notifications, user dashboards and app experiences. Supports the Social Media App and Game Zone OS mobile companion.",
+        x: "#",
+        // No LinkedIn supplied for this member.
+        linkedin: "",
+        image: "/assets/images/team/m07.png",
+        left: 57.5,
+        height: 49,
+    },
+    {
+        name: "Aman Prajapati",
+        role: "CTO & Co-Founder",
+        description: "7+ years of market analysis insights from Nielsen. Experienced in e-commerce business and gaming community leadership gaming community director, previously administering regional tournament setups with global brands including Red Bull and Buffalo Wild Wings. Directing token design and network distribution.",
+        x: "#",
+        linkedin: "https://www.linkedin.com/in/aman-prajapati-675909199/",
+        image: "/assets/images/team/m08.png",
+        left: 64.5,
+        height: 55,
+    },
+    {
+        name: "Ali Abdullah",
+        role: "Partnership Manager",
+        description: "1+ years in outreach, relationship management and community partnerships. Supports organisers, gaming zones, creators and ecosystem collaboration opportunities.",
+        x: "#",
+        linkedin: "https://www.linkedin.com/in/ali-abdullah-028845333/",
+        image: "/assets/images/team/m09.png",
+        left: 71.5,
+        height: 47,
+    },
+    {
+        name: "Anirban Nandi",
+        role: "UI/UX Designer",
+        description: "3+ years designing mobile and web experiences, prototypes and design systems. Supports clean onboarding, profile flows, dashboards and Game Zone OS management system.",
+        x: "#",
+        linkedin: "https://www.linkedin.com/in/aanirban-nandi/",
+        image: "/assets/images/team/m10.png",
+        left: 78.5,
+        height: 54,
+    },
+    {
+        name: "Aritra Ray",
+        role: "Backend Developer",
+        description: "3+ years building APIs, databases, authentication systems and scalable backend services. Supports user accounts, activity tracking, rewards and platform infrastructure.",
+        x: "#",
+        linkedin: "https://www.linkedin.com/in/aritraray05/",
+        image: "/assets/images/team/m11.png",
+        left: 85.5,
+        height: 51,
+    },
+    {
+        name: "Saachi Singh",
+        role: "Product Designer",
+        description: "4 years designing product screens, user journeys and interface flows. Supports UX structure across the Social Media App, Creator Website.",
+        x: "#",
+        linkedin: "https://www.linkedin.com/in/saachi-singh-75323123b/",
+        image: "/assets/images/team/m12.png",
+        left: 92.5,
+        height: 53,
+    },
 ];
 
 // Where each member's card sits, as % of the stage. `left` is the card's left
@@ -211,13 +310,18 @@ export default function CoreTeam() {
                             <p className="font-satoshi font-semibold text-white text-[length:clamp(12px,1.55svh,16px)] leading-relaxed">
                                 {active.description}
                             </p>
+                            {/* Only render a link the member actually has */}
                             <div className="flex justify-end gap-5 mt-2 text-white pointer-events-auto">
-                                <a href={active.x} target="_blank" rel="noopener noreferrer" className="hover:text-accent-cyan transition-colors">
-                                    <XIcon size={18} />
-                                </a>
-                                <a href={active.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-accent-cyan transition-colors">
-                                    <Linkedin size={19} />
-                                </a>
+                                {active.x && active.x !== "#" && (
+                                    <a href={active.x} target="_blank" rel="noopener noreferrer" aria-label={`${active.name} on X`} className="hover:text-accent-cyan transition-colors">
+                                        <XIcon size={18} />
+                                    </a>
+                                )}
+                                {active.linkedin && (
+                                    <a href={active.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${active.name} on LinkedIn`} className="hover:text-accent-cyan transition-colors">
+                                        <Linkedin size={19} />
+                                    </a>
+                                )}
                             </div>
                         </div>
                     </div>

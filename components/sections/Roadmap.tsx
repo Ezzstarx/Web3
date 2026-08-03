@@ -119,7 +119,7 @@ function PhaseDetail({ phase }: { phase: RoadmapPhase }) {
             <img
                 src={phase.image}
                 alt={phase.title}
-                className="w-auto h-[clamp(130px,22svh,220px)] object-contain shrink-0"
+                className="w-auto h-[clamp(105px,16svh,170px)] object-contain shrink-0"
             />
         </motion.div>
     );
@@ -153,7 +153,7 @@ export default function Roadmap() {
                 <div className="hidden lg:flex flex-col">
 
                     {/* Band above the line */}
-                    <div className="relative h-[clamp(210px,32svh,330px)]">
+                    <div className="relative h-[clamp(150px,23svh,265px)]">
                         <AnimatePresence mode="wait">
                             {active.side === "above" && <PhaseDetail phase={active} />}
                         </AnimatePresence>
@@ -183,26 +183,34 @@ export default function Roadmap() {
                                         </span>
                                     </button>
                                     {idx < phases.length - 1 && (
-                                        // The glowing segment marks progress up to the active phase
-                                        idx < phases.findIndex((p) => p.id === activeId) ? (
-                                            <div className="flex-1 h-[6px] mx-4 rounded-full bg-gradient-to-r from-[#ED3BD6]/10 via-[#ED3BD6] to-[#ED3BD6]/10 blur-[1px] shadow-[0_0_18px_rgba(237,59,214,0.8)] transition-all duration-500" />
-                                        ) : (
-                                            <div className="flex-1 h-[2px] mx-4 bg-white transition-all duration-500" />
-                                        )
+                                        // Progress track, styled like the presale bar: a thin
+                                        // outlined pill whose magenta -> cyan fill sweeps in
+                                        // for every segment behind the active phase.
+                                        <div className="flex-1 mx-4 h-[8px] rounded-full border border-white/70 bg-black/60 overflow-hidden">
+                                            <motion.div
+                                                className="h-full rounded-full bg-gradient-to-r from-[#FF00FF] to-[#00FFF0] shadow-[0_0_14px_rgba(255,0,255,0.75)]"
+                                                initial={false}
+                                                animate={{ width: idx < phases.findIndex((p) => p.id === activeId) ? "100%" : "0%" }}
+                                                transition={{ duration: 0.55, ease: "easeInOut" }}
+                                            />
+                                        </div>
                                     )}
                                 </div>
                             );
                         })}
                     </div>
 
-                    {/* Band below the line + phase selector */}
-                    <div className="relative h-[clamp(210px,32svh,330px)]">
+                    {/* Band below the line */}
+                    <div className="relative h-[clamp(150px,23svh,265px)]">
                         <AnimatePresence mode="wait">
                             {active.side === "below" && <PhaseDetail phase={active} />}
                         </AnimatePresence>
+                    </div>
 
-                        {/* Phase selector — five icons, bottom right */}
-                        <div className="absolute bottom-0 right-0 flex flex-nowrap items-end gap-6 md:gap-9 z-30">
+                    {/* Phase selector — its own row, so the detail block above can
+                        never sit on top of it. */}
+                    <div className="flex justify-end mt-2">
+                        <div className="flex flex-nowrap items-end gap-6 md:gap-9">
                             {phases.map((phase) => {
                                 const isActive = phase.id === activeId;
                                 return (

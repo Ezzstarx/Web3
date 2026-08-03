@@ -32,40 +32,16 @@ const messages = [
         lines: ["cool", "ill totally post my manga on there when i finish", "looks dope"],
         edited: false,
     },
-    {
-        name: "L4MENT",
-        badge: "⚡ ZZZ",
-        nameColor: "#ffffff",
-        highlighted: false,
-        lines: ["DAMN DUDE", "That's nice as hell"],
-        edited: false,
-    },
-    {
-        name: "Wisteria",
-        badge: "🍃 BG3",
-        nameColor: "#e0e0e0",
-        highlighted: false,
-        lines: [],
-        // Reaction image post — the client's own screenshot drops in here.
-        attachment: "absolute-cinema",
-        edited: false,
-    },
-    {
-        name: "Tobi Tobster The Toaste…",
-        badge: "💀 YBS",
-        nameColor: "#7ee0c9",
-        highlighted: true,
-        lines: ["its really good!"],
-        edited: false,
-    },
-    {
-        name: "Zanta",
-        badge: "💀 DUDE",
-        nameColor: "#ffffff",
-        highlighted: false,
-        lines: ["looks cool"],
-        edited: false,
-    },
+];
+
+// The client supplied four messages as finished screenshots (avatar, name,
+// badge and body already composed), so they render as images rather than being
+// rebuilt in markup — that keeps their real avatars and emoji exactly as sent.
+const messageShots = [
+    { src: "/assets/images/proof/msg1.png", alt: "L4MENT: DAMN DUDE — That's nice as hell" },
+    { src: "/assets/images/proof/msg2.png", alt: "Wisteria posted an ABSOLUTE CINEMA reaction image" },
+    { src: "/assets/images/proof/msg3.png", alt: "Tobi Tobster The Toaster: its really good!" },
+    { src: "/assets/images/proof/msg4.png", alt: "Zanta: looks cool" },
 ];
 
 export default function ProofOfDemand() {
@@ -123,43 +99,50 @@ export default function ProofOfDemand() {
                             so the loop point is invisible. Hovering pauses it. */}
                         <div className="chat-marquee relative rounded-2xl border border-white/15 bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-sm p-4 md:p-5 lg:h-[calc(126svh-360px)] overflow-hidden">
                             <div className="chat-track flex flex-col gap-3">
-                                {[...messages, ...messages].map((msg, idx) => (
-                                    <div
-                                        key={idx}
-                                        className={`relative flex gap-3 rounded-md p-3 shrink-0 ${msg.highlighted
-                                            ? "bg-[#2a2a20]/90 border-l-2 border-[#f0c040]"
-                                            : "bg-[#141417]/90"
-                                            }`}
-                                    >
-                                        {/* Avatar — client will provide */}
-                                        <span className="img-placeholder w-10 h-10 rounded-full shrink-0" data-image={`discord-avatar-${(idx % messages.length) + 1}`} />
+                                {[0, 1].map((copy) => (
+                                    <div key={copy} className="contents">
+                                        {messages.map((msg, idx) => (
+                                            <div
+                                                key={`t${copy}-${idx}`}
+                                                className={`relative flex gap-3 rounded-md p-3 shrink-0 ${msg.highlighted
+                                                    ? "bg-[#2a2a20]/90 border-l-2 border-[#f0c040]"
+                                                    : "bg-[#141417]/90"
+                                                    }`}
+                                            >
+                                                {/* Avatar — client will provide */}
+                                                <span className="img-placeholder w-10 h-10 rounded-full shrink-0" data-image={`discord-avatar-${idx + 1}`} />
 
-                                        <div className="flex flex-col gap-1 min-w-0">
-                                            <div className="flex items-center gap-2">
-                                                <span className="font-satoshi font-semibold text-[16px] truncate" style={{ color: msg.nameColor }}>
-                                                    {msg.name}
-                                                </span>
-                                                {msg.badge && (
-                                                    <span className="text-[11px] font-satoshi bg-black/60 border border-white/10 rounded px-1.5 py-0.5 text-white/80 shrink-0">
-                                                        {msg.badge}
-                                                    </span>
-                                                )}
+                                                <div className="flex flex-col gap-1 min-w-0">
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="font-satoshi font-semibold text-[16px] truncate" style={{ color: msg.nameColor }}>
+                                                            {msg.name}
+                                                        </span>
+                                                        {msg.badge && (
+                                                            <span className="text-[11px] font-satoshi bg-black/60 border border-white/10 rounded px-1.5 py-0.5 text-white/80 shrink-0">
+                                                                {msg.badge}
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                    {msg.lines.map((line, li) => (
+                                                        <p key={li} className="font-satoshi text-[14px] text-white/90 leading-snug">
+                                                            {line}
+                                                            {msg.edited && li === msg.lines.length - 1 && (
+                                                                <span className="text-white/40 text-[11px] ml-1">(edited)</span>
+                                                            )}
+                                                        </p>
+                                                    ))}
+                                                </div>
                                             </div>
-                                            {msg.lines.map((line, li) => (
-                                                <p key={li} className="font-satoshi text-[14px] text-white/90 leading-snug">
-                                                    {line}
-                                                    {msg.edited && li === msg.lines.length - 1 && (
-                                                        <span className="text-white/40 text-[11px] ml-1">(edited)</span>
-                                                    )}
-                                                </p>
-                                            ))}
-                                            {"attachment" in msg && msg.attachment && (
-                                                <span
-                                                    className="img-placeholder mt-1 block w-[190px] h-[150px] rounded"
-                                                    data-image={`discord-${msg.attachment}`}
-                                                />
-                                            )}
-                                        </div>
+                                        ))}
+                                        {/* The client's screenshot messages, used as-is */}
+                                        {messageShots.map((shot, idx) => (
+                                            <img
+                                                key={`s${copy}-${idx}`}
+                                                src={shot.src}
+                                                alt={shot.alt}
+                                                className="w-full h-auto rounded-md shrink-0"
+                                            />
+                                        ))}
                                     </div>
                                 ))}
                             </div>
