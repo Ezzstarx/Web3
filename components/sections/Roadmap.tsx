@@ -58,8 +58,8 @@ const phases: RoadmapPhase[] = [
             "Marketplace launch.",
         ],
         side: "below",
-        image: "/assets/images/roadmap/thumb-p3.png",
-        thumb: "/assets/images/roadmap/thumb-p3.png",
+        image: "/assets/images/roadmap/thumb-phase3.jpg",
+        thumb: "/assets/images/roadmap/thumb-phase3.jpg",
     },
     {
         id: 4,
@@ -124,7 +124,7 @@ function PhasePoints({ points }: { points: string[] }) {
 // bar's hue-cycling glow and travelling light stream, minus the container).
 function ProgressSegment({ filled }: { filled: boolean }) {
     return (
-        <div className="flex-1 mx-3 relative h-[10px]">
+        <div className="flex-1 mx-1 relative h-[10px]">
             {/* the plain rule every segment shows */}
             <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-white/85 rounded-full" />
             {/* the lit portion */}
