@@ -89,16 +89,21 @@ const phases: RoadmapPhase[] = [
     },
 ];
 
-// Labels sit on a 5-column grid, so phase i starts at i * 20% of the row. A
-// detail block starts at its own phase's column — that is what keeps the
-// block, its stem and the phase label aligned — and simply takes whatever
-// width is left. Late phases get a narrow column, so they stack the artwork
-// under the bullets instead of beside them.
+// Labels sit on a 5-column grid, so phase i starts at i * 20% of the row.
+// Normally a detail block starts at its own phase's column, which is what keeps
+// the block, its stem and the label on the same x. The last column is too
+// narrow for bullets + artwork side by side, so there the artwork moves to the
+// LEFT of the bullets and the block shifts left by exactly the artwork's width
+// — the bullets and stem still land on the phase's x.
 const COL = 20;
+const ICON_W = 13; // artwork column, % of the row
+const ICON_GAP = 2;
 function blockGeometry(index: number) {
-    const left = index * COL;
-    const width = Math.min(100 - left, 46);
-    return { left, width, stacked: width < 30 };
+    const phaseX = index * COL;
+    const iconLeft = 100 - phaseX < 30;
+    const left = iconLeft ? phaseX - ICON_W - ICON_GAP : phaseX;
+    const width = Math.min(100 - left, iconLeft ? 100 - left : 46);
+    return { left, width, iconLeft };
 }
 
 function PhasePoints({ points }: { points: string[] }) {
@@ -120,7 +125,7 @@ function PhasePoints({ points }: { points: string[] }) {
 // behind the active phase.
 function ProgressSegment({ filled }: { filled: boolean }) {
     return (
-        <div className="flex-1 mx-4 h-[10px] bg-black border border-white rounded-full overflow-hidden">
+        <div className="flex-1 mx-4 h-[6px] bg-black border border-white rounded-full overflow-hidden">
             <motion.div
                 className="relative h-[2px] top-1/2 -translate-y-1/2"
                 initial={false}
@@ -145,7 +150,7 @@ function ProgressSegment({ filled }: { filled: boolean }) {
 // starts at the block's left edge — which is the phase's own column, so the
 // block, the stem and the label all line up.
 function PhaseDetail({ phase, index }: { phase: RoadmapPhase; index: number }) {
-    const { left, width, stacked } = blockGeometry(index);
+    const { left, width, iconLeft } = blockGeometry(index);
     const stem = <div className="w-[1px] h-[clamp(20px,4.5svh,52px)] bg-white/60 ml-[14px]" />;
     return (
         <motion.div
@@ -157,21 +162,41 @@ function PhaseDetail({ phase, index }: { phase: RoadmapPhase; index: number }) {
             className={`absolute ${phase.side === "above" ? "bottom-0" : "top-0"}`}
             style={{ left: `${left}%`, width: `${width}%` }}
         >
-            {phase.side === "below" && <div className="mb-3">{stem}</div>}
-            <div className="flex items-start gap-8">
-                <PhasePoints points={phase.points} />
-                {/* The last column is too narrow to seat the artwork beside the
-                    bullets without spilling into the selector row — that phase's
-                    icon is shown in the selector directly below instead. */}
-                {!stacked && (
-                    <img
-                        src={phase.image}
-                        alt={phase.title}
-                        className="w-auto object-contain shrink-0 h-[clamp(105px,16svh,170px)] ml-auto"
-                    />
-                )}
-            </div>
-            {phase.side === "above" && <div className="mt-3">{stem}</div>}
+            {iconLeft ? (
+                // Artwork first, then a column holding the stem + bullets. That
+                // column starts exactly at the phase's x, so the stem still
+                // points at its own label.
+                <div className="flex items-start" style={{ gap: `${(ICON_GAP / width) * 100}%` }}>
+                    <div
+                        className="shrink-0 flex items-start justify-center"
+                        style={{ width: `${(ICON_W / width) * 100}%` }}
+                    >
+                        <img
+                            src={phase.image}
+                            alt={phase.title}
+                            className="max-w-full w-auto object-contain h-[clamp(105px,16svh,170px)]"
+                        />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                        {phase.side === "below" && <div className="mb-3">{stem}</div>}
+                        <PhasePoints points={phase.points} />
+                        {phase.side === "above" && <div className="mt-3">{stem}</div>}
+                    </div>
+                </div>
+            ) : (
+                <>
+                    {phase.side === "below" && <div className="mb-3">{stem}</div>}
+                    <div className="flex items-start gap-6">
+                        <PhasePoints points={phase.points} />
+                        <img
+                            src={phase.image}
+                            alt={phase.title}
+                            className="w-auto object-contain shrink-0 h-[clamp(105px,16svh,170px)]"
+                        />
+                    </div>
+                    {phase.side === "above" && <div className="mt-3">{stem}</div>}
+                </>
+            )}
         </motion.div>
     );
 }
@@ -193,7 +218,7 @@ export default function Roadmap() {
 
             <div className="page-x relative z-10">
                 {/* Heading — left aligned */}
-                <div className="relative w-fit pb-4 mb-10">
+                <div className="relative w-fit pb-4 mb-[clamp(28px,6svh,64px)]">
                     <h2 className="text-3xl md:text-[44px] font-tektur font-medium text-white">
                         RoadMap
                     </h2>
@@ -205,7 +230,7 @@ export default function Roadmap() {
                 <div className="hidden lg:flex flex-col">
 
                     {/* Band above the line */}
-                    <div className="relative h-[clamp(150px,23svh,265px)]">
+                    <div className="relative h-[clamp(140px,22svh,265px)]">
                         <AnimatePresence mode="wait">
                             {active.side === "above" && <PhaseDetail phase={active} index={activeIndex} />}
                         </AnimatePresence>
@@ -245,7 +270,7 @@ export default function Roadmap() {
                     </div>
 
                     {/* Band below the line */}
-                    <div className="relative h-[clamp(150px,23svh,265px)]">
+                    <div className="relative h-[clamp(140px,22svh,265px)]">
                         <AnimatePresence mode="wait">
                             {active.side === "below" && <PhaseDetail phase={active} index={activeIndex} />}
                         </AnimatePresence>
@@ -253,7 +278,7 @@ export default function Roadmap() {
 
                     {/* Phase selector — its own row, so the detail block above can
                         never sit on top of it. */}
-                    <div className="flex justify-end mt-2">
+                    <div className="flex justify-end mt-[clamp(10px,2.2svh,28px)]">
                         <div className="flex flex-nowrap items-end gap-6 md:gap-9">
                             {phases.map((phase) => {
                                 const isActive = phase.id === activeId;
