@@ -13,9 +13,6 @@ interface RoadmapPhase {
     // Which side of the timeline this phase's detail block sits on, matching
     // the design (phase 1 below, phase 2 above, alternating from there).
     side: "above" | "below";
-    // Left offset of the detail block, % of the row — puts it under/over its
-    // own label rather than always in the same place.
-    left: number;
     image: string;
     thumb: string;
 }
@@ -32,7 +29,6 @@ const phases: RoadmapPhase[] = [
             "Contract verification on BscScan.",
         ],
         side: "below",
-        left: 0,
         image: "/assets/images/roadmap/phase1-large.png",
         thumb: "/assets/images/roadmap/thumb1.png",
     },
@@ -48,7 +44,6 @@ const phases: RoadmapPhase[] = [
             "Game Zone OS launch.",
         ],
         side: "above",
-        left: 30,
         image: "/assets/images/roadmap/phase2-large.png",
         thumb: "/assets/images/roadmap/thumb2.png",
     },
@@ -56,33 +51,55 @@ const phases: RoadmapPhase[] = [
         id: 3,
         title: "Phase 3",
         period: "(Q4 2026)",
-        points: [],
+        points: [
+            "Token launch on exchanges",
+            "Creator Website launch",
+            "Creators Onboard",
+            "Marketplace launch.",
+        ],
         side: "below",
-        left: 30,
         image: "/assets/images/roadmap/thumb-p3.png",
         thumb: "/assets/images/roadmap/thumb-p3.png",
     },
     {
         id: 4,
         title: "Phase 4",
-        period: "(Q2 2026)",
-        points: [],
+        period: "(Q2 2027)",
+        points: [
+            "Mobile Social Media App launch",
+            "Crossed Arena Game launch",
+            "Community expansion.",
+        ],
         side: "above",
-        left: 52,
         image: "/assets/images/roadmap/thumb3.png",
         thumb: "/assets/images/roadmap/thumb3.png",
     },
     {
         id: 5,
         title: "Phase 5",
-        period: "",
-        points: [],
+        period: "(Q4 2027)",
+        points: [
+            "Xebion Realm launch",
+            "Global growth",
+            "Institutional partnerships and continuous updates.",
+        ],
         side: "below",
-        left: 52,
         image: "/assets/images/roadmap/thumb4.png",
         thumb: "/assets/images/roadmap/thumb4.png",
     },
 ];
+
+// Labels sit on a 5-column grid, so phase i starts at i * 20% of the row. A
+// detail block starts at its own phase's column — that is what keeps the
+// block, its stem and the phase label aligned — and simply takes whatever
+// width is left. Late phases get a narrow column, so they stack the artwork
+// under the bullets instead of beside them.
+const COL = 20;
+function blockGeometry(index: number) {
+    const left = index * COL;
+    const width = Math.min(100 - left, 46);
+    return { left, width, stacked: width < 30 };
+}
 
 function PhasePoints({ points }: { points: string[] }) {
     return (
@@ -97,10 +114,39 @@ function PhasePoints({ points }: { points: string[] }) {
     );
 }
 
-// The detail block: bullets on the left, phase artwork on the right, with the
-// stem that runs to the timeline (down when above it, up when below it).
-function PhaseDetail({ phase }: { phase: RoadmapPhase }) {
-    const stem = <div className="w-[1px] h-[clamp(20px,4.5svh,52px)] bg-white/60 ml-14" />;
+// A timeline connector, built exactly like the presale progress bar: an
+// outlined pill whose fill is a hue-cycling magenta→cyan glow, a travelling
+// light stream and a white core line on top. Fills when the segment sits
+// behind the active phase.
+function ProgressSegment({ filled }: { filled: boolean }) {
+    return (
+        <div className="flex-1 mx-4 h-[10px] bg-black border border-white rounded-full overflow-hidden">
+            <motion.div
+                className="relative h-[2px] top-1/2 -translate-y-1/2"
+                initial={false}
+                animate={{ width: filled ? "100%" : "0%" }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+            >
+                {/* 1. static gradient glow */}
+                <div
+                    className="absolute top-[-6px] bottom-[-6px] left-0 w-full bg-gradient-to-r from-[#FF00FF] to-[#00FFF0] blur-[4px] opacity-60 z-0"
+                    style={{ animation: "colorCycle 4s linear infinite" }}
+                />
+                {/* 2. travelling glow stream */}
+                <div className="presale-glow-stream z-0" />
+                {/* 3. the white line itself */}
+                <div className="absolute inset-0 bg-white z-10 rounded-full shadow-[0_0_15px_rgba(255,0,255,0.7)]" />
+            </motion.div>
+        </div>
+    );
+}
+
+// The detail block: bullets and the phase artwork, hanging off a stem that
+// starts at the block's left edge — which is the phase's own column, so the
+// block, the stem and the label all line up.
+function PhaseDetail({ phase, index }: { phase: RoadmapPhase; index: number }) {
+    const { left, width, stacked } = blockGeometry(index);
+    const stem = <div className="w-[1px] h-[clamp(20px,4.5svh,52px)] bg-white/60 ml-[14px]" />;
     return (
         <motion.div
             key={phase.id}
@@ -108,19 +154,24 @@ function PhaseDetail({ phase }: { phase: RoadmapPhase }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: phase.side === "above" ? -14 : 14 }}
             transition={{ duration: 0.28, ease: "easeOut" }}
-            className={`absolute flex items-start gap-12 ${phase.side === "above" ? "bottom-0" : "top-0"}`}
-            style={{ left: `${phase.left}%` }}
+            className={`absolute ${phase.side === "above" ? "bottom-0" : "top-0"}`}
+            style={{ left: `${left}%`, width: `${width}%` }}
         >
-            <div className="flex flex-col">
-                {phase.side === "below" && <div className="mb-3">{stem}</div>}
+            {phase.side === "below" && <div className="mb-3">{stem}</div>}
+            <div className="flex items-start gap-8">
                 <PhasePoints points={phase.points} />
-                {phase.side === "above" && <div className="mt-3">{stem}</div>}
+                {/* The last column is too narrow to seat the artwork beside the
+                    bullets without spilling into the selector row — that phase's
+                    icon is shown in the selector directly below instead. */}
+                {!stacked && (
+                    <img
+                        src={phase.image}
+                        alt={phase.title}
+                        className="w-auto object-contain shrink-0 h-[clamp(105px,16svh,170px)] ml-auto"
+                    />
+                )}
             </div>
-            <img
-                src={phase.image}
-                alt={phase.title}
-                className="w-auto h-[clamp(105px,16svh,170px)] object-contain shrink-0"
-            />
+            {phase.side === "above" && <div className="mt-3">{stem}</div>}
         </motion.div>
     );
 }
@@ -128,7 +179,8 @@ function PhaseDetail({ phase }: { phase: RoadmapPhase }) {
 export default function Roadmap() {
     // Only one phase is shown at a time; the design opens on Phase 1.
     const [activeId, setActiveId] = useState(1);
-    const active = phases.find((p) => p.id === activeId) || phases[0];
+    const activeIndex = Math.max(0, phases.findIndex((p) => p.id === activeId));
+    const active = phases[activeIndex];
 
     // Height leaves room for the ~70px partner strip that follows, so the two
     // together fill exactly one screen and the logos are visible alongside the
@@ -155,16 +207,18 @@ export default function Roadmap() {
                     {/* Band above the line */}
                     <div className="relative h-[clamp(150px,23svh,265px)]">
                         <AnimatePresence mode="wait">
-                            {active.side === "above" && <PhaseDetail phase={active} />}
+                            {active.side === "above" && <PhaseDetail phase={active} index={activeIndex} />}
                         </AnimatePresence>
                     </div>
 
-                    {/* The timeline itself — all five phases always visible */}
-                    <div className="flex items-center">
+                    {/* The timeline itself — all five phases always visible.
+                        A 5-column grid puts every label at an exact 20% step,
+                        which is what blockGeometry() aligns the details to. */}
+                    <div className="grid grid-cols-5 items-center">
                         {phases.map((phase, idx) => {
                             const isActive = phase.id === activeId;
                             return (
-                                <div key={phase.id} className={`flex items-center ${idx < phases.length - 1 ? "flex-1" : ""}`}>
+                                <div key={phase.id} className="flex items-center">
                                     <button
                                         onClick={() => setActiveId(phase.id)}
                                         className="flex flex-col shrink-0 text-left focus:outline-none"
@@ -183,17 +237,7 @@ export default function Roadmap() {
                                         </span>
                                     </button>
                                     {idx < phases.length - 1 && (
-                                        // Progress track, styled like the presale bar: a thin
-                                        // outlined pill whose magenta -> cyan fill sweeps in
-                                        // for every segment behind the active phase.
-                                        <div className="flex-1 mx-4 h-[8px] rounded-full border border-white/70 bg-black/60 overflow-hidden">
-                                            <motion.div
-                                                className="h-full rounded-full bg-gradient-to-r from-[#FF00FF] to-[#00FFF0] shadow-[0_0_14px_rgba(255,0,255,0.75)]"
-                                                initial={false}
-                                                animate={{ width: idx < phases.findIndex((p) => p.id === activeId) ? "100%" : "0%" }}
-                                                transition={{ duration: 0.55, ease: "easeInOut" }}
-                                            />
-                                        </div>
+                                        <ProgressSegment filled={idx < phases.findIndex((p) => p.id === activeId)} />
                                     )}
                                 </div>
                             );
@@ -203,7 +247,7 @@ export default function Roadmap() {
                     {/* Band below the line */}
                     <div className="relative h-[clamp(150px,23svh,265px)]">
                         <AnimatePresence mode="wait">
-                            {active.side === "below" && <PhaseDetail phase={active} />}
+                            {active.side === "below" && <PhaseDetail phase={active} index={activeIndex} />}
                         </AnimatePresence>
                     </div>
 
