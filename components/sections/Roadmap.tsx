@@ -124,7 +124,7 @@ function PhasePoints({ points }: { points: string[] }) {
 // bar's hue-cycling glow and travelling light stream, minus the container).
 function ProgressSegment({ filled }: { filled: boolean }) {
     return (
-        <div className="flex-1 mx-5 relative h-[10px]">
+        <div className="flex-1 mx-3 relative h-[10px]">
             {/* the plain rule every segment shows */}
             <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[2px] bg-white/85 rounded-full" />
             {/* the lit portion */}
@@ -135,11 +135,11 @@ function ProgressSegment({ filled }: { filled: boolean }) {
                 transition={{ duration: 0.6, ease: "easeInOut" }}
             >
                 <div
-                    className="absolute top-[-7px] bottom-[-7px] left-0 w-full bg-gradient-to-r from-[#FF00FF] to-[#00FFF0] blur-[5px] opacity-70 z-0"
+                    className="absolute top-[-4px] bottom-[-4px] left-0 w-full bg-gradient-to-r from-[#FF00FF] to-[#00FFF0] blur-[3px] opacity-70 z-0"
                     style={{ animation: "colorCycle 4s linear infinite" }}
                 />
                 <div className="presale-glow-stream z-0" />
-                <div className="absolute inset-0 bg-white z-10 rounded-full shadow-[0_0_15px_rgba(255,0,255,0.8)]" />
+                <div className="absolute inset-0 bg-white z-10 rounded-full shadow-[0_0_8px_rgba(255,0,255,0.8)]" />
             </motion.div>
         </div>
     );
@@ -259,13 +259,13 @@ export default function Roadmap() {
                                         className="flex flex-col shrink-0 text-left focus:outline-none"
                                         aria-current={isActive}
                                     >
-                                        <span className={`font-satoshi font-bold text-[26px] md:text-[30px] leading-tight transition-colors duration-300 ${isActive ? "text-[#ED3BD6]" : "text-white hover:text-white/80"}`}>
+                                        <span className={`font-satoshi font-bold text-[20px] md:text-[24px] leading-tight transition-colors duration-300 ${isActive ? "text-[#ED3BD6]" : "text-white hover:text-white/80"}`}>
                                             {phase.title}
                                         </span>
                                         {/* Phases without a date still render the line
                                             (invisible) so every label aligns. */}
                                         <span
-                                            className={`font-satoshi font-bold text-[17px] md:text-[19px] transition-colors duration-300 ${isActive ? "text-[#ED3BD6]" : "text-white"} ${phase.period ? "" : "opacity-0 select-none"}`}
+                                            className={`font-satoshi font-bold text-[14px] md:text-[16px] transition-colors duration-300 ${isActive ? "text-[#ED3BD6]" : "text-white"} ${phase.period ? "" : "opacity-0 select-none"}`}
                                             aria-hidden={!phase.period}
                                         >
                                             {phase.period || "(—)"}
