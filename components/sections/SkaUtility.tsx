@@ -22,7 +22,17 @@ const tabs: UtilityTab[] = [
             "Earn through competitive events",
         ],
     },
-    { id: "creator-monetization", label: "Creator Monetization", points: [] },
+    {
+        id: "creator-monetization",
+        label: "Creator Monetization",
+        points: [
+            "Support creators directly",
+            "Receive direct tips from audiences",
+            "Unlock exclusive creator chapters",
+            "Earn rewards based on quality views",
+            "Boost content, events, and gist",
+        ],
+    },
     { id: "character-identity", label: "Character Identity", points: [] },
     { id: "digital-goods", label: "Digital goods & Skins", points: [] },
     { id: "real-world-utility", label: "Real World Utility", points: [] },
