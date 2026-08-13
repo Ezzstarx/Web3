@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+                import type { Metadata } from 'next';
 import { Tektur, Inter } from 'next/font/google';
 import './globals.css';
 import { WalletProvider } from '@/components/providers/WalletProvider';
