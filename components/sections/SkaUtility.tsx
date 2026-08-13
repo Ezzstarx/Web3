@@ -33,7 +33,16 @@ const tabs: UtilityTab[] = [
             "Boost content, events, and gist",
         ],
     },
-    { id: "character-identity", label: "Character Identity", points: [] },
+    {
+        id: "character-identity",
+        label: "Character Identity",
+        points: [
+            "Unlock your 3D character identity",
+            "Useable in game, social app, and the digital realm",
+            "Unlock Elite Division system",
+            "Earn a Hall of Flame spot across the Ezzstar ecosystem",
+        ],
+    },
     { id: "digital-goods", label: "Digital goods & Skins", points: [] },
     { id: "real-world-utility", label: "Real World Utility", points: [] },
     { id: "future-utility", label: "Future Utility", points: [] },
