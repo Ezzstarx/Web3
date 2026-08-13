@@ -43,9 +43,33 @@ const tabs: UtilityTab[] = [
             "Earn a Hall of Flame spot across the Ezzstar ecosystem",
         ],
     },
-    { id: "digital-goods", label: "Digital goods & Skins", points: [] },
-    { id: "real-world-utility", label: "Real World Utility", points: [] },
-    { id: "future-utility", label: "Future Utility", points: [] },
+    {
+        id: "digital-goods",
+        label: "Digital goods & Skins",
+        points: [
+            "Buy, sell, and trade digital goods",
+            "Use Seika for skins and digital items",
+            "Access value across supported platforms",
+        ],
+    },
+    {
+        id: "real-world-utility",
+        label: "Real World Utility",
+        points: [
+            "Use Seika Koin with real world partners",
+            "Spend Seika for everyday value",
+            "Connect digital rewards with physical utility",
+        ],
+    },
+    {
+        id: "future-utility",
+        label: "Future Utility",
+        points: [
+            "SaaS product ecosystem utility coming as Ezzstar grows",
+            "More use cases will unlock over time",
+            "Built to expand beyond one product or platform",
+        ],
+    },
 ];
 
 export default function SkaUtility() {
