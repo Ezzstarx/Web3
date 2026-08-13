@@ -1,0 +1,531 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'AlienCons TFB';
+  src: url('/fonts/AlienCons-TFB.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Display face used for every hero character name.
+   Client-provided TTF is the only source — a stale woff2 that shipped earlier
+   was rendering as a different face and winning over the TTF in the src list.
+   The ?v= query is a permanent cache-buster: any CDN/browser cache of the old
+   file is bypassed and the real font loads for everyone. */
+@font-face {
+  font-family: 'Scarlet Reliquary';
+  src: url('/fonts/ScarletReliquary.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+@theme {
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+
+  --color-primary: #D946EF;
+  --color-primary-hover: #c026d3;
+
+  --color-secondary: #8B5CF6;
+  --color-secondary-hover: #7c3aed;
+
+  --color-accent-cyan: #00EAFF;
+  --color-accent-pink: #DE3BD6;
+
+  --color-card: rgba(9, 9, 15, 0.5);
+  --color-card-border: rgba(255, 255, 255, 0.1);
+
+  --font-tektur: 'Tektur', sans-serif;
+  --font-satoshi: 'Satoshi', sans-serif;
+  --font-aliencons: 'AlienCons TFB', sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+  /* The design's display face, self-hosted (see @font-face above). */
+  --font-scarlet: 'Scarlet Reliquary', sans-serif;
+  --font-family-scarlet: 'Scarlet Reliquary', sans-serif;
+
+  --shadow-neon: 0px 0px 10px rgba(222, 59, 214, 0.4), 1px 0px 5px rgba(1, 92, 104, 0.4);
+
+  --animate-pulse-scale: pulse-scale 2s infinite ease-in-out;
+  --animate-breathing-glow: breathing-glow 2s infinite ease-in-out;
+  --animate-spin-slow: spin 12s linear infinite;
+  --animate-reverse-spin: reverse-spin 15s linear infinite;
+  --animate-slide-up: slide-up 0.6s ease-out forwards;
+  --animate-marquee: marquee 30s linear infinite;
+
+  @keyframes pulse-scale {
+
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes breathing-glow {
+
+    0%,
+    100% {
+      box-shadow: 0 0 10px rgba(222, 59, 214, 0.4);
+      filter: brightness(1);
+    }
+
+    50% {
+      box-shadow: 0 0 25px rgba(222, 59, 214, 0.6);
+      filter: brightness(1.2);
+    }
+  }
+
+  @keyframes reverse-spin {
+    from {
+      transform: rotate(360deg);
+    }
+
+    to {
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+}
+
+:root {
+  --font-tektur: 'Tektur', sans-serif;
+  --font-satoshi: 'Satoshi', sans-serif;
+  --font-aliencons: 'AlienCons TFB', sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+  /* The design's display face, self-hosted (see @font-face above). */
+  --font-scarlet: 'Scarlet Reliquary', sans-serif;
+  --font-family-scarlet: 'Scarlet Reliquary', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply text-white font-satoshi;
+    background-color: #000000;
+    min-height: 100vh;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-cyan to-accent-pink;
+  }
+
+  .glass-card {
+    background: rgba(9, 9, 15, 0.3);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-primary-glow {
+    @apply bg-gradient-to-r from-[#C243FE] to-[#5B099B] bg-[length:200%_200%] hover:brightness-110 transition-all duration-300 animate-pulse-scale;
+    box-shadow: 0 0 15px rgba(194, 67, 254, 0.4);
+  }
+
+  .btn-primary-glow:hover {
+    box-shadow: 0 0 30px rgba(194, 67, 254, 0.6);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Smoke strip (see components/ui/SmokeStrip.tsx): the wrapper is masked by
+     the smoke artwork itself, so the silhouette stays perfectly still; the
+     texture inside crawls, making the marbled particles wriggle within it. */
+  /* No `position` here — the call sites position the strip themselves
+     (a rule here would win over their `absolute` utility and break clipping).
+     The mask is a dedicated PNG whose ALPHA is the smoke's luminance; the
+     source art is RGB-only, so an alpha mask on it was a no-op and the whole
+     strip scrolled. This holds the silhouette perfectly still. */
+  .smoke-mask {
+    overflow: hidden;
+    -webkit-mask-image: url('/assets/images/sections/transition-smoke-mask.png');
+    mask-image: url('/assets/images/sections/transition-smoke-mask.png');
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  /* Layer 1: the smoke structure. Static — never transformed, so the shape
+     stays exactly where the design puts it. */
+  .smoke-base {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    display: block;
+  }
+
+  /* Layer 2: fine filaments drifting right-to-left *inside* the silhouette.
+     The texture is a high-pass of the same artwork tiled [A][A-mirrored], so
+     it carries only particle detail and loops seamlessly. Screen-blended, so
+     its black field drops out and only the filaments add onto the base. */
+  .smoke-particles {
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/images/sections/transition-smoke-detail.png');
+    background-repeat: repeat-x;
+    background-size: 50% 100%;
+    mix-blend-mode: screen;
+    opacity: 0.55;
+    animation: smoke-drift 30s linear infinite;
+    will-change: background-position;
+  }
+
+  @keyframes smoke-drift {
+    from {
+      background-position: 0 0;
+    }
+
+    to {
+      background-position: -50% 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .smoke-particles {
+      animation: none;
+    }
+  }
+
+  /* Community feed that scrolls itself. The list is rendered twice inside
+     .chat-track; travelling exactly half the track height lands on an
+     identical frame, so the loop is seamless. The gap between the two copies
+     is accounted for by translating calc(-50% - half a gap). */
+  .chat-track {
+    animation: chat-scroll 36s linear infinite;
+    will-change: transform;
+  }
+
+  .chat-marquee:hover .chat-track {
+    animation-play-state: paused;
+  }
+
+  /* Fade the top and bottom edges so messages enter and leave softly */
+  .chat-marquee {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 6%, #000 94%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 6%, #000 94%, transparent 100%);
+  }
+
+  @keyframes chat-scroll {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      transform: translate3d(0, calc(-50% - 0.375rem), 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chat-track {
+      animation: none;
+    }
+  }
+
+  /* Shared page gutter — keeps every section's content off the screen edges
+     and matched to the design's inset. Used by all sections + the footer. */
+  .page-x {
+    padding-left: clamp(1.25rem, 7vw, 8.5rem);
+    padding-right: clamp(1.25rem, 7vw, 8.5rem);
+  }
+
+  /* One section per screen: each section fills the viewport and centres its
+     content, so scrolling lands on a whole section at a time. Only applied
+     from lg up — below that, content stacks and is allowed to run long. */
+  @media (min-width: 1024px) {
+    .screen-section {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  /* Empty slot for an image the client will provide later.
+     Swap the element for an <Image /> keeping the same classes/dimensions. */
+  .img-placeholder {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed rgba(255, 255, 255, 0.12);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #09090f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Magic Button Animation */
+.magic {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Rotating border */
+.magic::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 500%;
+  min-width: 1000px;
+  min-height: 1000px;
+  border-radius: inherit;
+  z-index: -1;
+  background: conic-gradient(from 0deg,
+      rgba(255, 0, 0, 0) 0deg,
+      rgba(255, 0, 0, 0) 230deg,
+      rgba(255, 255, 255, 0.9) 270deg,
+      rgba(255, 0, 0, 0) 310deg,
+      rgba(255, 0, 0, 0) 360deg);
+  animation: rotateBorder 7s linear infinite;
+}
+
+/* Inner mask to keep only border visible */
+.magic::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: var(--mask-bg, black);
+  z-index: -1;
+}
+
+@keyframes rotateBorder {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+
+/* Magic Card Animation (Larger version for cards) */
+.magic-card {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.magic-card::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1000px;
+  height: 1000px;
+  border-radius: inherit;
+  z-index: -1;
+  background: conic-gradient(from 0deg,
+      rgba(255, 0, 0, 0) 0deg,
+      rgba(255, 0, 0, 0) 230deg,
+      rgba(255, 255, 255, 0.9) 270deg,
+      rgba(255, 0, 0, 0) 310deg,
+      rgba(255, 0, 0, 0) 360deg);
+  animation: rotateBorder 7s linear infinite;
+}
+
+
+
+/* Magic Ring: For transparent containers with magic border */
+.magic-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: transparent;
+  pointer-events: none;
+  z-index: 0;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.magic-ring::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 500%;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(from 0deg,
+      rgba(255, 0, 0, 0) 0deg,
+      rgba(255, 0, 0, 0) 230deg,
+      rgba(255, 255, 255, 0.9) 270deg,
+      rgba(255, 0, 0, 0) 310deg,
+      rgba(255, 0, 0, 0) 360deg);
+  animation: rotateBorder 7s linear infinite;
+}
+
+/* Slider Glow Animation */
+@keyframes streamMove {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: 0% 0;
+  }
+}
+
+@keyframes colorCycle {
+  0% {
+    filter: hue-rotate(0deg) blur(4px);
+  }
+
+  100% {
+    filter: hue-rotate(360deg) blur(4px);
+  }
+}
+
+.slider-glow-stream {
+  position: absolute;
+  inset: -6px;
+  clip-path: inset(-50px -50px -50px 6px);
+  background: radial-gradient(ellipse at center,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 25%,
+      rgba(255, 255, 255, 0.4) 60%,
+      transparent 85%);
+  background-size: 60px 100%;
+  background-repeat: no-repeat;
+  border-radius: inherit;
+  z-index: -1;
+  animation: streamMove 2s linear infinite;
+  opacity: 1;
+  filter: blur(8px);
+  will-change: background-position;
+}
+
+/* Presale Widget Glow Stream - Left to Right */
+@keyframes streamMoveLeftToRight {
+  0% {
+    background-position: -60px 0;
+  }
+
+  100% {
+    background-position: calc(100% + 60px) 0;
+  }
+}
+
+.presale-glow-stream {
+  position: absolute;
+  inset: -6px;
+  clip-path: inset(-50px -50px -50px 6px);
+  background: radial-gradient(ellipse at center,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 25%,
+      rgba(255, 255, 255, 0.4) 60%,
+      transparent 85%);
+  background-size: 40px 100%;
+  background-repeat: no-repeat;
+  border-radius: inherit;
+  z-index: -1;
+  animation: streamMoveLeftToRight 2.5s linear infinite;
+  opacity: 1;
+  filter: blur(6px);
+  will-change: background-position;
+}
+
+/* Custom Scrollbar for Transaction List */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(173, 122, 255, 0.4);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(173, 122, 255, 0.6);
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(173, 122, 255, 0.4) rgba(255, 255, 255, 0.05);
+}
+
+/* Barcode stripes under the hero "Case File" line.
+   Stripe colours follow the active character via --bc1/--bc2. */
+.barcode {
+  background-image: repeating-linear-gradient(90deg,
+      var(--bc1, #a855f7) 0px,
+      var(--bc1, #a855f7) 2px,
+      transparent 2px,
+      transparent 4px,
+      var(--bc2, #7c3aed) 4px,
+      var(--bc2, #7c3aed) 5px,
+      transparent 5px,
+      transparent 9px,
+      var(--bc1, #a855f7) 9px,
+      var(--bc1, #a855f7) 12px,
+      transparent 12px,
+      transparent 14px);
+  opacity: 0.9;
+}
