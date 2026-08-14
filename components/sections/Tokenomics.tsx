@@ -25,15 +25,11 @@ export default function Tokenomics() {
 
     return (
         <section id="tokenomics" className="screen-section relative overflow-hidden py-12 md:py-[clamp(28px,5svh,56px)] bg-[#14082a]">
-            {/* Blurred "3B SKA" giant-letters background. Fitted to the section
-                width rather than cover — the section is far taller than the art's
-                1.67 aspect, and cover magnified the lettering ~1.67x.
-                Inset negatively so the blur has material to bleed into and
-                doesn't feather the section's edges. */}
+            {/* Full-section background image */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div
-                    className="absolute -inset-16 bg-no-repeat bg-top bg-[length:100%_auto] blur-[14px]"
-                    style={{ backgroundImage: "url('/assets/images/sections/tokenomics-bg.png')" }}
+                    className="absolute inset-0 bg-no-repeat bg-center bg-cover"
+                    style={{ backgroundImage: "url('/assets/images/sections/tokenomics-bg-new.jpeg')" }}
                 />
             </div>
             <div className="absolute inset-0 bg-black/30 pointer-events-none" />
