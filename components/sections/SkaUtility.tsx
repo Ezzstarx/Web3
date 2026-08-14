@@ -21,6 +21,7 @@ const tabs: UtilityTab[] = [
             "Grow your profile and unlock Badges",
             "Earn through competitive events",
         ],
+    },
     {
         id: "creator-monetization",
         label: "Creator Monetization",
