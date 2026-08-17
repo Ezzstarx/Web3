@@ -49,7 +49,7 @@ export default function Tokenomics() {
 
                     {/* Left: Donut distribution chart with callouts. Narrower panel
                         with the chart filling it edge to edge. */}
-                    <div className="relative w-full lg:max-w-[min(860px,62svh)] min-w-0 bg-[#0a0a12]/20 flex items-center justify-center">
+                    <div className="relative w-full lg:w-[679.85px] lg:h-[499.85px] lg:shrink-0 min-w-0 bg-[#0a0a12]/20 flex items-center justify-center">
                         <img
                             src="/assets/images/sections/tokenomics-donut.png"
                             alt="SKA token distribution"
