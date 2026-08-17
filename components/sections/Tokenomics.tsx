@@ -45,7 +45,7 @@ export default function Tokenomics() {
 
                 {/* Compact centred block matching the Figma export: chart panel left,
                     tight stats grid right, contract card narrower underneath. */}
-                <div className="mx-auto max-w-[1480px] flex flex-col lg:flex-row items-stretch lg:items-start justify-between gap-8 w-full mb-[clamp(14px,2.5svh,32px)]">
+                <div className="mx-auto max-w-[1480px] flex flex-col lg:flex-row items-stretch lg:items-start justify-between lg:justify-center lg:gap-[120px] gap-8 w-full mb-[clamp(14px,2.5svh,32px)]">
 
                     {/* Left: Donut distribution chart with callouts. Narrower panel
                         with the chart filling it edge to edge. */}
@@ -59,18 +59,18 @@ export default function Tokenomics() {
 
                     {/* Right: Distribution Stats Grid — uniformly transparent, with a
                         thin white rule between each row. */}
-                    <div className="lg:w-[417px] lg:h-[389px] lg:shrink-0 grid grid-cols-2 self-center w-full bg-[#0a0a12]/25">
+                    <div className="lg:w-[417px] lg:h-[389px] lg:shrink-0 grid grid-cols-2 grid-rows-4 self-center w-full bg-[#0a0a12]/25">
                         {distribution.map((item, idx) => (
                             <div
                                 key={idx}
-                                className={`relative px-6 py-[clamp(10px,2.2svh,20px)] flex flex-col gap-1 ${idx >= 2 ? "border-t border-white/25" : ""}`}
+                                className={`relative px-6 lg:px-8 py-[clamp(10px,2.2svh,20px)] lg:py-0 flex flex-col justify-center gap-1 ${idx >= 2 ? "border-t border-white/20" : ""}`}
                             >
                                 <span className="text-[24px] md:text-[length:clamp(21px,2.8svh,28px)] font-satoshi font-semibold text-white leading-tight">{item.pct}</span>
                                 <span className="text-gray-300 text-[14px] leading-tight font-satoshi">{item.label}</span>
 
                                 {/* Vertical separator between the two columns */}
                                 {idx % 2 === 0 && (
-                                    <div className="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] w-[1px] bg-white/20" />
+                                    <div className="absolute right-0 top-0 bottom-0 w-[1px] bg-white/20" />
                                 )}
                             </div>
                         ))}
