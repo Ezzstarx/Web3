@@ -48,7 +48,7 @@ export default function About() {
                         {/* Right: Pixel EZZSTAR stacked logo */}
                         <div className="relative w-[200px] md:w-[300px] shrink-0">
                             <img
-                                src="/assets/images/sections/ezzstar-pixel.png"
+                                src="/assets/images/sections/about-icon-new.jpg"
                                 alt="Ezzstar"
                                 className="w-full h-auto object-contain"
                             />

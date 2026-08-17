@@ -25,15 +25,11 @@ export default function Tokenomics() {
 
     return (
         <section id="tokenomics" className="screen-section relative overflow-hidden py-12 md:py-[clamp(28px,5svh,56px)] bg-[#14082a]">
-            {/* Blurred "3B SKA" giant-letters background. Fitted to the section
-                width rather than cover — the section is far taller than the art's
-                1.67 aspect, and cover magnified the lettering ~1.67x.
-                Inset negatively so the blur has material to bleed into and
-                doesn't feather the section's edges. */}
+            {/* Full-section background image */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div
-                    className="absolute -inset-16 bg-no-repeat bg-top bg-[length:100%_auto] blur-[14px]"
-                    style={{ backgroundImage: "url('/assets/images/sections/tokenomics-bg.png')" }}
+                    className="absolute inset-0 bg-no-repeat bg-center bg-cover"
+                    style={{ backgroundImage: "url('/assets/images/sections/tokenomics-bg-new.jpeg')" }}
                 />
             </div>
             <div className="absolute inset-0 bg-black/30 pointer-events-none" />
@@ -49,11 +45,11 @@ export default function Tokenomics() {
 
                 {/* Compact centred block matching the Figma export: chart panel left,
                     tight stats grid right, contract card narrower underneath. */}
-                <div className="mx-auto max-w-[1480px] flex flex-col lg:flex-row items-stretch lg:items-start justify-between gap-8 w-full mb-[clamp(14px,2.5svh,32px)]">
+                <div className="mx-auto max-w-[1480px] flex flex-col lg:flex-row items-stretch lg:items-start justify-between lg:justify-center lg:gap-[120px] gap-8 w-full mb-[clamp(14px,2.5svh,32px)]">
 
                     {/* Left: Donut distribution chart with callouts. Narrower panel
                         with the chart filling it edge to edge. */}
-                    <div className="relative w-full lg:max-w-[min(860px,62svh)] min-w-0 bg-[#0a0a12]/20 flex items-center justify-center">
+                    <div className="relative w-full lg:w-[679.85px] lg:h-[499.85px] lg:shrink-0 min-w-0 bg-[#0a0a12]/20 flex items-center justify-center">
                         <img
                             src="/assets/images/sections/tokenomics-donut.png"
                             alt="SKA token distribution"
@@ -63,18 +59,18 @@ export default function Tokenomics() {
 
                     {/* Right: Distribution Stats Grid — uniformly transparent, with a
                         thin white rule between each row. */}
-                    <div className="lg:w-[460px] lg:shrink-0 grid grid-cols-2 self-center w-full bg-[#0a0a12]/25">
+                    <div className="lg:w-[417px] lg:h-[389px] lg:shrink-0 grid grid-cols-2 grid-rows-4 self-center w-full bg-[#0a0a12]/25">
                         {distribution.map((item, idx) => (
                             <div
                                 key={idx}
-                                className={`relative px-6 py-[clamp(10px,2.2svh,20px)] flex flex-col gap-1 ${idx >= 2 ? "border-t border-white/25" : ""}`}
+                                className={`relative px-6 lg:px-8 py-[clamp(10px,2.2svh,20px)] lg:py-0 flex flex-col justify-center gap-1 ${idx >= 2 ? "border-t border-white/20" : ""}`}
                             >
                                 <span className="text-[24px] md:text-[length:clamp(21px,2.8svh,28px)] font-satoshi font-semibold text-white leading-tight">{item.pct}</span>
                                 <span className="text-gray-300 text-[14px] leading-tight font-satoshi">{item.label}</span>
 
                                 {/* Vertical separator between the two columns */}
                                 {idx % 2 === 0 && (
-                                    <div className="absolute right-0 top-1/2 -translate-y-1/2 h-[60%] w-[1px] bg-white/20" />
+                                    <div className="absolute right-0 top-0 bottom-0 w-[1px] bg-white/20" />
                                 )}
                             </div>
                         ))}

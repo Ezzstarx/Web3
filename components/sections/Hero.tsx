@@ -23,13 +23,14 @@ const navLinks = [
 // Subtitles/case-file codes were transcribed from a small design export —
 // correct any that the final design spells differently.
 const characters = [
-    { name: "Cass", subtitle: "The Chain Reaper", caseFile: "CR-04-Cass", image: "/assets/images/hero/char-11.png", ring: "/assets/images/hero/ring-11.png", thumbBg: "#7a1212", titleFrom: "#d04040", titleTo: "#6a1010" },
-    { name: "Scarclaw", subtitle: "The Warlord", caseFile: "WL-09-Scarclaw", image: "/assets/images/hero/char-10.png", ring: "/assets/images/hero/ring-10.png", thumbBg: "#7a4212", titleFrom: "#d08a3a", titleTo: "#6a3810" },
-    { name: "Luna", subtitle: "The Night Eyed Sovereign", caseFile: "NS-02-Luna", image: "/assets/images/hero/char-09.png", ring: "/assets/images/hero/ring-09.png", thumbBg: "#55101a", titleFrom: "#a03a48", titleTo: "#4a0e18" },
-    { name: "Ivy", subtitle: "The Occultist", caseFile: "OC-07-Ivy", image: "/assets/images/hero/char-08.png", ring: "/assets/images/hero/ring-08.png", thumbBg: "#8a1f2b", titleFrom: "#d15563", titleTo: "#7a1f28" },
-    { name: "Blackheart", subtitle: "The Titan", caseFile: "TT-01-Blackheart", image: "/assets/images/hero/char-07.png", ring: "/assets/images/hero/ring-07.png", thumbBg: "#601a12", titleFrom: "#b0503a", titleTo: "#5a1810" },
+    { name: "Cass", nameImage: "/assets/images/hero/char-11-name.png", subtitle: "The Chain Reaper", caseFile: "CR-04-Cass", image: "/assets/images/hero/char-11.png", ring: "/assets/images/hero/ring-11.png", thumbBg: "#7a1212", titleFrom: "#d04040", titleTo: "#6a1010" },
+    { name: "Scarclaw",nameImage: "/assets/images/hero/char-10-name.png", subtitle: "The Warlord", caseFile: "WL-09-Scarclaw", image: "/assets/images/hero/char-10.png", ring: "/assets/images/hero/ring-10.png", thumbBg: "#7a4212", titleFrom: "#d08a3a", titleTo: "#6a3810" },
+    { name: "Luna",nameImage: "/assets/images/hero/char-09-name.png", subtitle: "The Night Eyed Sovereign", caseFile: "NS-02-Luna", image: "/assets/images/hero/char-09.png", ring: "/assets/images/hero/ring-09.png", thumbBg: "#55101a", titleFrom: "#a03a48", titleTo: "#4a0e18" },
+    { name: "Ivy",nameImage: "/assets/images/hero/char-08-name.png", subtitle: "The Occultist", caseFile: "OC-07-Ivy", image: "/assets/images/hero/char-08.png", ring: "/assets/images/hero/ring-08.png", thumbBg: "#8a1f2b", titleFrom: "#d15563", titleTo: "#7a1f28" },
+    { name: "Blackheart",nameImage: "/assets/images/hero/char-07-name.png", subtitle: "The Titan", caseFile: "TT-01-Blackheart", image: "/assets/images/hero/char-07.png", ring: "/assets/images/hero/ring-07.png", thumbBg: "#601a12", titleFrom: "#b0503a", titleTo: "#5a1810" },
     {
         name: "Kenichi",
+        nameImage: "/assets/images/hero/char-06-name.png", 
         subtitle: "The Silent Executioner",
         caseFile: "SE-13-Kenichi",
         image: "/assets/images/hero/char-06.png",
@@ -38,10 +39,10 @@ const characters = [
         titleFrom: "#8d7ae0",
         titleTo: "#4a3a8f",
     },
-    { name: "Voidwalker", subtitle: "The Ghost", caseFile: "GH-00-Voidwalker", image: "/assets/images/hero/char-05.png", ring: "/assets/images/hero/ring-05.png", thumbBg: "#2c1470", titleFrom: "#7a5ae0", titleTo: "#2e1470" },
-    { name: "Hexa", subtitle: "The Techsmith", caseFile: "TS-08-Hexa", image: "/assets/images/hero/char-04.png", ring: "/assets/images/hero/ring-04.png", thumbBg: "#6b2410", titleFrom: "#e06a30", titleTo: "#7a2508" },
-    { name: "Rustbot", subtitle: "Nostalgic Machine", caseFile: "NM-77-Rustbot", image: "/assets/images/hero/char-03.png", ring: "/assets/images/hero/ring-03.png", thumbBg: "#6b5320", titleFrom: "#e0b860", titleTo: "#7a5a1a" },
-    { name: "Spica", subtitle: "SEIKA Spirit", caseFile: "Unknown", image: "/assets/images/hero/char-02.png", ring: "/assets/images/hero/ring-02.png", thumbBg: "#155e6b", titleFrom: "#4be0f0", titleTo: "#1a7a8c" },
+    { name: "Voidwalker",nameImage: "/assets/images/hero/char-05-name.png", subtitle: "The Ghost", caseFile: "GH-00-Voidwalker", image: "/assets/images/hero/char-05.png", ring: "/assets/images/hero/ring-05.png", thumbBg: "#2c1470", titleFrom: "#7a5ae0", titleTo: "#2e1470" },
+    { name: "Hexa",nameImage: "/assets/images/hero/char-04-name.png", subtitle: "The Techsmith", caseFile: "TS-08-Hexa", image: "/assets/images/hero/char-04.png", ring: "/assets/images/hero/ring-04.png", thumbBg: "#6b2410", titleFrom: "#e06a30", titleTo: "#7a2508" },
+    { name: "Rustbot",nameImage: "/assets/images/hero/char-03-name.png", subtitle: "Nostalgic Machine", caseFile: "NM-77-Rustbot", image: "/assets/images/hero/char-03.png", ring: "/assets/images/hero/ring-03.png", thumbBg: "#6b5320", titleFrom: "#e0b860", titleTo: "#7a5a1a" },
+    { name: "Spica",nameImage: "/assets/images/hero/char-02-name.png", subtitle: "SEIKA Spirit", caseFile: "Unknown", image: "/assets/images/hero/char-02.png", ring: "/assets/images/hero/ring-02.png", thumbBg: "#155e6b", titleFrom: "#4be0f0", titleTo: "#1a7a8c" },
     // Unrevealed silhouette — teased but not yet announced in the design.
     { name: "???", subtitle: "Unidentified", caseFile: "REDACTED", image: "/assets/images/hero/char-01.png", ring: "/assets/images/hero/ring-01.png", thumbBg: "#4a4a52", titleFrom: "#b9b9c4", titleTo: "#5a5a64" },
 ];
@@ -136,7 +137,11 @@ export default function Hero() {
                                 fontFamily: "'Scarlet Reliquary', sans-serif",
                             }}
                         >
-                            {active.name}
+                           <img
+                            src={active.nameImage}
+                            alt={active.name}
+                            className="w-[280px] md:w-[370px] h-auto"
+                             />
                         </h1>
                         <p className="mt-3 w-full text-center font-tektur text-lg md:text-[length:clamp(16px,2svh,22px)] text-white tracking-wide">
                             {active.subtitle}

@@ -22,11 +22,54 @@ const tabs: UtilityTab[] = [
             "Earn through competitive events",
         ],
     },
-    { id: "creator-monetization", label: "Creator Monetization", points: [] },
-    { id: "character-identity", label: "Character Identity", points: [] },
-    { id: "digital-goods", label: "Digital goods & Skins", points: [] },
-    { id: "real-world-utility", label: "Real World Utility", points: [] },
-    { id: "future-utility", label: "Future Utility", points: [] },
+    {
+        id: "creator-monetization",
+        label: "Creator Monetization",
+        points: [
+            "Support creators directly",
+            "Receive direct tips from audiences",
+            "Unlock exclusive creator chapters",
+            "Earn rewards based on quality views",
+            "Boost content, events, and gist",
+        ],
+    },
+    {
+        id: "character-identity",
+        label: "Character Identity",
+        points: [
+            "Unlock your 3D character identity",
+            "Useable in game, social app, and the digital realm",
+            "Unlock Elite Division system",
+            "Earn a Hall of Flame spot across the Ezzstar ecosystem",
+        ],
+    },
+    {
+        id: "digital-goods",
+        label: "Digital goods & Skins",
+        points: [
+            "Buy, sell, and trade digital goods",
+            "Use Seika for skins and digital items",
+            "Access value across supported platforms",
+        ],
+    },
+    {
+        id: "real-world-utility",
+        label: "Real World Utility",
+        points: [
+            "Use Seika Koin with real world partners",
+            "Spend Seika for everyday value",
+            "Connect digital rewards with physical utility",
+        ],
+    },
+    {
+        id: "future-utility",
+        label: "Future Utility",
+        points: [
+            "SaaS product ecosystem utility coming as Ezzstar grows",
+            "More use cases will unlock over time",
+            "Built to expand beyond one product or platform",
+        ],
+    },
 ];
 
 export default function SkaUtility() {
