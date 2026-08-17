@@ -59,7 +59,7 @@ export default function Tokenomics() {
 
                     {/* Right: Distribution Stats Grid — uniformly transparent, with a
                         thin white rule between each row. */}
-                    <div className="lg:w-[460px] lg:shrink-0 grid grid-cols-2 self-center w-full bg-[#0a0a12]/25">
+                    <div className="lg:w-[417px] lg:h-[389px] lg:shrink-0 grid grid-cols-2 self-center w-full bg-[#0a0a12]/25">
                         {distribution.map((item, idx) => (
                             <div
                                 key={idx}
