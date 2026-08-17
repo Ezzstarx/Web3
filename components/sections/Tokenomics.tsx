@@ -78,7 +78,7 @@ export default function Tokenomics() {
                 </div>
 
                 {/* Contract Section (shared component from the old site) */}
-                <div className="mx-auto max-w-[1160px] w-full bg-[#0a0a12]/70 flex flex-col">
+                <div className="mx-auto max-w-[1160px] lg:max-w-[1040px] lg:w-[1040px] lg:h-[202px] w-full bg-[#0a0a12]/70 flex flex-col lg:justify-center">
                     {/* Top Section with Border */}
                     <div className="px-6 md:px-8 py-3 md:py-4 border-t border-white/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
                         <div>
