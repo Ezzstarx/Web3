@@ -29,7 +29,7 @@ export default function Tokenomics() {
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div
                     className="absolute inset-0 bg-no-repeat bg-center bg-cover"
-                    style={{ backgroundImage: "url('/assets/images/sections/tokenomics-bg-new.jpeg')" }}
+                    style={{ backgroundImage: "url('/assets/images/sections/tokenomics-bg.png')" }}
                 />
             </div>
             <div className="absolute inset-0 bg-black/30 pointer-events-none" />
@@ -45,21 +45,21 @@ export default function Tokenomics() {
 
                 {/* Compact centred block matching the Figma export: chart panel left,
                     tight stats grid right, contract card narrower underneath. */}
-                <div className="mx-auto max-w-[1480px] flex flex-col lg:flex-row items-stretch lg:items-start justify-between lg:justify-center lg:gap-[120px] gap-8 w-full mb-[clamp(14px,2.5svh,32px)]">
+                <div className="mx-auto max-w-[1160px] flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-[40px] w-full mb-[clamp(14px,2.5svh,32px)]">
 
                     {/* Left: Donut distribution chart with callouts. Narrower panel
                         with the chart filling it edge to edge. */}
-                    <div className="relative w-full lg:w-[679.85px] lg:h-[499.85px] lg:shrink-0 min-w-0 bg-[#0a0a12]/20 flex items-center justify-center">
+                    <div className="relative w-full lg:w-[679.85px] lg:max-w-[679.85px] lg:h-[499.85px] lg:max-h-[499.85px] lg:shrink-0 min-w-0 bg-[#0a0a12]/20 flex items-center justify-center">
                         <img
                             src="/assets/images/sections/tokenomics-donut.png"
                             alt="SKA token distribution"
-                            className="w-full h-auto object-contain"
+                            className="w-full h-full max-w-full max-h-full object-contain"
                         />
                     </div>
 
                     {/* Right: Distribution Stats Grid — uniformly transparent, with a
                         thin white rule between each row. */}
-                    <div className="lg:w-[417px] lg:h-[389px] lg:shrink-0 grid grid-cols-2 grid-rows-4 self-center w-full bg-[#0a0a12]/25">
+                    <div className="lg:w-[417px] lg:max-w-[417px] lg:h-[389px] lg:max-h-[389px] lg:shrink-0 grid grid-cols-2 grid-rows-4 w-full bg-[#0a0a12]/25">
                         {distribution.map((item, idx) => (
                             <div
                                 key={idx}
