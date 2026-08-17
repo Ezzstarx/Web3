@@ -46,7 +46,7 @@ const messageShots = [
 
 export default function ProofOfDemand() {
     return (
-        <section id="proof-of-demand" className="relative overflow-hidden bg-black py-10 md:py-12 lg:min-h-[126svh] lg:flex lg:flex-col lg:justify-center">
+        <section id="proof-of-demand" className="relative overflow-hidden bg-black py-10 md:py-12">
             {/* Faint colored glow on the left edge */}
             <div className="absolute top-0 left-0 w-[300px] h-[600px] bg-[#2ECC71]/5 blur-[120px] pointer-events-none" />
 
@@ -59,29 +59,31 @@ export default function ProofOfDemand() {
                     <div className="absolute bottom-0 -left-16 w-[260%] h-[1px] bg-gradient-to-r from-transparent via-[#DE3BD6] to-transparent"></div>
                 </div>
 
-                {/* From lg up the row is height-driven off the viewport so the whole
-                    section stays within one screen; both columns scale to fit it. */}
-                {/* min-height, not a fixed height: on short viewports a fixed row
-                    could end up shorter than the chat card, which then spilled out
-                    and collided with the ribbon below. */}
-                <div className="flex flex-col lg:flex-row justify-between gap-14 w-full lg:min-h-[calc(126svh-275px)]">
+                {/* POSITIONING CHANGE: both groups now share the same fixed height
+                    (lg:h-[560px] below, on both the screenshot row and the chat
+                    card) and items-start, so the two headings sit on the same
+                    line and the two columns line up top AND bottom — instead of
+                    the old viewport-based min-height which could drift out of
+                    sync depending on screen size. */}
+                <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-10 lg:gap-16 w-full">
 
                     {/* Left: Creator platform screenshots */}
-                    <div className="w-full lg:w-[58%] flex flex-col min-h-0">
+                    <div className="w-full lg:w-[62%] min-w-0 flex flex-col">
                         <h3 className="font-tektur text-xl md:text-[26px] text-white text-center mb-6">
                             We showed the vision for the creator platform.
                         </h3>
-                        {/* Each shot gets half the column and is bounded on both axes,
-                            so growing the section can't push them past their column. */}
-                        <div className="flex justify-center gap-6 min-h-0 lg:flex-1">
+                        {/* POSITIONING CHANGE: items-stretch + shared lg:h-[560px]
+                            instead of items-start + lg:flex-1, so both screenshots
+                            fill the exact same height as the chat card next to them. */}
+                        <div className="flex items-stretch justify-center gap-2 lg:h-[560px]">
                             {[1, 2].map((n) => (
-                                <div key={n} className="lg:flex-1 lg:min-w-0 flex items-start justify-center">
+                                <div key={n} className="flex-1 min-w-0 flex items-center justify-center">
                                     <img
                                         src={`/assets/images/proof/screenshot-${n}.png`}
                                         alt={n === 1
                                             ? "Ezzstar creator platform — manga and stories"
                                             : "Ezzstar creator platform — gists and events"}
-                                        className="w-[300px] md:w-[380px] lg:w-auto lg:max-w-full h-auto lg:max-h-[calc(126svh-330px)] object-contain object-top"
+                                        className="w-full h-full max-w-full object-contain object-top rounded-lg border border-white/10"
                                     />
                                 </div>
                             ))}
@@ -89,27 +91,28 @@ export default function ProofOfDemand() {
                     </div>
 
                     {/* Right: Discord chat card */}
-                    <div className="w-full lg:w-[40%] flex flex-col min-h-0">
+                    <div className="w-full lg:w-[36%] min-w-0 flex flex-col">
                         <h3 className="font-tektur text-xl md:text-[26px] text-white text-center mb-6">
                             Community showed the love.
                         </h3>
 
-                        {/* The thread scrolls itself, forever. The list is rendered
-                            twice and the track travels exactly one copy's height,
-                            so the loop point is invisible. Hovering pauses it. */}
-                        <div className="chat-marquee relative rounded-2xl border border-white/15 bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-sm p-4 md:p-5 lg:h-[calc(126svh-360px)] overflow-hidden">
-                            <div className="chat-track flex flex-col gap-3">
+                        {/* POSITIONING CHANGE: lg:h-[560px] to match the screenshot
+                            column's height exactly (was calc(126svh-360px)). */}
+                        <div className="chat-marquee relative rounded-3xl border border-white/15 bg-gradient-to-b from-white/[0.06] to-white/[0.02] backdrop-blur-sm p-5 md:p-6 lg:h-[560px] overflow-hidden">
+                            {/* POSITIONING CHANGE: gap-3 -> gap-4 for slightly more
+                                breathing room between message boxes. */}
+                            <div className="chat-track flex flex-col gap-5">
                                 {[0, 1].map((copy) => (
                                     <div key={copy} className="contents">
                                         {messages.map((msg, idx) => (
                                             <div
                                                 key={`t${copy}-${idx}`}
-                                                className={`relative flex gap-3 rounded-md p-3 shrink-0 ${msg.highlighted
+                                                className={`relative flex gap-3 rounded-md p-4 shrink-0 ${msg.highlighted
                                                     ? "bg-[#2a2a20]/90 border-l-2 border-[#f0c040]"
                                                     : "bg-[#141417]/90"
                                                     }`}
                                             >
-                                                {/* Avatar — client will provide */}
+                                                {/* Avatar — client will provide (untouched) */}
                                                 <span className="img-placeholder w-10 h-10 rounded-full shrink-0" data-image={`discord-avatar-${idx + 1}`} />
 
                                                 <div className="flex flex-col gap-1 min-w-0">
@@ -134,7 +137,7 @@ export default function ProofOfDemand() {
                                                 </div>
                                             </div>
                                         ))}
-                                        {/* The client's screenshot messages, used as-is */}
+                                        {/* The client's screenshot messages, used as-is (untouched) */}
                                         {messageShots.map((shot, idx) => (
                                             <img
                                                 key={`s${copy}-${idx}`}
