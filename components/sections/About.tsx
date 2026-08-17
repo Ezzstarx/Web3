@@ -48,9 +48,10 @@ export default function About() {
                         {/* Right: Pixel EZZSTAR stacked logo */}
                         <div className="relative w-[200px] md:w-[300px] shrink-0">
                             <img
-                                src="/assets/images/sections/about-icon-new.jpg"
+                                src="/assets/images/Footer-Logo.png"
                                 alt="Ezzstar"
                                 className="w-full h-auto object-contain"
+                                style={{ imageRendering: 'pixelated' }}
                             />
                         </div>
                     </div>
