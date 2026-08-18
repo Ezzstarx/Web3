@@ -62,7 +62,7 @@ export default function Hero() {
     const visible = [wrap(activeIndex - 1), activeIndex, wrap(activeIndex + 1)];
 
     return (
-        <section id="hero" className="relative min-h-screen lg:h-screen lg:flex lg:flex-col bg-[#050505]">
+        <section id="hero" className="relative min-h-screen lg:h-screen lg:flex lg:flex-col overflow-hidden bg-[#050505]">
             {/* Dark grunge backdrop with the red bleed along the right edge */}
             <div
                 className="absolute inset-0 bg-cover bg-center pointer-events-none"
@@ -170,13 +170,13 @@ export default function Hero() {
                 </div>
 
                 {/* Right Column: Character Art */}
-                <div className="absolute inset-y-0 right-0 w-full lg:w-[58%] pointer-events-none overflow-hidden">
+                <div className="absolute inset-y-0 right-0 w-full lg:w-[58%] pointer-events-none">
                     {/* Grunge ring behind the character */}
                     <img
                         src={active.ring}
                         alt=""
                         aria-hidden
-                        className="absolute top-[8%] left-1/2 -translate-x-1/2 w-[580px] md:w-[840px] h-[580px] md:h-[840px] object-cover animate-[spin_20s_linear_infinite]"
+                        className="absolute top-[4%] left-1/2 -translate-x-1/2 w-[580px] md:w-[840px] h-auto animate-[spin_20s_linear_infinite]"
                     />
 
                     {/* Character artwork */}
