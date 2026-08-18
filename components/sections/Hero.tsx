@@ -62,7 +62,7 @@ export default function Hero() {
     const visible = [wrap(activeIndex - 1), activeIndex, wrap(activeIndex + 1)];
 
     return (
-        <section id="hero" className="relative min-h-screen lg:h-screen lg:flex lg:flex-col overflow-hidden bg-[#050505]">
+        <section id="hero" className="relative min-h-screen lg:h-screen lg:flex lg:flex-col bg-[#050505]">
             {/* Dark grunge backdrop with the red bleed along the right edge */}
             <div
                 className="absolute inset-0 bg-cover bg-center pointer-events-none"
@@ -176,7 +176,7 @@ export default function Hero() {
                         src={active.ring}
                         alt=""
                         aria-hidden
-                        className="absolute top-[4%] left-1/2 -translate-x-1/2 w-[580px] md:w-[840px] h-auto animate-[spin_20s_linear_infinite]"
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] w-[520px] md:w-[760px] h-auto animate-[spin_20s_linear_infinite]"
                     />
 
                     {/* Character artwork */}
