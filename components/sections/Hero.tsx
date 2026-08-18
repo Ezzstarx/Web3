@@ -121,8 +121,11 @@ export default function Hero() {
                                     className="w-[22px] h-[23px] shrink-0"
                                     style={{ imageRendering: "pixelated" }}
                                 />
-                                <span className="font-tektur text-xl md:text-[length:clamp(19px,2.5svh,27px)] text-[#c9c9ce] group-hover:text-white transition-colors tracking-wide">
-                                    {link.name}
+                                <span className="relative flex items-center">
+                                    <span className="absolute top-0 bottom-0 -left-3 w-0 bg-accent-cyan group-hover:w-[2px] transition-all duration-300" />
+                                    <span className="font-tektur text-xl md:text-[length:clamp(19px,2.5svh,27px)] text-[#c9c9ce] group-hover:text-white transition-colors tracking-wide pb-1 border-b-2 border-transparent group-hover:border-white">
+                                        {link.name}
+                                    </span>
                                 </span>
                             </Link>
                         ))}
@@ -140,7 +143,7 @@ export default function Hero() {
                            <img
                             src={active.nameImage}
                             alt={active.name}
-                            className="w-[280px] md:w-[370px] h-auto"
+                            className="w-[280px] md:w-[370px] h-[120px] md:h-[160px] object-contain object-left"
                              />
                         </h1>
                         <p className="mt-3 w-full text-center font-tektur text-lg md:text-[length:clamp(16px,2svh,22px)] text-white tracking-wide">
@@ -167,7 +170,7 @@ export default function Hero() {
                         src={active.ring}
                         alt=""
                         aria-hidden
-                        className="absolute top-[8%] left-1/2 -translate-x-1/2 w-[560px] md:w-[820px] h-auto"
+                        className="absolute top-[8%] left-1/2 -translate-x-1/2 w-[560px] md:w-[820px] h-auto animate-[spin_20s_linear_infinite]"
                     />
 
                     {/* Character artwork */}
@@ -213,7 +216,7 @@ export default function Hero() {
             {/* Smoke transition straddling the hero/Seika boundary: pinned to the
                 bottom edge with ~35% of the art dipping below it (clipped here,
                 completed by the matching strip at the top of Seika). */}
-            <SmokeStrip className="absolute bottom-0 left-0 z-20 w-full translate-y-[35%]" />
+            <SmokeStrip className="absolute bottom-0 left-0 z-20 w-full translate-y-[50%]" />
 
             {/* Custom Wallet Modal */}
             <CustomWalletModal isOpen={isCustomModalOpen} onClose={closeCustomModal} />
