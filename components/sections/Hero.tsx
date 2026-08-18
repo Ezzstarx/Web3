@@ -176,7 +176,7 @@ export default function Hero() {
                         src={active.ring}
                         alt=""
                         aria-hidden
-                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] w-[520px] md:w-[760px] h-auto animate-[spin_20s_linear_infinite]"
+                        className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-[48%] w-[85%] h-auto animate-[spin_20s_linear_infinite]"
                     />
 
                     {/* Character artwork */}
