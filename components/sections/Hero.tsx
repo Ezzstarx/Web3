@@ -62,7 +62,7 @@ export default function Hero() {
     const visible = [wrap(activeIndex - 1), activeIndex, wrap(activeIndex + 1)];
 
     return (
-        <section id="hero" className="relative min-h-screen lg:h-screen lg:flex lg:flex-col overflow-hidden bg-[#050505]">
+        <section id="hero" className="relative min-h-screen lg:h-screen lg:flex lg:flex-col bg-[#050505]">
             {/* Dark grunge backdrop with the red bleed along the right edge */}
             <div
                 className="absolute inset-0 bg-cover bg-center pointer-events-none"
@@ -140,11 +140,17 @@ export default function Hero() {
                                 fontFamily: "'Scarlet Reliquary', sans-serif",
                             }}
                         >
+                           {active.nameImage ? (
                            <img
                             src={active.nameImage}
                             alt={active.name}
                             className="w-[280px] md:w-[370px] h-[120px] md:h-[160px] object-contain object-left"
                              />
+                           ) : (
+                           <span className="block w-[280px] md:w-[370px] h-[120px] md:h-[160px] flex items-center justify-start text-[inherit]">
+                            {active.name}
+                           </span>
+                           )}
                         </h1>
                         <p className="mt-3 w-full text-center font-tektur text-lg md:text-[length:clamp(16px,2svh,22px)] text-white tracking-wide">
                             {active.subtitle}
@@ -164,13 +170,13 @@ export default function Hero() {
                 </div>
 
                 {/* Right Column: Character Art */}
-                <div className="absolute inset-y-0 right-0 w-full lg:w-[58%] pointer-events-none">
+                <div className="absolute inset-y-0 right-0 w-full lg:w-[58%] pointer-events-none overflow-hidden">
                     {/* Grunge ring behind the character */}
                     <img
                         src={active.ring}
                         alt=""
                         aria-hidden
-                        className="absolute top-[8%] left-1/2 -translate-x-1/2 w-[560px] md:w-[820px] h-auto animate-[spin_20s_linear_infinite]"
+                        className="absolute top-[8%] left-1/2 -translate-x-1/2 w-[580px] md:w-[840px] h-[580px] md:h-[840px] object-cover animate-[spin_20s_linear_infinite]"
                     />
 
                     {/* Character artwork */}
