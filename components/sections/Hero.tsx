@@ -171,13 +171,15 @@ export default function Hero() {
 
                 {/* Right Column: Character Art */}
                 <div className="absolute inset-y-0 right-0 w-full lg:w-[58%] pointer-events-none">
-                    {/* Grunge ring behind the character */}
-                    <img
-                        src={active.ring}
-                        alt=""
-                        aria-hidden
-                        className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-[48%] w-[85%] h-auto animate-[spin_20s_linear_infinite]"
-                    />
+                    {/* Grunge ring — two copies rotated 180° apart to fill gaps in the brush stroke */}
+                    <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-[48%] w-[85%] h-auto animate-[spin_20s_linear_infinite]">
+                        <img src={active.ring} alt="" aria-hidden className="w-full h-auto" />
+                    </div>
+                    <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-[48%] w-[85%] h-auto" style={{ transform: "translate(-50%, -48%) rotate(180deg)" }}>
+                        <div className="w-full h-auto animate-[spin_20s_linear_infinite]">
+                            <img src={active.ring} alt="" aria-hidden className="w-full h-auto" />
+                        </div>
+                    </div>
 
                     {/* Character artwork */}
                     <img
