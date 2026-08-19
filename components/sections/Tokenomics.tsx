@@ -28,7 +28,7 @@ export default function Tokenomics() {
             {/* Full-section background image */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div
-                    className="absolute inset-0 bg-no-repeat bg-center bg-cover"
+                    className="absolute inset-0 bg-no-repeat bg-center bg-cover opacity-30"
                     style={{ backgroundImage: "url('/assets/images/sections/tokenomics-bg.png')" }}
                 />
             </div>
