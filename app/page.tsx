@@ -21,10 +21,6 @@ export default function Home() {
       <PartnersMarquee />
       <ProofOfDemand />
       <CoreTeam />
-      {/* Breathing room so the team's floor reflections are fully visible before
-          the footer starts. Kept here rather than in Footer.tsx, which is a
-          byte-for-byte copy of the old site's footer. */}
-      <div aria-hidden className="h-[90px] md:h-[150px] bg-black" />
       <Footer />
     </div>
   );
