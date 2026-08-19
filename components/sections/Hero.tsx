@@ -198,7 +198,7 @@ export default function Hero() {
                     </nav>
 
                     {/* Character Identity Block */}
-                    <div className="mt-16 md:mt-0 flex flex-col items-start">
+                    <div className="mt-16 md:mt-0 flex flex-col items-center">
                         <h1
                             className="text-[96px] md:text-[length:clamp(104px,15svh,164px)] leading-none bg-clip-text text-transparent"
                             style={{
@@ -210,10 +210,10 @@ export default function Hero() {
                            <img
                             src={active.nameImage}
                             alt={active.name}
-                            className="h-[70px] md:h-[110px] w-auto max-w-full object-contain object-left"
+                            className="h-[70px] md:h-[110px] w-auto max-w-full object-contain object-center"
                              />
                            ) : (
-                           <span className="block h-[70px] md:h-[110px] w-auto max-w-full flex items-center justify-start text-[inherit]">
+                           <span className="block h-[70px] md:h-[110px] w-auto max-w-full flex items-center justify-center text-[inherit]">
                             {active.name}
                            </span>
                            )}
@@ -222,7 +222,7 @@ export default function Hero() {
                             {active.subtitle}
                         </p>
 
-                        <div className="mt-8 md:mt-[clamp(12px,2.6svh,32px)] md:pl-10">
+                        <div className="mt-8 md:mt-[clamp(12px,2.6svh,32px)] flex flex-col items-center">
                             <p className="font-satoshi text-base md:text-[length:clamp(14px,1.8svh,18px)] text-white">
                                 Case File: <span style={{ color: active.titleFrom }}>{active.caseFile}</span>
                             </p>

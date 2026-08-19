@@ -21,8 +21,6 @@ export default function SmokeStrip({ className = "" }: { className?: string }) {
                 alt=""
                 className="smoke-base"
             />
-            {/* 2. drifting particles */}
-            <div className="smoke-particles" />
         </div>
     );
 }
