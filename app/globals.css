@@ -174,12 +174,6 @@
      strip scrolled. This holds the silhouette perfectly still. */
   .smoke-mask {
     overflow: hidden;
-    -webkit-mask-image: url('/assets/images/sections/transition-smoke-mask.png');
-    mask-image: url('/assets/images/sections/transition-smoke-mask.png');
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
   }
 
   /* Layer 1: the smoke structure. Static — never transformed, so the shape
@@ -191,20 +185,6 @@
     height: 100%;
     object-fit: fill;
     display: block;
-  }
-
-  /* Layer 2: fine filaments drifting right-to-left *inside* the silhouette.
-     The texture is a high-pass of the same artwork tiled [A][A-mirrored], so
-     it carries only particle detail and loops seamlessly. Screen-blended, so
-     its black field drops out and only the filaments add onto the base. */
-  .smoke-particles {
-    position: absolute;
-    inset: 0;
-    background-image: url('/assets/images/sections/transition-smoke-detail.png');
-    background-repeat: repeat-x;
-    background-size: 50% 100%;
-    mix-blend-mode: screen;
-    opacity: 0.55;
   }
 
   @keyframes smoke-drift {
