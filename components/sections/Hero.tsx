@@ -285,7 +285,7 @@ export default function Hero() {
             {/* Smoke transition straddling the hero/Seika boundary: pinned to the
                 bottom edge with ~35% of the art dipping below it (clipped here,
                 completed by the matching strip at the top of Seika). */}
-            <SmokeStrip className="absolute bottom-0 left-0 z-20 w-full translate-y-[85%]" />
+            <SmokeStrip className="absolute bottom-0 left-0 z-20 w-full translate-y-[65%]" />
 
             {/* Custom Wallet Modal */}
             <CustomWalletModal isOpen={isCustomModalOpen} onClose={closeCustomModal} />
