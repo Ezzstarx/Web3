@@ -112,8 +112,12 @@ export default function Hero() {
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className="group flex items-center gap-5 w-fit"
+                                className="group relative flex items-center gap-5 w-fit px-2 py-1 -ml-2 rounded-lg overflow-hidden"
                             >
+                                {/* Shine effect layer */}
+                                <div className="absolute inset-0 pointer-events-none">
+                                    <div className="absolute top-0 -left-[150%] w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-25deg] group-hover:animate-[shine_0.6s_ease-in-out]" />
+                                </div>
                                 {/* Default SVG (Visible normally) */}
                                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-[22px] h-[23px] shrink-0 group-hover:hidden">
                                     <mask id="path-1-inside-1_2773_7471" fill="white">

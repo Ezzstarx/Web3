@@ -503,7 +503,11 @@
       transparent 9px,
       var(--bc1, #a855f7) 9px,
       var(--bc1, #a855f7) 12px,
-      transparent 12px,
       transparent 14px);
   opacity: 0.9;
+}
+
+@keyframes shine {
+  0% { left: -150%; }
+  100% { left: 150%; }
 }
