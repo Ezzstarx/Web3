@@ -59,9 +59,6 @@ import SmokeStrip from "../ui/SmokeStrip";
 export default function Seika() {
     return (
         <section id="seika" className="screen-section relative overflow-hidden bg-black pt-32 pb-8 md:pt-40 md:pb-10">
-
-            <SmokeStrip className="hidden lg:block absolute top-0 left-0 z-0 w-full -translate-y-[50%]" />
-
             <div className="page-x relative z-10">
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-6">
 

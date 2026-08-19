@@ -114,16 +114,82 @@ export default function Hero() {
                                 href={link.href}
                                 className="group flex items-center gap-5 w-fit"
                             >
-                                <img
-                                    src="/assets/images/hero/nav-bullet.png"
-                                    alt=""
-                                    aria-hidden
-                                    className="w-[22px] h-[23px] shrink-0"
-                                    style={{ imageRendering: "pixelated" }}
-                                />
+                                {/* Default SVG (Visible normally) */}
+                                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-[22px] h-[23px] shrink-0 group-hover:hidden">
+                                    <mask id="path-1-inside-1_2773_7471" fill="white">
+                                        <path d="M18.0107 4.45801H21.4033V18.0215H18.0107V21.4229H4.44531V18.0215H1.05469V4.45801H4.44531V1.07812H18.0107V4.45801Z"/>
+                                    </mask>
+                                    <path d="M18.0107 4.45801H21.4033V18.0215H18.0107V21.4229H4.44531V18.0215H1.05469V4.45801H4.44531V1.07812H18.0107V4.45801Z" fill="#342F36"/>
+                                    <path d="M18.0107 4.45801H17.0107V5.45801H18.0107V4.45801ZM21.4033 4.45801H22.4033V3.45801H21.4033V4.45801ZM21.4033 18.0215V19.0215H22.4033V18.0215H21.4033ZM18.0107 18.0215V17.0215H17.0107V18.0215H18.0107ZM18.0107 21.4229V22.4229H19.0107V21.4229H18.0107ZM4.44531 21.4229H3.44531V22.4229H4.44531V21.4229ZM4.44531 18.0215H5.44531V17.0215H4.44531V18.0215ZM1.05469 18.0215H0.0546875V19.0215H1.05469V18.0215ZM1.05469 4.45801V3.45801H0.0546875V4.45801H1.05469ZM4.44531 4.45801V5.45801H5.44531V4.45801H4.44531ZM4.44531 1.07812V0.078125H3.44531V1.07812H4.44531ZM18.0107 1.07812H19.0107V0.078125H18.0107V1.07812ZM18.0107 4.45801V5.45801H21.4033V4.45801V3.45801H18.0107V4.45801ZM21.4033 4.45801H20.4033V18.0215H21.4033H22.4033V4.45801H21.4033ZM21.4033 18.0215V17.0215H18.0107V18.0215V19.0215H21.4033V18.0215ZM18.0107 18.0215H17.0107V21.4229H18.0107H19.0107V18.0215H18.0107ZM18.0107 21.4229V20.4229H4.44531V21.4229V22.4229H18.0107V21.4229ZM4.44531 21.4229H5.44531V18.0215H4.44531H3.44531V21.4229H4.44531ZM4.44531 18.0215V17.0215H1.05469V18.0215V19.0215H4.44531V18.0215ZM1.05469 18.0215H2.05469V4.45801H1.05469H0.0546875V18.0215H1.05469ZM1.05469 4.45801V5.45801H4.44531V4.45801V3.45801H1.05469V4.45801ZM4.44531 4.45801H5.44531V1.07812H4.44531H3.44531V4.45801H4.44531ZM4.44531 1.07812V2.07812H18.0107V1.07812V0.078125H4.44531V1.07812ZM18.0107 1.07812H17.0107V4.45801H18.0107H19.0107V1.07812H18.0107Z" fill="#454545" mask="url(#path-1-inside-1_2773_7471)"/>
+                                    <path d="M5.65973 1.58883L20.9091 16.8344L20.9092 15.7776L6.44748 1.58969L5.65973 1.58883Z" fill="url(#paint0_linear_2773_7471)" style={{ mixBlendMode: "color-dodge" }}/>
+                                    <path d="M5.65973 1.58883L20.9091 16.8344L20.9092 15.7776L6.44748 1.58969L5.65973 1.58883Z" stroke="#787577"/>
+                                    <path d="M2.26662 4.9776L17.519 20.2257L17.5213 18.2491L4.24417 4.97781L2.26662 4.9776Z" fill="url(#paint1_linear_2773_7471)" style={{ mixBlendMode: "color-dodge" }}/>
+                                    <path d="M2.26662 4.9776L17.519 20.2257L17.5213 18.2491L4.24417 4.97781L2.26662 4.9776Z" stroke="#787577"/>
+                                    <g filter="url(#filter0_d_2773_7471)">
+                                        <path d="M11.281 8.83457L14.1312 5.98503L16.5946 8.44791L13.7444 11.2975L16.473 14.0255L14.0096 16.4884L11.281 13.7603L8.42816 16.6126L5.96477 14.1498L8.81766 11.2975L6.10289 8.58324L8.56628 6.12036L11.281 8.83457Z" fill="#5C5C5C"/>
+                                    </g>
+                                    <defs>
+                                        <filter id="filter0_d_2773_7471" x="1.96094" y="5.98438" width="18.6328" height="18.6289" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                            <feOffset dy="4"/>
+                                            <feGaussianBlur stdDeviation="2"/>
+                                            <feComposite in2="hardAlpha" operator="out"/>
+                                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2773_7471"/>
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2773_7471" result="shape"/>
+                                        </filter>
+                                        <linearGradient id="paint0_linear_2773_7471" x1="22.4152" y1="16.8903" x2="4.40008" y2="1.14812" gradientUnits="userSpaceOnUse">
+                                            <stop stopColor="#320647"/>
+                                            <stop offset="0.538462" stopColor="#7A0FAD"/>
+                                            <stop offset="0.990385" stopColor="#320647"/>
+                                        </linearGradient>
+                                        <linearGradient id="paint1_linear_2773_7471" x1="19.2824" y1="19.9841" x2="1.26588" y2="4.24061" gradientUnits="userSpaceOnUse">
+                                            <stop offset="0.182692" stopColor="#2E204A"/>
+                                            <stop offset="0.538462" stopColor="#6D4CB0"/>
+                                            <stop offset="0.860577" stopColor="#2E204A"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                
+                                {/* Hover SVG (Visible on hover) */}
+                                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" className="hidden group-hover:block w-[22px] h-[23px] shrink-0">
+                                    <mask id="path-1-inside-1_2773_7462" fill="white">
+                                        <path d="M18.0107 4.45801H21.4033V18.0215H18.0107V21.4229H4.44531V18.0215H1.05469V4.45801H4.44531V1.07812H18.0107V4.45801Z"/>
+                                    </mask>
+                                    <path d="M18.0107 4.45801H21.4033V18.0215H18.0107V21.4229H4.44531V18.0215H1.05469V4.45801H4.44531V1.07812H18.0107V4.45801Z" fill="#290533"/>
+                                    <path d="M18.0107 4.45801H17.0107V5.45801H18.0107V4.45801ZM21.4033 4.45801H22.4033V3.45801H21.4033V4.45801ZM21.4033 18.0215V19.0215H22.4033V18.0215H21.4033ZM18.0107 18.0215V17.0215H17.0107V18.0215H18.0107ZM18.0107 21.4229V22.4229H19.0107V21.4229H18.0107ZM4.44531 21.4229H3.44531V22.4229H4.44531V21.4229ZM4.44531 18.0215H5.44531V17.0215H4.44531V18.0215ZM1.05469 18.0215H0.0546875V19.0215H1.05469V18.0215ZM1.05469 4.45801V3.45801H0.0546875V4.45801H1.05469ZM4.44531 4.45801V5.45801H5.44531V4.45801H4.44531ZM4.44531 1.07812V0.078125H3.44531V1.07812H4.44531ZM18.0107 1.07812H19.0107V0.078125H18.0107V1.07812ZM18.0107 4.45801V5.45801H21.4033V4.45801V3.45801H18.0107V4.45801ZM21.4033 4.45801H20.4033V18.0215H21.4033H22.4033V4.45801H21.4033ZM21.4033 18.0215V17.0215H18.0107V18.0215V19.0215H21.4033V18.0215ZM18.0107 18.0215H17.0107V21.4229H18.0107H19.0107V18.0215H18.0107ZM18.0107 21.4229V20.4229H4.44531V21.4229V22.4229H18.0107V21.4229ZM4.44531 21.4229H5.44531V18.0215H4.44531H3.44531V21.4229H4.44531ZM4.44531 18.0215V17.0215H1.05469V18.0215V19.0215H4.44531V18.0215ZM1.05469 18.0215H2.05469V4.45801H1.05469H0.0546875V18.0215H1.05469ZM1.05469 4.45801V5.45801H4.44531V4.45801V3.45801H1.05469V4.45801ZM4.44531 4.45801H5.44531V1.07812H4.44531H3.44531V4.45801H4.44531ZM4.44531 1.07812V2.07812H18.0107V1.07812V0.078125H4.44531V1.07812ZM18.0107 1.07812H17.0107V4.45801H18.0107H19.0107V1.07812H18.0107Z" fill="#FC80BB" mask="url(#path-1-inside-1_2773_7462)"/>
+                                    <path d="M21.4084 15.5679L6.65117 1.08947L4.45231 1.08835L21.4084 18.0424L21.4084 15.5679Z" fill="url(#paint0_linear_2773_7462)" style={{ mixBlendMode: "color-dodge" }}/>
+                                    <path d="M18.0205 18.0422L4.45049 4.47729L1.05904 4.47731L18.018 21.4311L18.0205 18.0422Z" fill="url(#paint1_linear_2773_7462)" style={{ mixBlendMode: "color-dodge" }}/>
+                                    <g filter="url(#filter0_d_2773_7462)">
+                                        <path d="M11.281 8.83457L14.1312 5.98503L16.5946 8.44791L13.7444 11.2975L16.473 14.0255L14.0096 16.4884L11.281 13.7603L8.42816 16.6126L5.96477 14.1498L8.81766 11.2975L6.10289 8.58324L8.56628 6.12036L11.281 8.83457Z" fill="#66D0EB"/>
+                                    </g>
+                                    <defs>
+                                        <filter id="filter0_d_2773_7462" x="1.96094" y="5.98438" width="18.6328" height="18.6289" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                            <feOffset dy="4"/>
+                                            <feGaussianBlur stdDeviation="2"/>
+                                            <feComposite in2="hardAlpha" operator="out"/>
+                                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2773_7462"/>
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2773_7462" result="shape"/>
+                                        </filter>
+                                        <linearGradient id="paint0_linear_2773_7462" x1="22.4152" y1="16.8903" x2="4.40008" y2="1.14812" gradientUnits="userSpaceOnUse">
+                                            <stop stopColor="#320647"/>
+                                            <stop offset="0.538462" stopColor="#7A0FAD"/>
+                                            <stop offset="0.990385" stopColor="#320647"/>
+                                        </linearGradient>
+                                        <linearGradient id="paint1_linear_2773_7462" x1="19.2824" y1="19.9841" x2="1.26588" y2="4.24061" gradientUnits="userSpaceOnUse">
+                                            <stop offset="0.182692" stopColor="#2E204A"/>
+                                            <stop offset="0.538462" stopColor="#6D4CB0"/>
+                                            <stop offset="0.860577" stopColor="#2E204A"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                
                                 <span className="relative flex items-center">
-                                    <span className="absolute top-0 bottom-0 -left-3 w-0 bg-accent-cyan group-hover:w-[2px] transition-all duration-300" />
-                                    <span className="font-tektur text-xl md:text-[length:clamp(19px,2.5svh,27px)] text-[#c9c9ce] group-hover:text-white transition-colors tracking-wide pb-1 border-b-2 border-transparent group-hover:border-white">
+                                    <span className="font-tektur text-xl md:text-[length:clamp(19px,2.5svh,27px)] text-[#c9c9ce] group-hover:text-white transition-colors tracking-wide pb-1 border-b-2 border-transparent group-hover:border-accent-cyan">
                                         {link.name}
                                     </span>
                                 </span>
