@@ -104,7 +104,7 @@ export default function Hero() {
             <div className="relative z-10 flex min-h-[calc(100vh-120px)] lg:min-h-0 lg:flex-1">
 
                 {/* Left Column: Nav + Character Identity */}
-                <div className="page-x relative z-20 flex flex-col justify-between pt-16 md:pt-[clamp(10px,2.2svh,48px)] pb-20 md:pb-[clamp(48px,8svh,88px)] w-full lg:w-1/2">
+                <div className="page-x relative z-20 flex flex-col justify-between pt-28 md:pt-[clamp(60px,8svh,100px)] pb-20 md:pb-[clamp(48px,8svh,88px)] w-full lg:w-1/2">
 
                     {/* Section Nav List */}
                     <nav className="flex flex-col gap-4 md:gap-[clamp(8px,1.7svh,20px)]">
@@ -144,10 +144,10 @@ export default function Hero() {
                            <img
                             src={active.nameImage}
                             alt={active.name}
-                            className="w-[280px] md:w-[370px] h-[120px] md:h-[160px] object-contain object-left"
+                            className="h-[70px] md:h-[110px] w-auto max-w-full object-contain object-left"
                              />
                            ) : (
-                           <span className="block w-[280px] md:w-[370px] h-[120px] md:h-[160px] flex items-center justify-start text-[inherit]">
+                           <span className="block h-[70px] md:h-[110px] w-auto max-w-full flex items-center justify-start text-[inherit]">
                             {active.name}
                            </span>
                            )}
@@ -171,14 +171,9 @@ export default function Hero() {
 
                 {/* Right Column: Character Art */}
                 <div className="absolute inset-y-0 right-0 w-full lg:w-[58%] pointer-events-none">
-                    {/* Grunge ring — two copies rotated 180° apart to fill gaps in the brush stroke */}
-                    <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-[48%] w-[85%] h-auto animate-[spin_20s_linear_infinite]">
-                        <img src={active.ring} alt="" aria-hidden className="w-full h-auto" />
-                    </div>
-                    <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-[48%] w-[85%] h-auto" style={{ transform: "translate(-50%, -48%) rotate(180deg)" }}>
-                        <div className="w-full h-auto animate-[spin_20s_linear_infinite]">
-                            <img src={active.ring} alt="" aria-hidden className="w-full h-auto" />
-                        </div>
+                    {/* Grunge ring behind the character */}
+                    <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-[48%] w-[85%] aspect-square animate-[spin_20s_linear_infinite]">
+                        <img src={active.ring} alt="" aria-hidden className="w-full h-full object-contain" />
                     </div>
 
                     {/* Character artwork */}
@@ -224,7 +219,7 @@ export default function Hero() {
             {/* Smoke transition straddling the hero/Seika boundary: pinned to the
                 bottom edge with ~35% of the art dipping below it (clipped here,
                 completed by the matching strip at the top of Seika). */}
-            <SmokeStrip className="absolute bottom-0 left-0 z-20 w-full translate-y-[50%]" />
+            <SmokeStrip className="absolute bottom-0 left-0 z-20 w-full translate-y-[85%]" />
 
             {/* Custom Wallet Modal */}
             <CustomWalletModal isOpen={isCustomModalOpen} onClose={closeCustomModal} />
