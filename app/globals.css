@@ -216,10 +216,11 @@
     animation-play-state: paused;
   }
 
-  /* Fade the top and bottom edges so messages enter and leave softly */
+  /* Edges shown in full, no fade — top/bottom messages stay fully visible
+     instead of dissolving into transparent/black at the marquee's edges. */
   .chat-marquee {
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 6%, #000 94%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0, #000 6%, #000 94%, transparent 100%);
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   @keyframes chat-scroll {
