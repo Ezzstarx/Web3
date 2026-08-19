@@ -46,11 +46,23 @@ export default function About() {
                         </div>
 
                         {/* Right: Pixel EZZSTAR stacked logo */}
-                        <div className="relative w-[200px] md:w-[300px] shrink-0">
+                        <div className="group relative w-[200px] md:w-[300px] shrink-0">
+                            {/* Shine effect layer masked to the logo shape */}
+                            <div 
+                                className="absolute inset-0 pointer-events-none z-10"
+                                style={{
+                                    WebkitMaskImage: "url('/assets/images/Footer-Logo.png')",
+                                    WebkitMaskSize: "contain",
+                                    WebkitMaskRepeat: "no-repeat",
+                                    WebkitMaskPosition: "center"
+                                }}
+                            >
+                                <div className="absolute top-0 -left-[150%] w-[150%] h-full bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-[-25deg] group-hover:animate-[shine_0.8s_ease-in-out]" />
+                            </div>
                             <img
                                 src="/assets/images/Footer-Logo.png"
                                 alt="Ezzstar"
-                                className="w-full h-auto object-contain"
+                                className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-105"
                                 style={{ imageRendering: 'pixelated' }}
                             />
                         </div>
