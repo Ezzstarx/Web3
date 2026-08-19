@@ -198,7 +198,7 @@ export default function Hero() {
                     </nav>
 
                     {/* Character Identity Block */}
-                    <div className="mt-16 md:mt-0 flex flex-col items-center">
+                    <div className="mt-16 md:mt-[clamp(24px,5svh,56px)] flex flex-col items-center">
                         <h1
                             className="text-[96px] md:text-[length:clamp(104px,15svh,164px)] leading-none bg-clip-text text-transparent"
                             style={{
