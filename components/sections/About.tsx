@@ -57,7 +57,7 @@ export default function About() {
                                     WebkitMaskPosition: "center"
                                 }}
                             >
-                                <div className="absolute top-0 -left-[150%] w-[150%] h-full bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-[-25deg] group-hover:animate-[shine_0.8s_ease-in-out]" />
+                                <div className="absolute top-0 -left-[150%] group-hover:left-[150%] w-[150%] h-full bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-[-25deg] transition-all duration-[800ms] ease-in-out" />
                             </div>
                             <img
                                 src="/assets/images/Footer-Logo.png"

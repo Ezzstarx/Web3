@@ -188,8 +188,13 @@ export default function Hero() {
                                     </defs>
                                 </svg>
                                 
-                                <span className="relative flex items-center">
-                                    <span className="font-tektur text-xl md:text-[length:clamp(19px,2.5svh,27px)] text-[#c9c9ce] group-hover:text-white transition-colors tracking-wide pb-1 border-b-2 border-transparent group-hover:border-accent-cyan">
+                                {/* Text */}
+                                <span className="relative flex items-center overflow-hidden">
+                                    {/* Shine effect layer */}
+                                    <span className="absolute inset-0 pointer-events-none z-10">
+                                        <span className="absolute top-0 -left-[150%] group-hover:left-[150%] w-[150%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-25deg] transition-all duration-500 ease-in-out" />
+                                    </span>
+                                    <span className="relative z-0 font-tektur text-xl md:text-[length:clamp(19px,2.5svh,27px)] text-[#c9c9ce] group-hover:text-white transition-colors tracking-wide pb-1 border-b-2 border-transparent group-hover:border-accent-cyan">
                                         {link.name}
                                     </span>
                                 </span>
