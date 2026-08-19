@@ -19,7 +19,7 @@ export default function SmokeStrip({ className = "" }: { className?: string }) {
             <img
                 src="/assets/images/sections/transition-smoke.png"
                 alt=""
-                className="smoke-base"
+                className="smoke-base scale-[1.03] translate-x-[2%]"
             />
         </div>
     );
