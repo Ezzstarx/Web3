@@ -102,30 +102,32 @@ export default function SkaUtility() {
                             What makes SEIKA unique?
                         </h3>
 
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={activeTab.id}
-                                initial={{ opacity: 0, y: 12 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -12 }}
-                                transition={{ duration: 0.25 }}
-                                className="relative rounded-xl border border-white/25 bg-gradient-to-b from-[#4c1d95]/35 to-[#2e1065]/35 backdrop-blur-[2px] p-8 md:p-10 min-h-[clamp(210px,40svh,330px)]"
-                            >
-                                <h4 className="text-2xl md:text-[30px] font-tektur font-medium text-white mb-6">
-                                    {activeTab.label}
-                                </h4>
-                                <ul className="space-y-3">
-                                    {activeTab.points.map((point, idx) => (
-                                        <li key={idx} className="flex items-start gap-3">
-                                            <span className="mt-2 w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>
-                                            <span className="text-white font-tektur text-base md:text-[17px] leading-relaxed">
-                                                {point}
-                                            </span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </motion.div>
-                        </AnimatePresence>
+                        <div className="min-h-[350px] md:min-h-[420px]">
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={activeTab.id}
+                                    initial={{ opacity: 0, y: 12 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -12 }}
+                                    transition={{ duration: 0.25 }}
+                                    className="relative rounded-xl border border-white/25 bg-gradient-to-b from-[#4c1d95]/35 to-[#2e1065]/35 backdrop-blur-[2px] p-8 md:p-10 min-h-[clamp(210px,40svh,330px)]"
+                                >
+                                    <h4 className="text-2xl md:text-[30px] font-tektur font-medium text-white mb-6">
+                                        {activeTab.label}
+                                    </h4>
+                                    <ul className="space-y-3">
+                                        {activeTab.points.map((point, idx) => (
+                                            <li key={idx} className="flex items-start gap-3">
+                                                <span className="mt-2 w-1.5 h-1.5 rounded-full bg-white shrink-0"></span>
+                                                <span className="text-white font-tektur text-base md:text-[17px] leading-relaxed">
+                                                    {point}
+                                                </span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
                     </div>
 
                     {/* Right: Utility Tab List */}

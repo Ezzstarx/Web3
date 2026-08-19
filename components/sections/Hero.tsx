@@ -62,7 +62,7 @@ export default function Hero() {
     const visible = [wrap(activeIndex - 1), activeIndex, wrap(activeIndex + 1)];
 
     return (
-        <section id="hero" className="relative min-h-screen lg:h-screen lg:flex lg:flex-col overflow-hidden bg-[#050505]">
+        <section id="hero" className="relative min-h-screen lg:h-screen lg:flex lg:flex-col bg-[#050505]">
             {/* Dark grunge backdrop with the red bleed along the right edge */}
             <div
                 className="absolute inset-0 bg-cover bg-center pointer-events-none"
@@ -104,7 +104,7 @@ export default function Hero() {
             <div className="relative z-10 flex min-h-[calc(100vh-120px)] lg:min-h-0 lg:flex-1">
 
                 {/* Left Column: Nav + Character Identity */}
-                <div className="page-x relative z-20 flex flex-col justify-between pt-16 md:pt-[clamp(10px,2.2svh,48px)] pb-20 md:pb-[clamp(48px,8svh,88px)] w-full lg:w-1/2">
+                <div className="page-x relative z-20 flex flex-col justify-between pt-28 md:pt-[clamp(60px,8svh,100px)] pb-20 md:pb-[clamp(48px,8svh,88px)] w-full lg:w-1/2">
 
                     {/* Section Nav List */}
                     <nav className="flex flex-col gap-4 md:gap-[clamp(8px,1.7svh,20px)]">
@@ -112,18 +112,89 @@ export default function Hero() {
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className="group flex items-center gap-5 w-fit"
+                                className="group flex items-center gap-5 w-fit px-2 py-1 -ml-2"
                             >
-                                <img
-                                    src="/assets/images/hero/nav-bullet.png"
-                                    alt=""
-                                    aria-hidden
-                                    className="w-[22px] h-[23px] shrink-0"
-                                    style={{ imageRendering: "pixelated" }}
-                                />
-                                <span className="relative flex items-center">
-                                    <span className="absolute top-0 bottom-0 -left-3 w-0 bg-accent-cyan group-hover:w-[2px] transition-all duration-300" />
-                                    <span className="font-tektur text-xl md:text-[length:clamp(19px,2.5svh,27px)] text-[#c9c9ce] group-hover:text-white transition-colors tracking-wide pb-1 border-b-2 border-transparent group-hover:border-white">
+                                {/* Default SVG (Visible normally) */}
+                                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-[22px] h-[23px] shrink-0 group-hover:hidden">
+                                    <mask id="path-1-inside-1_2773_7471" fill="white">
+                                        <path d="M18.0107 4.45801H21.4033V18.0215H18.0107V21.4229H4.44531V18.0215H1.05469V4.45801H4.44531V1.07812H18.0107V4.45801Z"/>
+                                    </mask>
+                                    <path d="M18.0107 4.45801H21.4033V18.0215H18.0107V21.4229H4.44531V18.0215H1.05469V4.45801H4.44531V1.07812H18.0107V4.45801Z" fill="#342F36"/>
+                                    <path d="M18.0107 4.45801H17.0107V5.45801H18.0107V4.45801ZM21.4033 4.45801H22.4033V3.45801H21.4033V4.45801ZM21.4033 18.0215V19.0215H22.4033V18.0215H21.4033ZM18.0107 18.0215V17.0215H17.0107V18.0215H18.0107ZM18.0107 21.4229V22.4229H19.0107V21.4229H18.0107ZM4.44531 21.4229H3.44531V22.4229H4.44531V21.4229ZM4.44531 18.0215H5.44531V17.0215H4.44531V18.0215ZM1.05469 18.0215H0.0546875V19.0215H1.05469V18.0215ZM1.05469 4.45801V3.45801H0.0546875V4.45801H1.05469ZM4.44531 4.45801V5.45801H5.44531V4.45801H4.44531ZM4.44531 1.07812V0.078125H3.44531V1.07812H4.44531ZM18.0107 1.07812H19.0107V0.078125H18.0107V1.07812ZM18.0107 4.45801V5.45801H21.4033V4.45801V3.45801H18.0107V4.45801ZM21.4033 4.45801H20.4033V18.0215H21.4033H22.4033V4.45801H21.4033ZM21.4033 18.0215V17.0215H18.0107V18.0215V19.0215H21.4033V18.0215ZM18.0107 18.0215H17.0107V21.4229H18.0107H19.0107V18.0215H18.0107ZM18.0107 21.4229V20.4229H4.44531V21.4229V22.4229H18.0107V21.4229ZM4.44531 21.4229H5.44531V18.0215H4.44531H3.44531V21.4229H4.44531ZM4.44531 18.0215V17.0215H1.05469V18.0215V19.0215H4.44531V18.0215ZM1.05469 18.0215H2.05469V4.45801H1.05469H0.0546875V18.0215H1.05469ZM1.05469 4.45801V5.45801H4.44531V4.45801V3.45801H1.05469V4.45801ZM4.44531 4.45801H5.44531V1.07812H4.44531H3.44531V4.45801H4.44531ZM4.44531 1.07812V2.07812H18.0107V1.07812V0.078125H4.44531V1.07812ZM18.0107 1.07812H17.0107V4.45801H18.0107H19.0107V1.07812H18.0107Z" fill="#454545" mask="url(#path-1-inside-1_2773_7471)"/>
+                                    <path d="M5.65973 1.58883L20.9091 16.8344L20.9092 15.7776L6.44748 1.58969L5.65973 1.58883Z" fill="url(#paint0_linear_2773_7471)" style={{ mixBlendMode: "color-dodge" }}/>
+                                    <path d="M5.65973 1.58883L20.9091 16.8344L20.9092 15.7776L6.44748 1.58969L5.65973 1.58883Z" stroke="#787577"/>
+                                    <path d="M2.26662 4.9776L17.519 20.2257L17.5213 18.2491L4.24417 4.97781L2.26662 4.9776Z" fill="url(#paint1_linear_2773_7471)" style={{ mixBlendMode: "color-dodge" }}/>
+                                    <path d="M2.26662 4.9776L17.519 20.2257L17.5213 18.2491L4.24417 4.97781L2.26662 4.9776Z" stroke="#787577"/>
+                                    <g filter="url(#filter0_d_2773_7471)">
+                                        <path d="M11.281 8.83457L14.1312 5.98503L16.5946 8.44791L13.7444 11.2975L16.473 14.0255L14.0096 16.4884L11.281 13.7603L8.42816 16.6126L5.96477 14.1498L8.81766 11.2975L6.10289 8.58324L8.56628 6.12036L11.281 8.83457Z" fill="#5C5C5C"/>
+                                    </g>
+                                    <defs>
+                                        <filter id="filter0_d_2773_7471" x="1.96094" y="5.98438" width="18.6328" height="18.6289" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                            <feOffset dy="4"/>
+                                            <feGaussianBlur stdDeviation="2"/>
+                                            <feComposite in2="hardAlpha" operator="out"/>
+                                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2773_7471"/>
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2773_7471" result="shape"/>
+                                        </filter>
+                                        <linearGradient id="paint0_linear_2773_7471" x1="22.4152" y1="16.8903" x2="4.40008" y2="1.14812" gradientUnits="userSpaceOnUse">
+                                            <stop stopColor="#320647"/>
+                                            <stop offset="0.538462" stopColor="#7A0FAD"/>
+                                            <stop offset="0.990385" stopColor="#320647"/>
+                                        </linearGradient>
+                                        <linearGradient id="paint1_linear_2773_7471" x1="19.2824" y1="19.9841" x2="1.26588" y2="4.24061" gradientUnits="userSpaceOnUse">
+                                            <stop offset="0.182692" stopColor="#2E204A"/>
+                                            <stop offset="0.538462" stopColor="#6D4CB0"/>
+                                            <stop offset="0.860577" stopColor="#2E204A"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                
+                                {/* Hover SVG (Visible on hover) */}
+                                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" className="hidden group-hover:block w-[22px] h-[23px] shrink-0">
+                                    <mask id="path-1-inside-1_2773_7462" fill="white">
+                                        <path d="M18.0107 4.45801H21.4033V18.0215H18.0107V21.4229H4.44531V18.0215H1.05469V4.45801H4.44531V1.07812H18.0107V4.45801Z"/>
+                                    </mask>
+                                    <path d="M18.0107 4.45801H21.4033V18.0215H18.0107V21.4229H4.44531V18.0215H1.05469V4.45801H4.44531V1.07812H18.0107V4.45801Z" fill="#290533"/>
+                                    <path d="M18.0107 4.45801H17.0107V5.45801H18.0107V4.45801ZM21.4033 4.45801H22.4033V3.45801H21.4033V4.45801ZM21.4033 18.0215V19.0215H22.4033V18.0215H21.4033ZM18.0107 18.0215V17.0215H17.0107V18.0215H18.0107ZM18.0107 21.4229V22.4229H19.0107V21.4229H18.0107ZM4.44531 21.4229H3.44531V22.4229H4.44531V21.4229ZM4.44531 18.0215H5.44531V17.0215H4.44531V18.0215ZM1.05469 18.0215H0.0546875V19.0215H1.05469V18.0215ZM1.05469 4.45801V3.45801H0.0546875V4.45801H1.05469ZM4.44531 4.45801V5.45801H5.44531V4.45801H4.44531ZM4.44531 1.07812V0.078125H3.44531V1.07812H4.44531ZM18.0107 1.07812H19.0107V0.078125H18.0107V1.07812ZM18.0107 4.45801V5.45801H21.4033V4.45801V3.45801H18.0107V4.45801ZM21.4033 4.45801H20.4033V18.0215H21.4033H22.4033V4.45801H21.4033ZM21.4033 18.0215V17.0215H18.0107V18.0215V19.0215H21.4033V18.0215ZM18.0107 18.0215H17.0107V21.4229H18.0107H19.0107V18.0215H18.0107ZM18.0107 21.4229V20.4229H4.44531V21.4229V22.4229H18.0107V21.4229ZM4.44531 21.4229H5.44531V18.0215H4.44531H3.44531V21.4229H4.44531ZM4.44531 18.0215V17.0215H1.05469V18.0215V19.0215H4.44531V18.0215ZM1.05469 18.0215H2.05469V4.45801H1.05469H0.0546875V18.0215H1.05469ZM1.05469 4.45801V5.45801H4.44531V4.45801V3.45801H1.05469V4.45801ZM4.44531 4.45801H5.44531V1.07812H4.44531H3.44531V4.45801H4.44531ZM4.44531 1.07812V2.07812H18.0107V1.07812V0.078125H4.44531V1.07812ZM18.0107 1.07812H17.0107V4.45801H18.0107H19.0107V1.07812H18.0107Z" fill="#FC80BB" mask="url(#path-1-inside-1_2773_7462)"/>
+                                    <path d="M21.4084 15.5679L6.65117 1.08947L4.45231 1.08835L21.4084 18.0424L21.4084 15.5679Z" fill="url(#paint0_linear_2773_7462)" style={{ mixBlendMode: "color-dodge" }}/>
+                                    <path d="M18.0205 18.0422L4.45049 4.47729L1.05904 4.47731L18.018 21.4311L18.0205 18.0422Z" fill="url(#paint1_linear_2773_7462)" style={{ mixBlendMode: "color-dodge" }}/>
+                                    <g filter="url(#filter0_d_2773_7462)">
+                                        <path d="M11.281 8.83457L14.1312 5.98503L16.5946 8.44791L13.7444 11.2975L16.473 14.0255L14.0096 16.4884L11.281 13.7603L8.42816 16.6126L5.96477 14.1498L8.81766 11.2975L6.10289 8.58324L8.56628 6.12036L11.281 8.83457Z" fill="#66D0EB"/>
+                                    </g>
+                                    <defs>
+                                        <filter id="filter0_d_2773_7462" x="1.96094" y="5.98438" width="18.6328" height="18.6289" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                            <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                            <feOffset dy="4"/>
+                                            <feGaussianBlur stdDeviation="2"/>
+                                            <feComposite in2="hardAlpha" operator="out"/>
+                                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2773_7462"/>
+                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2773_7462" result="shape"/>
+                                        </filter>
+                                        <linearGradient id="paint0_linear_2773_7462" x1="22.4152" y1="16.8903" x2="4.40008" y2="1.14812" gradientUnits="userSpaceOnUse">
+                                            <stop stopColor="#320647"/>
+                                            <stop offset="0.538462" stopColor="#7A0FAD"/>
+                                            <stop offset="0.990385" stopColor="#320647"/>
+                                        </linearGradient>
+                                        <linearGradient id="paint1_linear_2773_7462" x1="19.2824" y1="19.9841" x2="1.26588" y2="4.24061" gradientUnits="userSpaceOnUse">
+                                            <stop offset="0.182692" stopColor="#2E204A"/>
+                                            <stop offset="0.538462" stopColor="#6D4CB0"/>
+                                            <stop offset="0.860577" stopColor="#2E204A"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                
+                                {/* Text */}
+                                <span className="relative flex items-center overflow-hidden">
+                                    {/* Shine effect layer */}
+                                    <span className="absolute inset-0 pointer-events-none z-10">
+                                        <span className="absolute top-0 -left-[150%] group-hover:left-[150%] w-[150%] h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-25deg] transition-all duration-500 ease-in-out" />
+                                    </span>
+                                    <span className="relative z-0 font-tektur text-xl md:text-[length:clamp(19px,2.5svh,27px)] text-[#c9c9ce] group-hover:text-white transition-colors tracking-wide pb-1 border-b-2 border-transparent group-hover:border-accent-cyan">
                                         {link.name}
                                     </span>
                                 </span>
@@ -132,7 +203,7 @@ export default function Hero() {
                     </nav>
 
                     {/* Character Identity Block */}
-                    <div className="mt-16 md:mt-0 flex flex-col items-start">
+                    <div className="mt-16 md:mt-[clamp(24px,5svh,56px)] flex flex-col items-center">
                         <h1
                             className="text-[96px] md:text-[length:clamp(104px,15svh,164px)] leading-none bg-clip-text text-transparent"
                             style={{
@@ -140,17 +211,23 @@ export default function Hero() {
                                 fontFamily: "'Scarlet Reliquary', sans-serif",
                             }}
                         >
+                           {active.nameImage ? (
                            <img
                             src={active.nameImage}
                             alt={active.name}
-                            className="w-[280px] md:w-[370px] h-[120px] md:h-[160px] object-contain object-left"
+                            className="h-[70px] md:h-[110px] w-auto max-w-full object-contain object-center"
                              />
+                           ) : (
+                           <span className="block h-[70px] md:h-[110px] w-auto max-w-full flex items-center justify-center text-[inherit]">
+                            {active.name}
+                           </span>
+                           )}
                         </h1>
                         <p className="mt-3 w-full text-center font-tektur text-lg md:text-[length:clamp(16px,2svh,22px)] text-white tracking-wide">
                             {active.subtitle}
                         </p>
 
-                        <div className="mt-8 md:mt-[clamp(12px,2.6svh,32px)] md:pl-10">
+                        <div className="mt-8 md:mt-[clamp(12px,2.6svh,32px)] flex flex-col items-center">
                             <p className="font-satoshi text-base md:text-[length:clamp(14px,1.8svh,18px)] text-white">
                                 Case File: <span style={{ color: active.titleFrom }}>{active.caseFile}</span>
                             </p>
@@ -166,12 +243,9 @@ export default function Hero() {
                 {/* Right Column: Character Art */}
                 <div className="absolute inset-y-0 right-0 w-full lg:w-[58%] pointer-events-none">
                     {/* Grunge ring behind the character */}
-                    <img
-                        src={active.ring}
-                        alt=""
-                        aria-hidden
-                        className="absolute top-[8%] left-1/2 -translate-x-1/2 w-[560px] md:w-[820px] h-auto animate-[spin_20s_linear_infinite]"
-                    />
+                    <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-[48%] w-[85%] aspect-square animate-[spin_20s_linear_infinite]">
+                        <img src={active.ring} alt="" aria-hidden className="w-full h-full object-contain" />
+                    </div>
 
                     {/* Character artwork */}
                     <img
@@ -216,7 +290,7 @@ export default function Hero() {
             {/* Smoke transition straddling the hero/Seika boundary: pinned to the
                 bottom edge with ~35% of the art dipping below it (clipped here,
                 completed by the matching strip at the top of Seika). */}
-            <SmokeStrip className="absolute bottom-0 left-0 z-20 w-full translate-y-[50%]" />
+            <SmokeStrip className="absolute bottom-0 left-0 z-20 w-full translate-y-[65%]" />
 
             {/* Custom Wallet Modal */}
             <CustomWalletModal isOpen={isCustomModalOpen} onClose={closeCustomModal} />
