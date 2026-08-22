@@ -376,7 +376,10 @@ interface TeamMember {
     image: string;
     left: number;
     height: number;
+<<<<<<< HEAD
     offsetY: number;
+=======
+>>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
 }
 
 const members: TeamMember[] = [
@@ -388,9 +391,14 @@ const members: TeamMember[] = [
         x: "#",
         linkedin: "https://www.linkedin.com/in/misbah-iftikhar-20761938/",
         image: "/assets/images/team/m01.png",
+<<<<<<< HEAD
         left: 6.5,
         height: 52,
         offsetY: 180,
+=======
+        left: 9.5,
+        height: 52,
+>>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
     },
     {
         name: "Fateen Mooen",
@@ -400,9 +408,14 @@ const members: TeamMember[] = [
         x: "#",
         linkedin: "https://www.linkedin.com/in/fateen-catzero/",
         image: "/assets/images/team/m02.png",
+<<<<<<< HEAD
         left: 15.5,
         height: 52,
         offsetY: 110,
+=======
+        left: 17.5,
+        height: 57,
+>>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
     },
     {
         name: "Abdullah Khan",
@@ -412,9 +425,14 @@ const members: TeamMember[] = [
         x: "#",
         linkedin: "https://www.linkedin.com/in/abdullahkhancs01/",
         image: "/assets/images/team/m03.png",
+<<<<<<< HEAD
         left: 24,
         height: 52,
         offsetY: 180,
+=======
+        left: 26,
+        height: 54,
+>>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
     },
     {
         name: "Nikhil Kandesar",
@@ -424,9 +442,14 @@ const members: TeamMember[] = [
         x: "#",
         linkedin: "https://www.linkedin.com/in/nikhilkandesar/",
         image: "/assets/images/team/m04.png",
+<<<<<<< HEAD
         left: 32.5,
         height: 52,
         offsetY: 150,
+=======
+        left: 34,
+        height: 50,
+>>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
     },
     {
         name: "Rabiya Javed",
@@ -436,9 +459,14 @@ const members: TeamMember[] = [
         x: "#",
         linkedin: "https://www.linkedin.com/in/rabiya-javed-378694275/",
         image: "/assets/images/team/m05.png",
+<<<<<<< HEAD
         left: 39.5,
         height: 52,
         offsetY: 180,
+=======
+        left: 41.5,
+        height: 53,
+>>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
     },
     {
         name: "Muzammil Moosa",
@@ -448,9 +476,14 @@ const members: TeamMember[] = [
         x: "https://x.com/ezzstarx?s=21",
         linkedin: "https://www.linkedin.com/in/muzammil-moosa-48ba7a201/",
         image: "/assets/images/team/m06.png",
+<<<<<<< HEAD
         left: 48.5,
         height: 57,
         offsetY: 210,
+=======
+        left: 50.5,
+        height: 60,
+>>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
     },
     {
         name: "Anshu Kumar",
@@ -460,9 +493,14 @@ const members: TeamMember[] = [
         x: "#",
         linkedin: "",
         image: "/assets/images/team/m07.png",
+<<<<<<< HEAD
         left: 56.5,
         height: 52,
         offsetY: 110,
+=======
+        left: 57.5,
+        height: 49,
+>>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
     },
     {
         name: "Aman Prajapati",
@@ -473,8 +511,12 @@ const members: TeamMember[] = [
         linkedin: "https://www.linkedin.com/in/aman-prajapati-675909199/",
         image: "/assets/images/team/m08.png",
         left: 64.5,
+<<<<<<< HEAD
         height: 52,
         offsetY: 180,
+=======
+        height: 55,
+>>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
     },
     {
         name: "Ali Abdullah",
@@ -484,9 +526,14 @@ const members: TeamMember[] = [
         x: "#",
         linkedin: "https://www.linkedin.com/in/ali-abdullah-028845333/",
         image: "/assets/images/team/m09.png",
+<<<<<<< HEAD
         left: 72.5,
         height: 52,
         offsetY: 120,
+=======
+        left: 71.5,
+        height: 47,
+>>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
     },
     {
         name: "Anirban Nandi",
@@ -497,8 +544,12 @@ const members: TeamMember[] = [
         linkedin: "https://www.linkedin.com/in/aanirban-nandi/",
         image: "/assets/images/team/m10.png",
         left: 78.5,
+<<<<<<< HEAD
         height: 52,
         offsetY: 150,
+=======
+        height: 54,
+>>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
     },
     {
         name: "Aritra Ray",
@@ -508,9 +559,14 @@ const members: TeamMember[] = [
         x: "#",
         linkedin: "https://www.linkedin.com/in/aritraray05/",
         image: "/assets/images/team/m11.png",
+<<<<<<< HEAD
         left: 86.5,
         height: 52,
         offsetY: 100,
+=======
+        left: 85.5,
+        height: 51,
+>>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
     },
     {
         name: "Saachi Singh",
@@ -520,9 +576,14 @@ const members: TeamMember[] = [
         x: "#",
         linkedin: "https://www.linkedin.com/in/saachi-singh-75323123b/",
         image: "/assets/images/team/m12.png",
+<<<<<<< HEAD
         left: 95,
         height: 52,
         offsetY: 150,
+=======
+        left: 92.5,
+        height: 53,
+>>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
     },
 ];
 
@@ -605,6 +666,7 @@ export default function CoreTeam() {
         return () => {
             cancelAnimationFrame(raf);
             window.removeEventListener("resize", measure);
+<<<<<<< HEAD
         };  
     }, [activeIndex, isMirror]);
 
@@ -612,6 +674,15 @@ export default function CoreTeam() {
         <section
             id="team"
             className="relative overflow-hidden bg-[#04070d] lg:min-h-[120svh] lg:flex lg:flex-col"
+=======
+        };
+    }, [activeIndex, isMirror]);
+
+    return (
+        <section
+            id="team"
+            className="relative overflow-hidden bg-[#04070d] lg:min-h-[140svh] lg:flex lg:flex-col"
+>>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
         >
             {/* Section heading */}
             <div className="relative z-20 pt-8 md:pt-10 shrink-0">
@@ -650,7 +721,10 @@ export default function CoreTeam() {
                             style={{
                                 left: `${member.left}%`,
                                 height: `${member.height}%`,
+<<<<<<< HEAD
                                 bottom: `calc(36% - ${member.offsetY ?? 0}px)`,
+=======
+>>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
                                 zIndex: isActive ? 12 : 4,
                             }}
                         >
@@ -757,6 +831,7 @@ export default function CoreTeam() {
 
                 {/* Desktop Member Details */}
                 {active && (
+<<<<<<< HEAD
                     <>
                         {/* Name Badge — stays in its current position */}
                         <div
@@ -845,6 +920,143 @@ export default function CoreTeam() {
                             </div>
                         </div>
                     </>
+=======
+                    <div
+                        className="hidden lg:block absolute z-30 pointer-events-none transition-all duration-300"
+                        style={{
+                            left: `${cardLeft}%`,
+                            bottom: `25%`,
+                            width: `${CARD_WIDTH}%`,
+                        }}
+                    >
+                        <div
+                            className={`relative flex items-center gap-6 ${
+                                isMirror ? "flex-row-reverse" : ""
+                            }`}
+                        >
+                            {/* Figma-Matched Double-Slanted Name Tag */}
+                            <div ref={badgeRef} className="relative shrink-0 pointer-events-auto">
+                                {/* Outer Glow Effect */}
+                                <div
+                                    className="absolute -inset-[2px] bg-[#d946ef] opacity-80 blur-[2px]"
+                                    style={{
+                                        clipPath:
+                                            "polygon(12% 0, 100% 0, 88% 100%, 0 100%)",
+                                    }}
+                                />
+
+                                {/* Main Tag Gradient Container */}
+                                <div
+                                    className="relative px-8 py-3 bg-gradient-to-r from-[#9333ea] via-[#c026d3] to-[#7e22ce] text-center"
+                                    style={{
+                                        clipPath:
+                                            "polygon(12% 0, 100% 0, 88% 100%, 0 100%)",
+                                    }}
+                                >
+                                    {/* Halftone Pattern Overlay */}
+                                    <div
+                                        className="absolute inset-0 opacity-25 mix-blend-overlay"
+                                        style={{
+                                            backgroundImage:
+                                                "radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px)",
+                                            backgroundSize: "4px 4px",
+                                        }}
+                                    />
+
+                                    <p className="relative font-satoshi font-bold text-white text-[16px] leading-tight whitespace-nowrap drop-shadow">
+                                        {active.name}
+                                    </p>
+                                    <p className="relative font-satoshi text-white/90 text-[12px] whitespace-nowrap">
+                                        {active.role}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Description & Socials */}
+                            <div className="flex-1 min-w-0">
+                                <p className="font-satoshi font-medium text-white/90 text-[13px] leading-relaxed [text-shadow:0_2px_8px_rgba(0,0,0,0.9)]">
+                                    {active.description}
+                                </p>
+
+                                <div className="flex justify-end gap-3 mt-3 text-white pointer-events-auto">
+                                    {active.x && active.x !== "#" && (
+                                        <a
+                                            href={active.x}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label={`${active.name} on X`}
+                                            className="hover:text-[#d946ef] transition-colors"
+                                        >
+                                            <XIcon size={16} />
+                                        </a>
+                                    )}
+
+                                    {active.linkedin && (
+                                        <a
+                                            href={active.linkedin}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label={`${active.name} on LinkedIn`}
+                                            className="hover:text-[#d946ef] transition-colors"
+                                        >
+                                            <Linkedin size={17} />
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Mobile member details */}
+                {active && (
+                    <div className="lg:hidden absolute bottom-[2%] left-0 right-0 z-30 px-6 pointer-events-none">
+                        <div
+                            className="relative px-6 py-2 w-fit bg-gradient-to-r from-[#c026d3] to-[#7c3aed]"
+                            style={{
+                                clipPath:
+                                    "polygon(10% 0, 100% 0, 90% 100%, 0 100%)",
+                            }}
+                        >
+                            <p className="font-satoshi font-bold text-white text-[15px] leading-snug">
+                                {active.name}
+                            </p>
+                            <p className="font-satoshi text-white/90 text-[13px]">
+                                {active.role}
+                            </p>
+                        </div>
+
+                        <p className="mt-2 font-satoshi font-semibold text-white text-[13px] leading-relaxed [text-shadow:0_2px_10px_rgba(0,0,0,0.95)]">
+                            {active.description}
+                        </p>
+
+                        <div className="flex gap-5 mt-2 text-white pointer-events-auto">
+                            {active.x && active.x !== "#" && (
+                                <a
+                                    href={active.x}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`${active.name} on X`}
+                                    className="hover:text-accent-cyan transition-colors"
+                                >
+                                    <XIcon size={18} />
+                                </a>
+                            )}
+
+                            {active.linkedin && (
+                                <a
+                                    href={active.linkedin}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`${active.name} on LinkedIn`}
+                                    className="hover:text-accent-cyan transition-colors"
+                                >
+                                    <Linkedin size={19} />
+                                </a>
+                            )}
+                        </div>
+                    </div>
+>>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
                 )}
             </div>
         </section>
