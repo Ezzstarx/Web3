@@ -526,9 +526,12 @@ const members: TeamMember[] = [
     },
 ];
 
-// Nameplate PNG is 545 × 196 (aspect ≈ 2.78)
-const NAMEPLATE_ASPECT = 545 / 196;
-const NAMEPLATE_WIDTH_PCT = 22; // % of stage width
+// Nameplate PNG is 545 × 131 (aspect ≈ 4.16)
+const NAMEPLATE_ASPECT = 545 / 131;
+const NAMEPLATE_WIDTH_PCT = 24; // % of stage width
+// The plate lives in the left half of the floor so it never collides with the
+// description block pinned bottom-right (which starts around 67%).
+const NAMEPLATE_MAX_RIGHT_PCT = 48;
 
 export default function CoreTeam() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -560,7 +563,7 @@ export default function CoreTeam() {
                       : active.left - NAMEPLATE_WIDTH_PCT - 6,
                   1.5,
               ),
-              100 - NAMEPLATE_WIDTH_PCT - 1.5,
+              NAMEPLATE_MAX_RIGHT_PCT - NAMEPLATE_WIDTH_PCT,
           )
         : 0;
 
@@ -589,17 +592,20 @@ export default function CoreTeam() {
                 stageRect.left;
             const shoeYPx = memberRect.bottom - stageRect.top - 10;
 
-            // Line starts at the parallelogram's slanted tip, at the plate's
-            // lower edge — this is where the connector emerges in the design.
-            const startXPx = isMirror
-                ? badgeRect.left - stageRect.left + badgeRect.width * 0.1
-                : badgeRect.right - stageRect.left - badgeRect.width * 0.1;
-            const startYPx = badgeRect.bottom - stageRect.top - 8;
+            // Line emerges from the parallelogram's slanted tip, roughly at the
+            // plate's mid-height, then runs out toward the character.
+            const startXPx =
+                badgeRect.left -
+                stageRect.left +
+                badgeRect.width * (isMirror ? 0.06 : 0.94);
+            const startYPx = badgeRect.top - stageRect.top + badgeRect.height * 0.42;
 
-            // Elbow: horizontal covers ~70% of the way to the shoe so the
-            // line reads primarily as horizontal, then a short diagonal drops
-            // to the foot ring — matches the design's L-shape.
-            const middleXPx = startXPx + (shoeXPx - startXPx) * 0.7;
+            // Elbow: run horizontally, then break away at ~45° for the last
+            // stretch up to the foot ring — the design's dog-leg.
+            const deltaY = Math.abs(startYPx - shoeYPx);
+            const middleXPx = isMirror
+                ? Math.min(shoeXPx + deltaY, startXPx - 6)
+                : Math.max(shoeXPx - deltaY, startXPx + 6);
 
             setConnector({
                 startXPx,
@@ -688,21 +694,23 @@ export default function CoreTeam() {
                             {/* Contact shadow */}
                             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-[13px] bg-black/40 blur-[8px] rounded-[50%] z-[1]" />
 
-                            {/* Reflection — dulled */}
+                            {/* Reflection — visible but muted, brightest at the feet */}
                             <img
                                 src={member.image}
                                 alt=""
                                 aria-hidden
-                                className="absolute top-full left-1/2 w-auto max-w-none object-contain object-top opacity-[0.18]"
+                                className="absolute top-full left-1/2 w-auto max-w-none object-contain object-top opacity-40"
                                 style={{
                                     height: "62%",
                                     transform: "translateX(-50%) scaleY(-1)",
                                     transformOrigin: "center",
-                                    filter: "brightness(0.55) contrast(0.9) blur(1px)",
+                                    filter: "brightness(0.72) contrast(0.95) blur(0.8px)",
+                                    // Element is scaleY(-1), so "to top" reads
+                                    // visually top-down: strongest at the feet.
                                     WebkitMaskImage:
-                                        "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.18) 75%, transparent 100%)",
+                                        "linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.25) 72%, transparent 100%)",
                                     maskImage:
-                                        "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.18) 75%, transparent 100%)",
+                                        "linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.25) 72%, transparent 100%)",
                                 }}
                             />
                         </div>
@@ -773,46 +781,46 @@ export default function CoreTeam() {
                 {/* Desktop Member Details */}
                 {active && (
                     <>
-                        {/* Nameplate — PNG asset with text overlay on the pink parallelogram */}
+                        {/* Nameplate — sits on the floor below the feet and behind the
+                            figures (z-3 vs the figures' z-4), as in the design. */}
                         <div
                             ref={badgeRef}
-                            className="hidden lg:block absolute z-30 pointer-events-auto transition-all duration-300"
+                            className="hidden lg:block absolute z-[3] pointer-events-none transition-all duration-300"
                             style={{
                                 left: `${cardLeft}%`,
-                                bottom: `22%`,
+                                bottom: `4%`,
                                 width: `${NAMEPLATE_WIDTH_PCT}%`,
                                 aspectRatio: `${NAMEPLATE_ASPECT}`,
-                                transform: isMirror ? "scaleX(-1)" : undefined,
                             }}
                         >
                             <img
                                 src="/assets/images/team/nameplate.png"
                                 alt=""
                                 aria-hidden
-                                className="absolute inset-0 w-full h-full object-contain select-none"
+                                className="absolute inset-0 w-full h-full object-fill select-none"
                                 draggable={false}
-                            />
-                            {/* Text overlay — counter-flip in mirror mode so text reads normally */}
-                            <div
-                                className="absolute inset-0 flex flex-col items-center justify-center px-[14%] pt-[4%] pb-[10%] text-center"
                                 style={{ transform: isMirror ? "scaleX(-1)" : undefined }}
-                            >
-                                <p className="font-satoshi font-bold text-white text-[15px] leading-tight whitespace-nowrap [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
+                            />
+                            {/* Text box sits fully inside the pink parallelogram in
+                                either orientation (symmetric 20% side insets). */}
+                            <div className="absolute inset-0 flex flex-col items-center justify-center px-[20%] pt-[9%] pb-[33%] text-center">
+                                <p className="font-satoshi font-bold text-white text-[14px] leading-tight whitespace-nowrap [text-shadow:0_1px_3px_rgba(0,0,0,0.6)]">
                                     {active.name}
                                 </p>
-                                <p className="font-satoshi text-white/95 text-[11px] leading-tight whitespace-nowrap mt-0.5 [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
+                                <p className="font-satoshi text-white/95 text-[11px] leading-tight whitespace-nowrap mt-[2px] [text-shadow:0_1px_3px_rgba(0,0,0,0.6)]">
                                     {active.role}
                                 </p>
                             </div>
                         </div>
 
-                        {/* Description & Socials — pinned to bottom-right corner, wraps to 2-3 lines */}
-                        <div className="hidden lg:block absolute z-30 bottom-6 right-8 w-[380px] pointer-events-none transition-all duration-300">
-                            <p className="font-satoshi font-medium text-white/90 text-[14px] leading-relaxed text-left [text-shadow:0_2px_8px_rgba(0,0,0,0.9)]">
+                        {/* Description & Socials — pinned bottom-right, low enough to
+                            clear the figures' feet. */}
+                        <div className="hidden lg:block absolute z-30 bottom-2 right-8 w-[500px] pointer-events-none transition-all duration-300">
+                            <p className="font-satoshi font-medium text-white/90 text-[12px] leading-snug text-left [text-shadow:0_2px_8px_rgba(0,0,0,0.9)]">
                                 {active.description}
                             </p>
 
-                            <div className="flex justify-end gap-3 mt-3 text-white pointer-events-auto">
+                            <div className="flex justify-end gap-3 mt-2 text-white pointer-events-auto">
                                 {active.x && active.x !== "#" && (
                                     <a
                                         href={active.x}
