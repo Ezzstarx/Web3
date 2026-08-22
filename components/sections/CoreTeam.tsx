@@ -606,37 +606,81 @@ export default function CoreTeam() {
                 ? Math.min(shoeXPx + deltaY, startXPx - 6)
                 : Math.max(shoeXPx - deltaY, startXPx + 6);
 
-            setConnector({
+            const next = {
                 startXPx,
                 startYPx,
                 shoeXPx,
                 shoeYPx,
                 middleXPx,
-            });
+            };
+
+            setConnector((prev) =>
+                prev &&
+                prev.startXPx === next.startXPx &&
+                prev.startYPx === next.startYPx &&
+                prev.shoeXPx === next.shoeXPx &&
+                prev.shoeYPx === next.shoeYPx &&
+                prev.middleXPx === next.middleXPx
+                    ? prev
+                    : next,
+            );
+
+            return `${startXPx}|${startYPx}|${shoeXPx}|${shoeYPx}`;
         };
 
-        const raf1 = requestAnimationFrame(measure);
-        const raf2 = requestAnimationFrame(() =>
-            requestAnimationFrame(measure),
-        );
-        const timeout = setTimeout(measure, 120);
+        // Re-measure until the geometry stops moving. A single pass can land
+        // while layout is still settling (fonts, image decode, any transition
+        // on the measured elements) and would anchor the hook to a stale
+        // position that never gets corrected — the ResizeObserver below only
+        // catches size changes, not moves.
+        // Layout is already committed when this effect runs and the plate is
+        // not transitioned, so the synchronous pass is normally the final
+        // answer. The frame loop and timers only cover late settling, and the
+        // timers matter on their own because rAF is throttled hard in a
+        // backgrounded tab.
+        measure();
 
-        const ro = new ResizeObserver(measure);
+        let rafId = 0;
+        let lastKey: string | undefined;
+        let stableFrames = 0;
+        const startedAt = performance.now();
+
+        const tick = () => {
+            const key = measure();
+            if (key !== undefined && key === lastKey) stableFrames += 1;
+            else stableFrames = 0;
+            lastKey = key;
+
+            if (stableFrames < 3 && performance.now() - startedAt < 700) {
+                rafId = requestAnimationFrame(tick);
+            }
+        };
+        rafId = requestAnimationFrame(tick);
+
+        const onMeasure = () => {
+            measure();
+        };
+
+        const timers = [60, 180, 400].map((ms) => setTimeout(onMeasure, ms));
+
+        const ro = new ResizeObserver(onMeasure);
         if (stageRef.current) ro.observe(stageRef.current);
         if (badgeRef.current) ro.observe(badgeRef.current);
         if (memberRefs.current[activeIndex])
             ro.observe(memberRefs.current[activeIndex]!);
 
-        window.addEventListener("resize", measure);
-        window.addEventListener("scroll", measure, { passive: true });
+        const badgeEl = badgeRef.current;
+        badgeEl?.addEventListener("transitionend", onMeasure);
+        window.addEventListener("resize", onMeasure);
+        window.addEventListener("scroll", onMeasure, { passive: true });
 
         return () => {
-            cancelAnimationFrame(raf1);
-            cancelAnimationFrame(raf2);
-            clearTimeout(timeout);
+            cancelAnimationFrame(rafId);
+            timers.forEach(clearTimeout);
             ro.disconnect();
-            window.removeEventListener("resize", measure);
-            window.removeEventListener("scroll", measure);
+            badgeEl?.removeEventListener("transitionend", onMeasure);
+            window.removeEventListener("resize", onMeasure);
+            window.removeEventListener("scroll", onMeasure);
         };
     }, [activeIndex, isMirror]);
 
@@ -785,10 +829,13 @@ export default function CoreTeam() {
                 {active && (
                     <>
                         {/* Nameplate — sits on the floor below the feet and behind the
-                            figures (z-3 vs the figures' z-4), as in the design. */}
+                            figures (z-3 vs the figures' z-4), as in the design.
+                            Deliberately not transitioned: the connector is measured
+                            from this element, and a sliding plate gets measured
+                            mid-flight, anchoring the hook short. */}
                         <div
                             ref={badgeRef}
-                            className="hidden lg:block absolute z-[3] pointer-events-none transition-all duration-300"
+                            className="hidden lg:block absolute z-[3] pointer-events-none"
                             style={{
                                 left: `${cardLeft}%`,
                                 bottom: `${NAMEPLATE_BOTTOM_PCT}%`,
