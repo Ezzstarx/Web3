@@ -390,7 +390,7 @@ const members: TeamMember[] = [
         image: "/assets/images/team/m01.png",
         left: 6.5,
         height: 52,
-        offsetY: 180,
+        offsetY: 150,
     },
     {
         name: "Fateen Mooen",
@@ -402,7 +402,7 @@ const members: TeamMember[] = [
         image: "/assets/images/team/m02.png",
         left: 15.5,
         height: 52,
-        offsetY: 110,
+        offsetY: 150,
     },
     {
         name: "Abdullah Khan",
@@ -414,7 +414,7 @@ const members: TeamMember[] = [
         image: "/assets/images/team/m03.png",
         left: 24,
         height: 52,
-        offsetY: 180,
+        offsetY: 150,
     },
     {
         name: "Nikhil Kandesar",
@@ -438,7 +438,7 @@ const members: TeamMember[] = [
         image: "/assets/images/team/m05.png",
         left: 39.5,
         height: 52,
-        offsetY: 180,
+        offsetY: 150,
     },
     {
         name: "Muzammil Moosa",
@@ -450,7 +450,7 @@ const members: TeamMember[] = [
         image: "/assets/images/team/m06.png",
         left: 48.5,
         height: 57,
-        offsetY: 210,
+        offsetY: 150,
     },
     {
         name: "Anshu Kumar",
@@ -462,7 +462,7 @@ const members: TeamMember[] = [
         image: "/assets/images/team/m07.png",
         left: 56.5,
         height: 52,
-        offsetY: 110,
+        offsetY: 150,
     },
     {
         name: "Aman Prajapati",
@@ -474,7 +474,7 @@ const members: TeamMember[] = [
         image: "/assets/images/team/m08.png",
         left: 64.5,
         height: 52,
-        offsetY: 180,
+        offsetY: 150,
     },
     {
         name: "Ali Abdullah",
@@ -486,7 +486,7 @@ const members: TeamMember[] = [
         image: "/assets/images/team/m09.png",
         left: 72.5,
         height: 52,
-        offsetY: 120,
+        offsetY: 150,
     },
     {
         name: "Anirban Nandi",
@@ -510,7 +510,7 @@ const members: TeamMember[] = [
         image: "/assets/images/team/m11.png",
         left: 86.5,
         height: 52,
-        offsetY: 100,
+        offsetY: 150,
     },
     {
         name: "Saachi Singh",
@@ -638,52 +638,44 @@ export default function CoreTeam() {
 
                 {/* Team figures */}
                 {members.map((member, idx) => {
-                    const isActive = activeIndex === idx;
-
                     return (
                         <div
                             key={idx}
                             ref={(el) => {
                                 memberRefs.current[idx] = el;
                             }}
-                            className="absolute bottom-[36%] -translate-x-1/2 pointer-events-none flex flex-col items-center"
+                            className="absolute -translate-x-1/2 pointer-events-none flex flex-col items-center"
                             style={{
                                 left: `${member.left}%`,
                                 height: `${member.height}%`,
                                 bottom: `calc(36% - ${member.offsetY ?? 0}px)`,
-                                zIndex: isActive ? 12 : 4,
+                                zIndex: 4,
                             }}
                         >
                             <img
                                 src={member.image}
                                 alt={member.name}
-                                className={`h-full w-auto max-w-none object-contain object-bottom transition-all duration-300 ${
-                                    isActive
-                                        ? "brightness-[1.35] drop-shadow-[0_0_25px_rgba(168,85,247,0.4)]"
-                                        : "brightness-[1.0]"
-                                }`}
+                                className="h-full w-auto max-w-none object-contain object-bottom"
                             />
 
                             {/* Contact shadow */}
                             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-[13px] bg-black/40 blur-[8px] rounded-[50%] z-[1]" />
 
-                            {/* Reflection */}
+                            {/* Reflection — dulled */}
                             <img
                                 src={member.image}
                                 alt=""
                                 aria-hidden
-                                className={`absolute top-full left-1/2 w-auto max-w-none object-contain object-top transition-opacity duration-300 ${
-                                    isActive ? "opacity-70" : "opacity-50"
-                                }`}
+                                className="absolute top-full left-1/2 w-auto max-w-none object-contain object-top opacity-[0.18]"
                                 style={{
                                     height: "62%",
                                     transform: "translateX(-50%) scaleY(-1)",
                                     transformOrigin: "center",
-                                    filter: "brightness(1.3) contrast(1.1)",
+                                    filter: "brightness(0.55) contrast(0.9) blur(1px)",
                                     WebkitMaskImage:
-                                        "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.55) 80%, rgba(0,0,0,0.2) 95%, transparent 100%)",
+                                        "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.18) 75%, transparent 100%)",
                                     maskImage:
-                                        "linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.55) 80%, rgba(0,0,0,0.2) 95%, transparent 100%)",
+                                        "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.18) 75%, transparent 100%)",
                                 }}
                             />
                         </div>
@@ -700,12 +692,10 @@ export default function CoreTeam() {
                     return (
                         <button
                             key={`hit-${idx}`}
-                            onMouseEnter={() => setActiveIndex(idx)}
-                            onMouseLeave={() => setActiveIndex(null)}
-                            onFocus={() => setActiveIndex(idx)}
-                            onBlur={() => setActiveIndex(null)}
-                            onClick={() => setActiveIndex(idx)}
-                            className="absolute bottom-0 top-[8%] bg-transparent focus:outline-none focus-visible:bg-white/5"
+                            onClick={() =>
+                                setActiveIndex((prev) => (prev === idx ? null : idx))
+                            }
+                            className="absolute bottom-0 top-[8%] bg-transparent focus:outline-none focus-visible:bg-white/5 cursor-pointer"
                             style={{
                                 left: `${start}%`,
                                 width: `${end - start}%`,
