@@ -526,9 +526,9 @@ const members: TeamMember[] = [
     },
 ];
 
-const CARD_WIDTH = 46;
-const MIN_CARD_LEFT = 2;
-const MAX_CARD_LEFT = 100 - CARD_WIDTH - 2;
+// Nameplate PNG is 545 × 196 (aspect ≈ 2.78)
+const NAMEPLATE_ASPECT = 545 / 196;
+const NAMEPLATE_WIDTH_PCT = 22; // % of stage width
 
 export default function CoreTeam() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -546,16 +546,23 @@ export default function CoreTeam() {
     } | null>(null);
 
     const active = activeIndex !== null ? members[activeIndex] : null;
-    const isMirror = active ? active.left > 50 : false;
 
-    const rawCardLeft = active
-        ? active.left - (isMirror ? 0.75 : 0.25) * CARD_WIDTH
+    // Put nameplate to the LEFT of the character (as in design). For characters
+    // near the far left, flip and put nameplate to their RIGHT so it doesn't
+    // fall off the stage or overlap the character.
+    const isMirror = active ? active.left < 28 : false;
+
+    const cardLeft = active
+        ? Math.min(
+              Math.max(
+                  isMirror
+                      ? active.left + 6
+                      : active.left - NAMEPLATE_WIDTH_PCT - 6,
+                  1.5,
+              ),
+              100 - NAMEPLATE_WIDTH_PCT - 1.5,
+          )
         : 0;
-
-    const cardLeft = Math.min(
-        Math.max(rawCardLeft, MIN_CARD_LEFT),
-        MAX_CARD_LEFT
-    );
 
     useEffect(() => {
         if (activeIndex === null) {
@@ -575,20 +582,24 @@ export default function CoreTeam() {
 
             if (stageRect.height === 0 || stageRect.width === 0) return;
 
-            // Target position: Character's left shoe
-            const shoeXPx = memberRect.left + memberRect.width * 0.38 - stageRect.left;
-            const shoeYPx = memberRect.bottom - stageRect.top - 12;
+            // Foot ring target — near the character's forward shoe.
+            const shoeXPx =
+                memberRect.left +
+                memberRect.width * (isMirror ? 0.62 : 0.38) -
+                stageRect.left;
+            const shoeYPx = memberRect.bottom - stageRect.top - 10;
 
-            // Connection start point on the badge border
+            // Line starts at the parallelogram's slanted tip, at the plate's
+            // lower edge — this is where the connector emerges in the design.
             const startXPx = isMirror
-                ? badgeRect.left - stageRect.left
-                : badgeRect.right - stageRect.left;
-            const startYPx = badgeRect.top + badgeRect.height / 2 - stageRect.top;
+                ? badgeRect.left - stageRect.left + badgeRect.width * 0.1
+                : badgeRect.right - stageRect.left - badgeRect.width * 0.1;
+            const startYPx = badgeRect.bottom - stageRect.top - 8;
 
-            // Elbow point for the angled connector line
-            const middleXPx = isMirror
-                ? Math.min(startXPx - 40, shoeXPx + 20)
-                : Math.max(startXPx + 40, shoeXPx - 20);
+            // Elbow: horizontal covers ~70% of the way to the shoe so the
+            // line reads primarily as horizontal, then a short diagonal drops
+            // to the foot ring — matches the design's L-shape.
+            const middleXPx = startXPx + (shoeXPx - startXPx) * 0.7;
 
             setConnector({
                 startXPx,
@@ -599,13 +610,29 @@ export default function CoreTeam() {
             });
         };
 
-        const raf = requestAnimationFrame(measure);
+        const raf1 = requestAnimationFrame(measure);
+        const raf2 = requestAnimationFrame(() =>
+            requestAnimationFrame(measure),
+        );
+        const timeout = setTimeout(measure, 120);
+
+        const ro = new ResizeObserver(measure);
+        if (stageRef.current) ro.observe(stageRef.current);
+        if (badgeRef.current) ro.observe(badgeRef.current);
+        if (memberRefs.current[activeIndex])
+            ro.observe(memberRefs.current[activeIndex]!);
+
         window.addEventListener("resize", measure);
+        window.addEventListener("scroll", measure, { passive: true });
 
         return () => {
-            cancelAnimationFrame(raf);
+            cancelAnimationFrame(raf1);
+            cancelAnimationFrame(raf2);
+            clearTimeout(timeout);
+            ro.disconnect();
             window.removeEventListener("resize", measure);
-        };  
+            window.removeEventListener("scroll", measure);
+        };
     }, [activeIndex, isMirror]);
 
         return (
@@ -706,41 +733,39 @@ export default function CoreTeam() {
                     );
                 })}
 
-                {/* SVG Pointer Connector Line */}
+                {/* SVG Pointer Connector Line — from plate's slanted tip to foot ring */}
                 {active && connector && (
                     <svg className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-30">
-                        {/* Glow Filter */}
                         <defs>
                             <filter id="purple-glow" x="-20%" y="-20%" width="140%" height="140%">
-                                <feGaussianBlur stdDeviation="3" result="blur" />
-                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                <feGaussianBlur stdDeviation="2.5" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
                             </filter>
                         </defs>
 
-                        {/* Angled Connecting Path */}
+                        {/* Horizontal segment + diagonal-up segment to shoe */}
                         <path
                             d={`M ${connector.startXPx} ${connector.startYPx} L ${connector.middleXPx} ${connector.startYPx} L ${connector.shoeXPx} ${connector.shoeYPx}`}
                             fill="none"
-                            stroke="#c026d3"
-                            strokeWidth="2"
+                            stroke="#9333ea"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             filter="url(#purple-glow)"
                         />
 
-                        {/* Shoe Target Ring */}
+                        {/* Foot ring (open circle) */}
                         <circle
                             cx={connector.shoeXPx}
                             cy={connector.shoeYPx}
-                            r="11"
+                            r="10"
                             fill="none"
-                            stroke="#d946ef"
+                            stroke="#9333ea"
                             strokeWidth="2.5"
                             filter="url(#purple-glow)"
-                        />
-                        <circle
-                            cx={connector.shoeXPx}
-                            cy={connector.shoeYPx}
-                            r="4"
-                            fill="#d946ef"
                         />
                     </svg>
                 )}
@@ -748,57 +773,36 @@ export default function CoreTeam() {
                 {/* Desktop Member Details */}
                 {active && (
                     <>
-                        {/* Name Badge — stays in its current position */}
+                        {/* Nameplate — PNG asset with text overlay on the pink parallelogram */}
                         <div
-                            className="hidden lg:block absolute z-30 pointer-events-none transition-all duration-300"
+                            ref={badgeRef}
+                            className="hidden lg:block absolute z-30 pointer-events-auto transition-all duration-300"
                             style={{
                                 left: `${cardLeft}%`,
-                                bottom: `25%`,
-                                width: `${CARD_WIDTH}%`,
+                                bottom: `22%`,
+                                width: `${NAMEPLATE_WIDTH_PCT}%`,
+                                aspectRatio: `${NAMEPLATE_ASPECT}`,
+                                transform: isMirror ? "scaleX(-1)" : undefined,
                             }}
                         >
+                            <img
+                                src="/assets/images/team/nameplate.png"
+                                alt=""
+                                aria-hidden
+                                className="absolute inset-0 w-full h-full object-contain select-none"
+                                draggable={false}
+                            />
+                            {/* Text overlay — counter-flip in mirror mode so text reads normally */}
                             <div
-                                className={`relative flex items-center gap-6 ${
-                                    isMirror ? "flex-row-reverse" : ""
-                                }`}
+                                className="absolute inset-0 flex flex-col items-center justify-center px-[14%] pt-[4%] pb-[10%] text-center"
+                                style={{ transform: isMirror ? "scaleX(-1)" : undefined }}
                             >
-                                {/* Figma-Matched Double-Slanted Name Tag */}
-                                <div ref={badgeRef} className="relative shrink-0 pointer-events-auto">
-                                    {/* Outer Glow Effect */}
-                                    <div
-                                        className="absolute -inset-[2px] bg-[#d946ef] opacity-80 blur-[2px]"
-                                        style={{
-                                            clipPath:
-                                                "polygon(12% 0, 100% 0, 88% 100%, 0 100%)",
-                                        }}
-                                    />
-
-                                    {/* Main Tag Gradient Container */}
-                                    <div
-                                        className="relative px-8 py-3 bg-gradient-to-r from-[#9333ea] via-[#c026d3] to-[#7e22ce] text-center"
-                                        style={{
-                                            clipPath:
-                                                "polygon(12% 0, 100% 0, 88% 100%, 0 100%)",
-                                        }}
-                                    >
-                                        {/* Halftone Pattern Overlay */}
-                                        <div
-                                            className="absolute inset-0 opacity-25 mix-blend-overlay"
-                                            style={{
-                                                backgroundImage:
-                                                    "radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px)",
-                                                backgroundSize: "4px 4px",
-                                            }}
-                                        />
-
-                                        <p className="relative font-satoshi font-bold text-white text-[16px] leading-tight whitespace-nowrap drop-shadow">
-                                            {active.name}
-                                        </p>
-                                        <p className="relative font-satoshi text-white/90 text-[12px] whitespace-nowrap">
-                                            {active.role}
-                                        </p>
-                                    </div>
-                                </div>
+                                <p className="font-satoshi font-bold text-white text-[15px] leading-tight whitespace-nowrap [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
+                                    {active.name}
+                                </p>
+                                <p className="font-satoshi text-white/95 text-[11px] leading-tight whitespace-nowrap mt-0.5 [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
+                                    {active.role}
+                                </p>
                             </div>
                         </div>
 
