@@ -376,7 +376,6 @@ interface TeamMember {
     image: string;
     left: number;
     height: number;
-    offsetY: number;
 }
 
 const members: TeamMember[] = [
@@ -389,8 +388,7 @@ const members: TeamMember[] = [
         linkedin: "https://www.linkedin.com/in/misbah-iftikhar-20761938/",
         image: "/assets/images/team/m01.png",
         left: 6.5,
-        height: 52,
-        offsetY: 150,
+        height: 49.5,
     },
     {
         name: "Fateen Mooen",
@@ -401,8 +399,7 @@ const members: TeamMember[] = [
         linkedin: "https://www.linkedin.com/in/fateen-catzero/",
         image: "/assets/images/team/m02.png",
         left: 15.5,
-        height: 52,
-        offsetY: 150,
+        height: 49.5,
     },
     {
         name: "Abdullah Khan",
@@ -413,8 +410,7 @@ const members: TeamMember[] = [
         linkedin: "https://www.linkedin.com/in/abdullahkhancs01/",
         image: "/assets/images/team/m03.png",
         left: 24,
-        height: 52,
-        offsetY: 150,
+        height: 49.5,
     },
     {
         name: "Nikhil Kandesar",
@@ -425,8 +421,7 @@ const members: TeamMember[] = [
         linkedin: "https://www.linkedin.com/in/nikhilkandesar/",
         image: "/assets/images/team/m04.png",
         left: 32.5,
-        height: 52,
-        offsetY: 150,
+        height: 49.5,
     },
     {
         name: "Rabiya Javed",
@@ -437,8 +432,7 @@ const members: TeamMember[] = [
         linkedin: "https://www.linkedin.com/in/rabiya-javed-378694275/",
         image: "/assets/images/team/m05.png",
         left: 39.5,
-        height: 52,
-        offsetY: 150,
+        height: 49.5,
     },
     {
         name: "Muzammil Moosa",
@@ -449,8 +443,7 @@ const members: TeamMember[] = [
         linkedin: "https://www.linkedin.com/in/muzammil-moosa-48ba7a201/",
         image: "/assets/images/team/m06.png",
         left: 48.5,
-        height: 57,
-        offsetY: 150,
+        height: 55,
     },
     {
         name: "Anshu Kumar",
@@ -461,8 +454,7 @@ const members: TeamMember[] = [
         linkedin: "",
         image: "/assets/images/team/m07.png",
         left: 56.5,
-        height: 52,
-        offsetY: 150,
+        height: 49.5,
     },
     {
         name: "Aman Prajapati",
@@ -473,8 +465,7 @@ const members: TeamMember[] = [
         linkedin: "https://www.linkedin.com/in/aman-prajapati-675909199/",
         image: "/assets/images/team/m08.png",
         left: 64.5,
-        height: 52,
-        offsetY: 150,
+        height: 49.5,
     },
     {
         name: "Ali Abdullah",
@@ -485,8 +476,7 @@ const members: TeamMember[] = [
         linkedin: "https://www.linkedin.com/in/ali-abdullah-028845333/",
         image: "/assets/images/team/m09.png",
         left: 72.5,
-        height: 52,
-        offsetY: 150,
+        height: 49.5,
     },
     {
         name: "Anirban Nandi",
@@ -497,8 +487,7 @@ const members: TeamMember[] = [
         linkedin: "https://www.linkedin.com/in/aanirban-nandi/",
         image: "/assets/images/team/m10.png",
         left: 78.5,
-        height: 52,
-        offsetY: 150,
+        height: 49.5,
     },
     {
         name: "Aritra Ray",
@@ -509,8 +498,7 @@ const members: TeamMember[] = [
         linkedin: "https://www.linkedin.com/in/aritraray05/",
         image: "/assets/images/team/m11.png",
         left: 86.5,
-        height: 52,
-        offsetY: 150,
+        height: 49.5,
     },
     {
         name: "Saachi Singh",
@@ -521,17 +509,21 @@ const members: TeamMember[] = [
         linkedin: "https://www.linkedin.com/in/saachi-singh-75323123b/",
         image: "/assets/images/team/m12.png",
         left: 95,
-        height: 52,
-        offsetY: 150,
+        height: 49.5,
     },
 ];
 
 // Nameplate PNG is 545 × 131 (aspect ≈ 4.16)
 const NAMEPLATE_ASPECT = 545 / 131;
 const NAMEPLATE_WIDTH_PCT = 24; // % of stage width
-// The plate lives in the left half of the floor so it never collides with the
-// description block pinned bottom-right (which starts around 67%).
-const NAMEPLATE_MAX_RIGHT_PCT = 48;
+
+// The floor the figures stand on, as % of stage height measured from the
+// bottom. Everything below it is the reflection apron, split into two bands:
+// the nameplate sits directly under the feet, the description under that.
+// Keeping them on separate rows lets the plate track its character across the
+// full width instead of being pinned near the centre.
+const FLOOR_PCT = 21;
+const NAMEPLATE_BOTTOM_PCT = 12.5;
 
 export default function CoreTeam() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -563,7 +555,7 @@ export default function CoreTeam() {
                       : active.left - NAMEPLATE_WIDTH_PCT - 6,
                   1.5,
               ),
-              NAMEPLATE_MAX_RIGHT_PCT - NAMEPLATE_WIDTH_PCT,
+              100 - NAMEPLATE_WIDTH_PCT - 1.5,
           )
         : 0;
 
@@ -644,7 +636,7 @@ export default function CoreTeam() {
         return (
         <section
             id="team"
-            className="relative overflow-hidden bg-[#04070d] lg:min-h-[120svh] lg:flex lg:flex-col"
+            className="relative overflow-hidden bg-[#04070d] lg:min-h-[133svh] lg:flex lg:flex-col"
         >
             {/* Section heading */}
             <div className="relative z-20 pt-8 md:pt-10 shrink-0">
@@ -681,7 +673,7 @@ export default function CoreTeam() {
                             style={{
                                 left: `${member.left}%`,
                                 height: `${member.height}%`,
-                                bottom: `calc(36% - ${member.offsetY ?? 0}px)`,
+                                bottom: `${FLOOR_PCT}%`,
                                 zIndex: 4,
                             }}
                         >
@@ -788,7 +780,7 @@ export default function CoreTeam() {
                             className="hidden lg:block absolute z-[3] pointer-events-none transition-all duration-300"
                             style={{
                                 left: `${cardLeft}%`,
-                                bottom: `4%`,
+                                bottom: `${NAMEPLATE_BOTTOM_PCT}%`,
                                 width: `${NAMEPLATE_WIDTH_PCT}%`,
                                 aspectRatio: `${NAMEPLATE_ASPECT}`,
                             }}
