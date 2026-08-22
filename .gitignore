@@ -1,0 +1,41 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# next.js
+/.next/
+/out/
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env files
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# raw design exports (processed copies live in public/assets)
+/assets
+
+# personal files
+*.jpeg
+WhatsApp*
+_*.png
+
+# NOTE: the raw-exports rule must stay anchored as "/assets" (root only).
+# A bare "assets/" pattern also matches public/assets/ and silently keeps
+# every new site image out of git — which is exactly what broke production
+# (missing phase-3 pic, community screenshots and the smoke texture).
