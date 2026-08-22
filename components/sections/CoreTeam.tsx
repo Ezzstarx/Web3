@@ -526,7 +526,11 @@ const FLOOR_PCT = 21;
 const NAMEPLATE_BOTTOM_PCT = 12.5;
 
 export default function CoreTeam() {
-    const [activeIndex, setActiveIndex] = useState<number | null>(null);
+    // Hovering previews a member; clicking pins them so the pointer can travel
+    // to the description's X / LinkedIn links without the card vanishing.
+    const [pinnedIndex, setPinnedIndex] = useState<number | null>(null);
+    const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+    const activeIndex = pinnedIndex ?? hoverIndex;
 
     const stageRef = useRef<HTMLDivElement | null>(null);
     const memberRefs = useRef<Array<HTMLDivElement | null>>([]);
@@ -585,11 +589,14 @@ export default function CoreTeam() {
             const shoeYPx = memberRect.bottom - stageRect.top - 10;
 
             // Line emerges from the parallelogram's slanted tip, roughly at the
-            // plate's mid-height, then runs out toward the character.
+            // plate's mid-height, then runs out toward the character. At 42%
+            // down the plate the pink spans 14.1%–94.3% of its width, so the
+            // anchor is set a few percent inside that edge: sitting exactly on
+            // it leaves a ~1px bite that the stroke and glow render as a gap.
             const startXPx =
                 badgeRect.left -
                 stageRect.left +
-                badgeRect.width * (isMirror ? 0.06 : 0.94);
+                badgeRect.width * (isMirror ? 0.12 : 0.88);
             const startYPx = badgeRect.top - stageRect.top + badgeRect.height * 0.42;
 
             // Elbow: run horizontally, then break away at ~45° for the last
@@ -719,8 +726,12 @@ export default function CoreTeam() {
                     return (
                         <button
                             key={`hit-${idx}`}
+                            onMouseEnter={() => setHoverIndex(idx)}
+                            onMouseLeave={() => setHoverIndex(null)}
+                            onFocus={() => setHoverIndex(idx)}
+                            onBlur={() => setHoverIndex(null)}
                             onClick={() =>
-                                setActiveIndex((prev) => (prev === idx ? null : idx))
+                                setPinnedIndex((prev) => (prev === idx ? null : idx))
                             }
                             className="absolute bottom-0 top-[8%] bg-transparent focus:outline-none focus-visible:bg-white/5 cursor-pointer"
                             style={{
