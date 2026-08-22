@@ -75,11 +75,7 @@ export default function ProofOfDemand() {
                         {/* POSITIONING CHANGE: items-stretch + shared lg:h-[560px]
                             instead of items-start + lg:flex-1, so both screenshots
                             fill the exact same height as the chat card next to them. */}
-<<<<<<< HEAD
                         <div className="flex items-stretch justify-center gap-2 lg:h-[600px]">
-=======
-                        <div className="flex items-stretch justify-center gap-2 lg:h-[560px]">
->>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
                             {[1, 2].map((n) => (
                                 <div key={n} className="flex-1 min-w-0 flex items-center justify-center">
                                     <img
@@ -87,11 +83,7 @@ export default function ProofOfDemand() {
                                         alt={n === 1
                                             ? "Ezzstar creator platform — manga and stories"
                                             : "Ezzstar creator platform — gists and events"}
-<<<<<<< HEAD
                                         className="w-full h-full max-w-full object-cover object-top border-white/10"
-=======
-                                        className="w-full h-full max-w-full object-contain object-top rounded-lg border border-white/10"
->>>>>>> e8f2aeec79285dbc2ce5b8618636df456c3b014d
                                     />
                                 </div>
                             ))}
